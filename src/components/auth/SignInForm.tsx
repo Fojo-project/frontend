@@ -1,11 +1,14 @@
 "use client";
-import Checkbox from "@/components/form/input/Checkbox";
+/* import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
-import Label from "@/components/form/Label";
+import Label from "@/components/form/Label"; */
 import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState } from "react";
+import Label from "../../../waste/form/Label";
+import Input from "../../../waste/form/input/InputField";
+import Checkbox from "../../../waste/form/input/Checkbox";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
