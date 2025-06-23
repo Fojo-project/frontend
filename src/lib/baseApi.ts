@@ -9,8 +9,8 @@ interface AxiosBaseQueryArgs {
   params?: AxiosRequestConfig['params'];
 }
 
-  
-  export const axiosBaseQuery =(): BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> =>
+
+export const axiosBaseQuery = (): BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> =>
     async ({ url, method, data, params }) => {
       try {
         const response = await axiosInstance({

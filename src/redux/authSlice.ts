@@ -5,7 +5,6 @@ interface User {
   id: string;
   name: string;
   email: string;
-  // Add more fields based on your actual user object
 }
 
 interface AuthState {

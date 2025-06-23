@@ -32,7 +32,6 @@ interface ForgetPasswordPayload {
   email: string;
 }
 
-// Example response type (adjust as needed)
 interface AuthResponse {
   success: boolean;
   message: string;
@@ -85,7 +84,7 @@ export const AuthApi = createApi({
     }),
     resetPassword: builder.mutation<AuthResponse, ResetPasswordPayload>({
       query: (body) => ({
-        url: '/customauth/reset-password', // fixed the wrong URL here
+        url: '/customauth/reset-password', 
         method: 'POST',
         body,
       }),
