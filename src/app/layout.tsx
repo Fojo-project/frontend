@@ -2,7 +2,7 @@ import { Outfit } from 'next/font/google';
 import './globals.css';
 import { SidebarProvider } from '@/context/SidebarContext';
 import { ThemeProvider } from '@/context/ThemeContext';
-import Providers from '@/constant/Providers';
+import Providers from '@/lib/Providers';
 
 const outfit = Outfit({
   subsets: ["latin"],
