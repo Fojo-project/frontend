@@ -15,7 +15,6 @@ const axiosInstance = axios.create({
   },
 });
 
-// ✅ Automatically attach token from cookies
 axiosInstance.interceptors.request.use((config) => {
   const token = Cookies.get('access_token');
   if (token && config.headers) {
