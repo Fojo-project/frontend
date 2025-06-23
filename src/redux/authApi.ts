@@ -1,5 +1,5 @@
+import { axiosBaseQuery } from '@/lib/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { axiosBaseQuery } from './baseApi';
 
 // Example types — adjust based on your backend response shape
 interface LoginRequest {

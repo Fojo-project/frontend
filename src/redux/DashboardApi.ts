@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { axiosBaseQuery } from '@/lib/baseApi';
 import { createApi,  } from '@reduxjs/toolkit/query/react';
-import { axiosBaseQuery } from './baseApi';
 
 
 
