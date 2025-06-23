@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './authSlice';
-import { AuthApi } from './authApi';
-import { DashboardApi } from './DashboardApi';
+import authReducer from './auth/auth.slice';
+import { AuthApi } from './auth/auth.api';
+import { DashboardApi } from './dashboard/dashboard.api';
 
 export const store = configureStore({
   reducer: {
