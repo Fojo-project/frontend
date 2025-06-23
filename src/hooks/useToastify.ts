@@ -2,7 +2,7 @@ import { toast, ToastOptions, Id } from "react-toastify";
 import { useState, useCallback, useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
-type ToastType = "success" | "error" | "info" | "warning" | "default" | "loading";
+type ToastType = "success" | "error" | "info" | "warning" | "default";
 
 interface ToastMessages {
   pending?: string;
@@ -12,13 +12,7 @@ interface ToastMessages {
 
 interface UseToastifyReturn {
   showToast: (message: string, type?: ToastType, options?: ToastOptions) => Id;
-  asyncShowToast: <T>(
-    asyncFn: () => Promise<T>,
-    messages?: ToastMessages,
-    options?: ToastOptions
-  ) => Promise<T | unknown>;
   dismiss: () => void;
-  isLoading: boolean;
 }
 
 const useToastify = (): UseToastifyReturn => {
@@ -52,7 +46,6 @@ const useToastify = (): UseToastifyReturn => {
         info: toast.info,
         warning: toast.warning,
         default: toast,
-        loading: toast.loading,
       };
 
       const toastHandler = toastHandlers[type];
@@ -63,72 +56,13 @@ const useToastify = (): UseToastifyReturn => {
     [dismissActiveToast]
   );
 
-  const asyncShowToast = useCallback(
-    async <T>(
-      asyncFn: () => Promise<T>,
-      messages: ToastMessages = {
-        pending: "Loading...",
-        success: "Successfully completed!",
-        error: "Something went wrong.",
-      },
-      options: ToastOptions = {}
-    ): Promise<T | unknown> => {
-      const toastOptions: ToastOptions = {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        ...options,
-      };
-
-      setIsLoading(true);
-      dismissActiveToast();
-
-      const toastId = toast.loading(messages.pending ?? "Loading...", toastOptions);
-      activeToastIdRef.current = toastId;
-
-      try {
-        const response = await asyncFn();
-
-        toast.update(toastId, {
-          render: messages.success ?? "Success!",
-          type: "success",
-          isLoading: false,
-          autoClose: options.autoClose ?? 5000,
-          closeButton: true,
-        });
-
-        setIsLoading(false);
-        return response;
-      } catch (err: any) {
-        const errorMessage = (err?.message ?? messages.error) ?? "Something went wrong.";
-
-        toast.update(toastId, {
-          render: errorMessage,
-          type: "error",
-          isLoading: false,
-          autoClose: options.autoClose ?? 5000,
-          closeButton: true,
-        });
-
-        setIsLoading(false);
-        return err;
-      }
-    },
-    [dismissActiveToast]
-  );
-
   const dismiss = useCallback((): void => {
     dismissActiveToast();
   }, [dismissActiveToast]);
 
   return {
     showToast,
-    asyncShowToast,
     dismiss,
-    isLoading,
   };
 };
 
