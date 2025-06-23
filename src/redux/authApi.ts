@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from './baseApi';
+import { axiosBaseQuery } from './baseApi';
 
 // Example types — adjust based on your backend response shape
 interface LoginRequest {
@@ -46,7 +46,7 @@ interface AuthResponse {
 
 export const AuthApi = createApi({
   reducerPath: 'authApi',
-  baseQuery,
+  baseQuery:axiosBaseQuery(),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (body) => ({

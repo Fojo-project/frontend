@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApi,  } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from './baseApi';
+import { axiosBaseQuery } from './baseApi';
 
 
 
@@ -19,7 +19,7 @@ interface WooCommerceResponse {
 
 export const DashboardApi = createApi({
   reducerPath: 'dashboardApi',
-  baseQuery,
+  baseQuery:axiosBaseQuery(),
   endpoints: (builder) => ({
     connectShopify: builder.query<ShopifyResponse, void>({
       query: () => ({
