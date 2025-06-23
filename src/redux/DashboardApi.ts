@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import API_BASE_URL from '@/constant/Api';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import Cookies from 'js-cookie';
+import { createApi,  } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from './baseApi';
+
 
 
 //Example on how to connect the endpoint
@@ -19,16 +19,7 @@ interface WooCommerceResponse {
 
 export const DashboardApi = createApi({
   reducerPath: 'dashboardApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
-    prepareHeaders: (headers) => {
-      const token = Cookies.get('access_token');
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery:axiosBaseQuery(),
   endpoints: (builder) => ({
     connectShopify: builder.query<ShopifyResponse, void>({
       query: () => ({

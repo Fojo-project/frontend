@@ -1,6 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import API_BASE_URL from '../constant/Api';
-import type { RootState } from './store';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from './baseApi';
 
 // Example types — adjust based on your backend response shape
 interface LoginRequest {
@@ -47,18 +46,7 @@ interface AuthResponse {
 
 export const AuthApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      headers.set('Content-Type', 'application/json');
-      headers.set('Accept', 'application/json');
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery:axiosBaseQuery(),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (body) => ({
