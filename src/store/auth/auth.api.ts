@@ -43,6 +43,11 @@ interface AuthResponse {
   };
 }
 
+interface SocialLoginPayload {
+  token: string;
+  provider: 'google' | 'facebook' | 'apple';
+}
+
 export const AuthApi = createApi({
   reducerPath: 'authApi',
   baseQuery:axiosBaseQuery(),
@@ -89,6 +94,13 @@ export const AuthApi = createApi({
         body,
       }),
     }),
+    socialLogin: builder.mutation<AuthResponse, SocialLoginPayload>({
+      query: (body) => ({
+        url: '/social-login',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -99,4 +111,5 @@ export const {
   useVerifyOtpMutation,
   useResendOtpMutation,
   useForgetPasswordMutation,
+  useSocialLoginMutation,
 } = AuthApi;
