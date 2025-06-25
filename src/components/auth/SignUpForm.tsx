@@ -12,8 +12,6 @@ import config from "@/config";
 
 export default function SignUpForm() {
 
-  console.log(config.apiBaseUrl, '1')
-  console.log(process.env.NEXT_PUBLIC_API_BASE_URL, '2')
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   return (
