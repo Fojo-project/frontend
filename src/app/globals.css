@@ -1,6 +1,19 @@
 @import 'tailwindcss';
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @custom-variant dark (&:is(.dark *));
+
+.cormorant-garamond {
+  font-family: "Cormorant Garamond", serif;
+}
+.lora {
+  font-family: "Lora", serif;
+}
+.authbg{
+  background-image: 
+  url(../../public/authImages/FOJO.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 @theme {
   --font-*: initial;
@@ -24,7 +37,7 @@
   --text-title-lg--line-height: 60px;
   --text-title-md: 36px;
   --text-title-md--line-height: 44px;
-  --text-title-sm: 30px;
+  --text-title-sm: 24px;
   --text-title-sm--line-height: 38px;
   --text-theme-xl: 20px;
   --text-theme-xl--line-height: 30px;
@@ -70,7 +83,7 @@
   --color-gray-200: #e4e7ec;
   --color-gray-300: #d0d5dd;
   --color-gray-400: #98a2b3;
-  --color-gray-500: #667085;
+  --color-gray-500: #555555;
   --color-gray-600: #475467;
   --color-gray-700: #344054;
   --color-gray-800: #1d2939;
