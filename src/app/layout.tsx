@@ -1,12 +1,25 @@
-import { Outfit } from 'next/font/google';
+import { Outfit, Cormorant_Garamond, Open_Sans } from 'next/font/google';
 import './globals.css';
 import { SidebarProvider } from '@/context/SidebarContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import Providers from '@/lib/Providers';
 
 const outfit = Outfit({
-  subsets: ["latin"],
+  subsets: ['latin'],
+  variable: '--font-outfit',
 });
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-cormorant',
+});
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  variable: '--font-open-sans',
+});
+
 
 export default function RootLayout({
   children,
@@ -14,12 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${outfit.className} dark:bg-gray-900`}>
+<html lang="en" className={`${outfit.variable} ${cormorant.variable} ${openSans.variable}`}>
+      <body className="font-outfit dark:bg-gray-900">
         <Providers>
-        <ThemeProvider>
-          <SidebarProvider>{children}</SidebarProvider>
-        </ThemeProvider>
+          <ThemeProvider>
+            <SidebarProvider>{children}</SidebarProvider>
+          </ThemeProvider>
         </Providers>
       </body>
     </html>
