@@ -3,7 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-  baseURL: config.apiBaseUrl,
+  baseURL:
+    typeof config.apiBaseUrl === 'string' ? config.apiBaseUrl : undefined,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

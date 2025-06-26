@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const DiscipleshipSection = () => {
@@ -22,15 +21,15 @@ const DiscipleshipSection = () => {
         </h2>
 
         <p className="sm:mt-4 text-lg sm:text-base font-lora leading-relaxed">
-          "Whoever wants to be my disciple must deny themselves and take up their cross and follow me."
-          <br/>
+          &quot; Whoever wants to be my disciple must deny themselves and take up their cross and follow me. &quot;
+          <br />
           <span className="font-semibold">- Matthew 16:24 (NIV)</span>
         </p>
         <p className="mt-4 text-lg sm:text-[16px] font-lora leading-[1.5] text-[#555555] w-[90%]">
           FOJO (Followers of Jesus Only) is a free discipleship platform committed to equipping believers
           with Bible-based teachings that lead to spiritual growth and deeper intimacy with Jesus.
-          Whether you're a new believer or a seasoned saint, FOJO is here to guide your walk with Christ.
-          We believe discipleship is not optional—it's foundational. That’s why FOJO exists: to help you follow Jesus only.
+          Whether you`re a new believer or a seasoned saint, FOJO is here to guide your walk with Christ.
+          We believe discipleship is not optional—it`s foundational. That`s why FOJO exists: to help you follow Jesus only.
         </p>
       </div>
 

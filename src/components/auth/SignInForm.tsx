@@ -1,18 +1,10 @@
 "use client";
-/* import Checkbox from "@/components/form/input/Checkbox";
-import Input from "@/components/form/input/InputField";
-import Label from "@/components/form/Label"; */
-import Button from "@/components/ui/button/Button";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
+import { ChevronLeftIcon } from "@/icons";
 import Link from "next/link";
-import React, { useState } from "react";
-import Label from "../../../waste/form/Label";
-import Input from "../../../waste/form/input/InputField";
-import Checkbox from "../../../waste/form/input/Checkbox";
 
 export default function SignInForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
@@ -87,7 +79,7 @@ export default function SignInForm() {
                 </span>
               </div>
             </div>
-            <form>
+            {/* <form>
               <div className="space-y-6">
                 <div>
                   <Label>
@@ -100,7 +92,7 @@ export default function SignInForm() {
                     Password <span className="text-error-500">*</span>{" "}
                   </Label>
                   <div className="relative">
-                    <Input
+                    <InputForm
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
                     />
@@ -136,7 +128,7 @@ export default function SignInForm() {
                   </Button>
                 </div>
               </div>
-            </form>
+            </form> */}
 
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">

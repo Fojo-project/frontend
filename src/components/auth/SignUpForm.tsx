@@ -2,7 +2,6 @@
 import { EyeCloseIcon, EyeIcon } from '@/icons';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import Label from '../../../waste/form/Label';
 import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,6 +11,14 @@ import Cookies from 'js-cookie';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import { AppleIcon, GoogleIcon, FacebookIcon } from "@/assets/icons"
+import Label from '../form/Label';
+
+type RegisterFormInputs = {
+  full_name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+};
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,13 +30,19 @@ export default function SignUpForm() {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<RegisterFormInputs>({
     resolver: yupResolver(RegisterFormSchema),
   });
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: RegisterFormInputs) => {
     try {
-      const response = await registerUser(formData).unwrap();
+      const apiData = {
+        fullName: formData.full_name,
+        email: formData.email,
+        password: formData.password,
+        password_confirmation: formData.password_confirmation,
+      };
+      const response = await registerUser(apiData).unwrap();
       if (response?.token) {
         Cookies.set('access_token', response.token, {
           expires: 7,

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const LearningSection = () => {
@@ -13,7 +12,7 @@ const LearningSection = () => {
       </h2>
 
       <p className="max-w-2xl text-gray-300 mx-auto mb-14 md:mb-8 sm:mb-10 font-lora font-light text-[14px] sm:text-base break-words">
-        Discipleship doesn't have to be complicated. With FOJO, you can learn the<br />
+        Discipleship doesn`t have to be complicated. With FOJO, you can learn the<br />
         way of Jesus in just three simple steps.
       </p>
 

@@ -3,14 +3,11 @@ import React from "react";
 import { useModal } from "../../hooks/useModal";
 import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
-import Input from "../form/input/InputField";
-import Label from "../form/Label";
 
 export default function UserAddressCard() {
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
-    console.log("Saving changes...");
     closeModal();
   };
   return (
@@ -98,23 +95,23 @@ export default function UserAddressCard() {
             <div className="px-2 overflow-y-auto custom-scrollbar">
               <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                 <div>
-                  <Label>Country</Label>
-                  <Input type="text" defaultValue="United States" />
+                  {/* <Label>Country</Label>
+                  <Input type="text" defaultValue="United States" /> */}
                 </div>
 
                 <div>
-                  <Label>City/State</Label>
-                  <Input type="text" defaultValue="Arizona, United States." />
+                  {/* <Label>City/State</Label>
+                  <Input type="text" defaultValue="Arizona, United States." /> */}
                 </div>
 
                 <div>
-                  <Label>Postal Code</Label>
-                  <Input type="text" defaultValue="ERT 2489" />
+                  {/* <Label>Postal Code</Label>
+                  <Input type="text" defaultValue="ERT 2489" /> */}
                 </div>
 
                 <div>
-                  <Label>TAX ID</Label>
-                  <Input type="text" defaultValue="AS4568384" />
+                  {/* <Label>TAX ID</Label>
+                  <Input type="text" defaultValue="AS4568384" /> */}
                 </div>
               </div>
             </div>
