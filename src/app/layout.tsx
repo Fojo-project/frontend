@@ -6,6 +6,8 @@ import Providers from '@/lib/Providers';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import './globals.css';
 import config from '@/config';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const outfit = Outfit({
@@ -39,6 +41,7 @@ export default function RootLayout({
               <SidebarProvider>{children}</SidebarProvider>
             </ThemeProvider>
           </Providers>
+          <ToastContainer />
         </GoogleOAuthProvider>
       </body>
     </html>
