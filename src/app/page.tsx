@@ -5,6 +5,7 @@ import InputForm from "@/components/form/InputForm";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "@/validation/schema";
+import GoogleAuth from '@/components/GoogleAuth'
 
 export default function Page() {
   const {

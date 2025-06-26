@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import Label from "../../../waste/form/Label";
 import Input from "../../../waste/form/input/InputField";
 import Checkbox from "../../../waste/form/input/Checkbox";
-import config from "@/config";
+
 
 export default function SignUpForm() {
 
