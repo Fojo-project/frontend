@@ -8,13 +8,10 @@ interface LoginRequest {
 }
 
 interface RegisterRequest {
-  companyName: string;
-  contact: string;
+  fullName: string;
   email: string;
-  companySize: string;
-  businessProfession: string;
-  requestDemo: boolean;
   password: string;
+  password_confirmation: string;
 }
 
 interface OtpPayload {
@@ -50,7 +47,7 @@ interface SocialLoginPayload {
 
 export const AuthApi = createApi({
   reducerPath: 'authApi',
-  baseQuery:axiosBaseQuery(),
+  baseQuery: axiosBaseQuery(),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (body) => ({
@@ -60,10 +57,10 @@ export const AuthApi = createApi({
       }),
     }),
     registerUser: builder.mutation<AuthResponse, RegisterRequest>({
-      query: (body) => ({
-        url: '/customauth/register',
+      query: (data) => ({
+        url: '/api/register',
         method: 'POST',
-        body,
+        data,
       }),
     }),
     verifyOtp: builder.mutation<AuthResponse, OtpPayload>({
@@ -89,7 +86,7 @@ export const AuthApi = createApi({
     }),
     resetPassword: builder.mutation<AuthResponse, ResetPasswordPayload>({
       query: (body) => ({
-        url: '/customauth/reset-password', 
+        url: '/customauth/reset-password',
         method: 'POST',
         body,
       }),
