@@ -7,6 +7,7 @@ import LearningSection from "@/components/Learning/learning";
 import CoursesSection from "@/components/courses/courses";
 import NewsLetterSection from "@/components/Newsletter/newsletter";
 import Footer from "@/components/footer/footer";
+
 export default function Page() {
   return (
     <div className="relative h-screen w-full">

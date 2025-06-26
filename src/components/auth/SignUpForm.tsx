@@ -1,19 +1,19 @@
-"use client";
+'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label"; */
-import { EyeCloseIcon, EyeIcon } from "@/icons";
-import Link from "next/link";
-import React, { useState } from "react";
-import Label from "../../../waste/form/Label";
-import GoogleIcon from "../../../public/icons/GoogleIcon"
-import AppleIcon from "../../../public/icons/AppleIcon"
-import FacebookIcon from "../../../public/icons/FacebookIcon"
-import InputForm from "../form/InputForm";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { formSchema } from "@/validation/schema";
+import { EyeCloseIcon, EyeIcon } from '@/icons';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import Label from '../../../waste/form/Label';
+import GoogleIcon from '../../../public/icons/GoogleIcon';
+import AppleIcon from '../../../public/icons/AppleIcon';
+import FacebookIcon from '../../../public/icons/FacebookIcon';
+import InputForm from '../form/InputForm';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { formSchema } from '@/validation/schema';
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,16 +26,16 @@ export default function SignUpForm() {
   });
 
   const onSubmit = (data: any) => {
-    console.log("Form Data:", data);
+    console.log('Form Data:', data);
   };
-  
+
   return (
-    <div className="flex flex-col flex-1 my-[40px] bg-red-500 shadow-[1px_4px_40px_0px_#0000000D]  w-full overflow-y-auto no-scrollbar">
+    <div className="flex flex-col flex-1 my-[40px] shadow-[1px_4px_40px_0px_#0000000D]  w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col lora justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           <div className="mb-5 sm:mb-8">
             <h1 className="mb-2 font-semibold text-black text-title-sm sm:text-title-md">
-            Join the FOJO Community.
+              Join the FOJO Community.
             </h1>
             <p className="text-sm text-gray-500 ">
               Start your discipleship journey.
@@ -44,13 +44,13 @@ export default function SignUpForm() {
           <div>
             <div className="grid grid-cols-3 gap-3  sm:gap-5">
               <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
-               <GoogleIcon/>
+                <GoogleIcon />
               </button>
               <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
-               <AppleIcon/>
+                <AppleIcon />
               </button>
               <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
-               <FacebookIcon/>
+                <FacebookIcon />
               </button>
             </div>
             <div className="relative py-3 sm:py-5">
@@ -64,48 +64,47 @@ export default function SignUpForm() {
               </div>
             </div>
             <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full max-w-md space-y-6"
-        >
-                <div className="grid grid-cols-1 gap-3 ">
-                  {/* <!-- First Name --> */}
-                  <div className="sm:col-span-1">
-                    <Label className="font-medium  text-gray-500">
-                      Full Name
-                    </Label>
-                    <InputForm
-                     name="fullName"
-                      placeholder="Enter your full name"
-                      register={register}
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-full max-w-md space-y-6"
+            >
+              <div className="grid grid-cols-1 gap-3 ">
+                {/* <!-- First Name --> */}
+                <div className="sm:col-span-1">
+                  <Label className="font-medium  text-gray-500">
+                    Full Name
+                  </Label>
+                  <InputForm
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    register={register}
                     error={errors.fullName}
-                    type='text'
-                      />
-                  </div>
-              
-                  {/* <!-- Email --> */}
-                  <div className="sm:col-span-1">
-                    <Label className="font-medium  text-gray-500">
-                    Email Address                    </Label>
-                    <InputForm
-                     name="email"
-                      placeholder="Enter your email address"
-                      register={register}
+                    type="text"
+                  />
+                </div>
+
+                {/* <!-- Email --> */}
+                <div className="sm:col-span-1">
+                  <Label className="font-medium  text-gray-500">
+                    Email Address{' '}
+                  </Label>
+                  <InputForm
+                    name="email"
+                    placeholder="Enter your email address"
+                    register={register}
                     error={errors.email}
                     type="text"
-                      />
-                  </div>
+                  />
+                </div>
                 {/* <!-- Password --> */}
                 <div>
-                <Label className="font-medium  text-gray-500">
-                Password
-                  </Label>
+                  <Label className="font-medium  text-gray-500">Password</Label>
                   <div className="relative">
-                  <InputForm
-                     name="password"
+                    <InputForm
+                      name="password"
                       placeholder="Enter password"
                       register={register}
                       error={errors.password}
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
@@ -121,16 +120,16 @@ export default function SignUpForm() {
                 </div>
                 {/* <!--Confirm Password --> */}
                 <div>
-                <Label className="font-medium  text-gray-500">
-                Confirm Password
+                  <Label className="font-medium  text-gray-500">
+                    Confirm Password
                   </Label>
                   <div className="relative">
-                  <InputForm
-                     name="Confirmpassword"
+                    <InputForm
+                      name="Confirmpassword"
                       placeholder="Confirm password"
                       register={register}
                       error={errors.password_confirmation}
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}

@@ -1,13 +1,8 @@
 @import 'tailwindcss';
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
-=======
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
->>>>>>> 68243b83d0f917b1284d2882746ab2f7eb088032
 @custom-variant dark (&:is(.dark *));
 
 .cormorant-garamond {
