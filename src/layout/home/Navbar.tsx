@@ -2,13 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { NAV_LINKS } from "@/utils/constant"
 
-const NAV_LINKS: { label: string; href: string }[] = [
-  { label: "Home", href: "#" },
-  { label: "Courses", href: "#" },
-  { label: "About", href: "#" },
-  { label: "Support Us", href: "#" },
-];
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,7 +13,7 @@ const Navbar = () => {
     <header className="absolute top-0 left-0 right-0 z-50 font-openSans">
       <nav className="flex items-center justify-between px-6 md:px-16 py-6 text-white w-full">
         {/* Logo */}
-        <Link href="#">
+        <Link href="/">
           <Image
             src="/images/home/logo.png"
             alt="FOJO Logo"
@@ -50,13 +46,13 @@ const Navbar = () => {
 
           <div className="flex items-center gap-3">
             <Link
-              href="#"
+              href="/signup"
               className="text-sm px-6 py-2 border rounded-lg bg-white text-black font-medium hover:bg-gray-200 transition"
             >
               Sign Up
             </Link>
             <Link
-              href="#"
+              href="/signin"
               className="text-sm px-6 py-2 border rounded-lg text-white font-medium hover:bg-gray-200 transition"
             >
               Login
@@ -82,13 +78,13 @@ const Navbar = () => {
           </ul>
           <div className="mt-4 flex flex-col gap-2">
             <Link
-              href="#"
+              href="/signup"
               className="block text-sm text-black bg-white px-6 py-2 rounded-lg text-center font-medium hover:bg-gray-200"
             >
               Sign Up
             </Link>
             <Link
-              href="#"
+              href="/signin"
               className="block text-sm border border-white px-2 py-2 rounded-lg text-white text-center font-medium hover:bg-white hover:text-black"
             >
               Login

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { removeAuthTokens } from '@/utils/auth';
 
 interface User {
   id: string;
@@ -33,7 +32,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      removeAuthTokens();
+      // removeAuthTokens();
     },
   },
 });
