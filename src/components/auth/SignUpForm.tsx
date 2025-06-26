@@ -14,9 +14,11 @@ import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from '@/validation/schema';
+import { useRegisterUserMutation } from '@/store/auth/auth.api';
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
   const {
     register,
     handleSubmit,
@@ -25,8 +27,15 @@ export default function SignUpForm() {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log('Form Data:', data);
+  const onSubmit = async (formData: any) => {
+    try {
+      const response = await registerUser(formData).unwrap(); // .unwrap() throws on error
+      console.log('Registration successful!');
+      console.log('API response:', response);
+    } catch (error: any) {
+      console.log(error?.data?.message || 'Registration failed');
+      console.error('Registration error:', error);
+    }
   };
 
   return (
@@ -74,7 +83,7 @@ export default function SignUpForm() {
                     Full Name
                   </Label>
                   <InputForm
-                    name="fullName"
+                    name="full_name"
                     placeholder="Enter your full name"
                     register={register}
                     error={errors.fullName}
@@ -125,7 +134,7 @@ export default function SignUpForm() {
                   </Label>
                   <div className="relative">
                     <InputForm
-                      name="Confirmpassword"
+                      name="password_confirmation"
                       placeholder="Confirm password"
                       register={register}
                       error={errors.password_confirmation}
@@ -145,7 +154,10 @@ export default function SignUpForm() {
                 </div>
                 {/* <!-- Button --> */}
                 <div>
-                  <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-black shadow-theme-xs hover:bg-brand-600">
+                  <button
+                    type="submit"
+                    className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-black shadow-theme-xs hover:bg-brand-600"
+                  >
                     Sign Up
                   </button>
                 </div>

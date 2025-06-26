@@ -11,7 +11,7 @@ interface RegisterRequest {
   fullName: string;
   email: string;
   password: string;
-  confirm_Password: string;
+  password_confirmation: string;
 }
 
 interface OtpPayload {
@@ -57,10 +57,10 @@ export const AuthApi = createApi({
       }),
     }),
     registerUser: builder.mutation<AuthResponse, RegisterRequest>({
-      query: (body) => ({
-        url: '/customauth/register',
+      query: (data) => ({
+        url: '/api/register',
         method: 'POST',
-        body,
+        data,
       }),
     }),
     verifyOtp: builder.mutation<AuthResponse, OtpPayload>({
