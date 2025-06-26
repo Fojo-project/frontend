@@ -3,9 +3,6 @@ import { EyeCloseIcon, EyeIcon } from '@/icons';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Label from '../../../waste/form/Label';
-import GoogleIcon from '../../../public/icons/GoogleIcon';
-import AppleIcon from '../../../public/icons/AppleIcon';
-import FacebookIcon from '../../../public/icons/FacebookIcon';
 import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,6 +11,7 @@ import { useRegisterUserMutation } from '@/store/auth/auth.api';
 import Cookies from 'js-cookie';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
+import { AppleIcon, GoogleIcon, FacebookIcon } from "@/assets/icons"
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
