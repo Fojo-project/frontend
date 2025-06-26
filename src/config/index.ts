@@ -5,10 +5,7 @@ function displayError(key: string) {
 
 const config = {
   apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || displayError('apiBaseUrl'),
-  auth0: {
-    secret: process.env.NEXT_PUBLIC_AUTH0_SECRET || displayError('auth0 secret'),
-    clientID: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID || displayError('auth0 clientID'),
-  },
+  googleClientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || displayError('apiBaseUrl'),
 };
 
 export default config;
