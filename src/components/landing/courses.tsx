@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 const CoursesSection = () => {
     const courses = [
         {
@@ -41,7 +41,14 @@ const CoursesSection = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {courses.map((course, index) => (
                         <div key={index} className="bg-white border shadow-sm overflow-hidden transition-transform hover:scale-[1.02]">
-                            <img src={course.image} alt={course.title} className="w-full h-70 object-cover" />
+                            <div className="relative w-full h-[280px]">
+                                <Image
+                                    src={course.image}
+                                    alt={course.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
                             <div className="p-4 bg-gray-100 hover:bg-[#fff]">
                                 <h3 className="font-bold font-cormorant text-lg text-gray-800">{course.title}</h3>
                                 <p className="sm:text-sm  text-gray-600 mb-2 ">{course.description}</p>
@@ -63,4 +70,3 @@ const CoursesSection = () => {
 };
 
 export default CoursesSection;
-;
