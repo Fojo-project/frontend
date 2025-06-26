@@ -1,13 +1,12 @@
-import DiscipleshipSection from "@/components/discipleship/discipleship";
-import HeroBanner from "@/components/HeroBanner/HeroBanner";
-import Navbar from "@/components/Navbar/Navbar";
+import DiscipleshipSection from "../components/landing/discipleship";
+import HeroBanner from "../components/landing/HeroBanner";
+import Navbar from "../components/landing/Navbar";
 import React from "react";
 import Image from "next/image";
-import LearningSection from "@/components/Learning/learning";
-import CoursesSection from "@/components/courses/courses";
-import NewsLetterSection from "@/components/Newsletter/newsletter";
-import Footer from "@/components/footer/footer";
-
+import LearningSection from "../components/landing/learning";
+import CoursesSection from "../components/landing/courses";
+import NewsLetterSection from "../components/landing/newsletter";
+import Footer from "../components/landing/footer";
 export default function Page() {
   return (
     <div className="relative h-screen w-full">
