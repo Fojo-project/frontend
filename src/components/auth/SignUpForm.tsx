@@ -30,11 +30,7 @@ export default function SignUpForm() {
   const onSubmit = async (formData: any) => {
     try {
       const response = await registerUser(formData).unwrap(); // .unwrap() throws on error
-      console.log('Registration successful!');
-      console.log('API response:', response);
     } catch (error: any) {
-      console.log(error?.data?.message || 'Registration failed');
-      console.error('Registration error:', error);
     }
   };
 

@@ -1,14 +1,8 @@
-import { toast, ToastOptions, Id } from "react-toastify";
-import { useState, useCallback, useRef } from "react";
-import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastOptions, Id } from 'react-toastify';
+import { useCallback, useRef } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 
-type ToastType = "success" | "error" | "info" | "warning" | "default";
-
-interface ToastMessages {
-  pending?: string;
-  success?: string;
-  error?: string;
-}
+type ToastType = 'success' | 'error' | 'info' | 'warning' | 'default';
 
 interface UseToastifyReturn {
   showToast: (message: string, type?: ToastType, options?: ToastOptions) => Id;
@@ -16,7 +10,6 @@ interface UseToastifyReturn {
 }
 
 const useToastify = (): UseToastifyReturn => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const activeToastIdRef = useRef<Id | null>(null);
 
   const dismissActiveToast = useCallback((): void => {
@@ -27,9 +20,13 @@ const useToastify = (): UseToastifyReturn => {
   }, []);
 
   const showToast = useCallback(
-    (message: string, type: ToastType = "default", options: ToastOptions = {}): Id => {
+    (
+      message: string,
+      type: ToastType = 'default',
+      options: ToastOptions = {}
+    ): Id => {
       const toastOptions: ToastOptions = {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 4000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -40,7 +37,10 @@ const useToastify = (): UseToastifyReturn => {
 
       dismissActiveToast();
 
-      const toastHandlers: Record<ToastType, (msg: string, opts?: ToastOptions) => Id> = {
+      const toastHandlers: Record<
+        ToastType,
+        (msg: string, opts?: ToastOptions) => Id
+      > = {
         success: toast.success,
         error: toast.error,
         info: toast.info,
