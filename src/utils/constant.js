@@ -1,3 +1,5 @@
+import config from '@/config';
+
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
@@ -9,4 +11,11 @@ export const loadingIndicatorProperties = {
   height: 3.5,
   showSpinner: true,
   zIndex: 999999999,
+};
+export const cookieConfig = {
+  expires: Infinity,
+  path: '/',
+  secure: config.NODE_ENV === 'production',
+  sameSite: 'Lax',
+  domain: config.baseUrl,
 };
