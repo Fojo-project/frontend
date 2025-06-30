@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
+import Cookies from 'js-cookie';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
-import { AppleIcon, GoogleIcon, FacebookIcon } from '@/assets/icons';
+import { AppleIcon, GoogleIcon, FacebookIcon } from "@/assets/icons"
 import Label from '../form/Label';
-import { setTokenCookie } from '@/utils/helper'; // Make sure this path is correct and the function exists
 
 type RegisterFormInputs = {
   full_name: string;
@@ -21,11 +21,10 @@ type RegisterFormInputs = {
 };
 
 export default function SignUpForm() {
-  const [showPassword, setShowPassword] = useState({
-    password: false,
-    confirm: false,
-  });
-  const { showToast } = useToastify();
+const [showPassword, setShowPassword] = useState({
+  password: false,
+  confirm: false,
+});  const { showToast } = useToastify();
   const router = useRouter();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const {
@@ -37,36 +36,30 @@ export default function SignUpForm() {
     resolver: yupResolver(RegisterFormSchema),
   });
 
-  const togglePasswordVisibility = (field: 'password' | 'confirm') => {
-    setShowPassword((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
-  
   const onSubmit = async (formData: RegisterFormInputs) => {
     try {
       const apiData = {
-        full_name: formData.full_name,
+        fullName: formData.full_name,
         email: formData.email,
         password: formData.password,
         password_confirmation: formData.password_confirmation,
       };
       const response = await registerUser(apiData).unwrap();
-      setTokenCookie(response?.data?.token)
+      if (response?.token) {
+        Cookies.set('access_token', response.token, {
+          expires: 7,
+          path: '/',
+        });
+      }
       showToast(response.message, 'success');
-      router.replace('/verify-email');
+      router.push('/dashboard');
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
-          setError(
-            field as
-              | 'full_name'
-              | 'email'
-              | 'password'
-              | 'password_confirmation',
-            {
-              type: 'server',
-              message: Array.isArray(messages) ? messages[0] : messages,
-            }
-          )
+          setError(field as "full_name" | "email" | "password" | "password_confirmation", {
+            type: 'server',
+            message: Array.isArray(messages) ? messages[0] : messages,
+          })
         );
       }
     }
@@ -147,13 +140,13 @@ export default function SignUpForm() {
                       placeholder="Enter password"
                       register={register}
                       error={errors.password}
-                      type={showPassword.password ? 'text' : 'password'}
+                      type={showPassword ? 'text' : 'password'}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
-                      {showPassword.password ? (
+                      {showPassword ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
                       ) : (
                         <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
@@ -172,13 +165,13 @@ export default function SignUpForm() {
                       placeholder="Confirm password"
                       register={register}
                       error={errors.password_confirmation}
-                      type={showPassword.confirm ? 'text' : 'password'}
+                      type={showPassword ? 'text' : 'password'}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
-                      {showPassword.confirm ? (
+                      {showPassword ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
                       ) : (
                         <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
