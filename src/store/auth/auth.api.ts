@@ -8,7 +8,7 @@ interface LoginRequest {
 }
 
 interface RegisterRequest {
-  fullName: string;
+  full_name: string;
   email: string;
   password: string;
   password_confirmation: string;
@@ -32,11 +32,8 @@ interface ForgetPasswordPayload {
 interface AuthResponse {
   success: boolean;
   message: string;
-  token?: string;
-  user?: {
-    id: string;
-    name: string;
-    email: string;
+  data?: {
+    token?: string;
   };
 }
 
@@ -51,7 +48,7 @@ export const AuthApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (body) => ({
-        url: '/customauth/login',
+        url: '/api/login',
         method: 'POST',
         body,
       }),
@@ -63,14 +60,14 @@ export const AuthApi = createApi({
         data,
       }),
     }),
-    verifyOtp: builder.mutation<AuthResponse, OtpPayload>({
+    verifyEmail: builder.mutation<AuthResponse, OtpPayload>({
       query: (body) => ({
         url: '/customauth/verify-otp',
         method: 'POST',
         body,
       }),
     }),
-    resendOtp: builder.mutation<AuthResponse, { email: string }>({
+    resendVerifyEmail: builder.mutation<AuthResponse, { email: string }>({
       query: (body) => ({
         url: '/customauth/resend-otp',
         method: 'POST',
@@ -93,7 +90,7 @@ export const AuthApi = createApi({
     }),
     socialLogin: builder.mutation<AuthResponse, SocialLoginPayload>({
       query: (body) => ({
-        url: '/social-login',
+        url: '/api/social/{provider}',
         method: 'POST',
         body,
       }),
@@ -105,8 +102,8 @@ export const {
   useLoginMutation,
   useRegisterUserMutation,
   useResetPasswordMutation,
-  useVerifyOtpMutation,
-  useResendOtpMutation,
+  useVerifyEmailMutation,
+  useResendVerifyEmailMutation,
   useForgetPasswordMutation,
   useSocialLoginMutation,
 } = AuthApi;

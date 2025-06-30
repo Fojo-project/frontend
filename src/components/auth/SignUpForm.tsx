@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
-import Cookies from 'js-cookie';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import { AppleIcon, GoogleIcon, FacebookIcon } from '@/assets/icons';
 import Label from '../form/Label';
+import { setTokenCookie } from '@/utils/helper'; // Make sure this path is correct and the function exists
 
 type RegisterFormInputs = {
   full_name: string;
@@ -44,20 +44,15 @@ export default function SignUpForm() {
   const onSubmit = async (formData: RegisterFormInputs) => {
     try {
       const apiData = {
-        fullName: formData.full_name,
+        full_name: formData.full_name,
         email: formData.email,
         password: formData.password,
         password_confirmation: formData.password_confirmation,
       };
       const response = await registerUser(apiData).unwrap();
-      if (response?.token) {
-        Cookies.set('access_token', response.token, {
-          expires: 7,
-          path: '/',
-        });
-      }
+      setTokenCookie(response?.data?.token)
       showToast(response.message, 'success');
-      router.push('/dashboard');
+      router.replace('/verify-email');
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
@@ -155,7 +150,7 @@ export default function SignUpForm() {
                       type={showPassword.password ? 'text' : 'password'}
                     />
                     <span
-                      onClick={() => togglePasswordVisibility('password')}
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
                       {showPassword.password ? (
@@ -180,7 +175,7 @@ export default function SignUpForm() {
                       type={showPassword.confirm ? 'text' : 'password'}
                     />
                     <span
-                      onClick={() => togglePasswordVisibility('confirm')}
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
                       {showPassword.confirm ? (
