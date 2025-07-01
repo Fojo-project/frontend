@@ -76,10 +76,10 @@ export const AuthApi = createApi({
       }),
     }),
     forgetPassword: builder.mutation<AuthResponse, ForgetPasswordPayload>({
-      query: (body) => ({
-        url: '/customauth/forgot-password',
+      query: (data) => ({
+        url: '/api/forgot-password',
         method: 'POST',
-        body,
+        data,
       }),
     }),
     resetPassword: builder.mutation<AuthResponse, ResetPasswordPayload>({
