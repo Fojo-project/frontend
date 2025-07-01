@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
-import Cookies from 'js-cookie';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import { AppleIcon, GoogleIcon, FacebookIcon } from '@/assets/icons';
 import Label from '../form/Label';
+import { setTokenCookie } from '@/utils/helper';
 
 type RegisterFormInputs = {
   full_name: string;
@@ -50,23 +50,18 @@ export default function SignUpForm() {
         password_confirmation: formData.password_confirmation,
       };
       const response = await registerUser(apiData).unwrap();
-      if (response?.token) {
-        Cookies.set('access_token', response.token, {
-          expires: 7,
-          path: '/',
-        });
-      }
+      setTokenCookie(response.data?.token);
       showToast(response.message, 'success');
-      router.push('/dashboard');
+      router.push('/verify-email');
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
           setError(
             field as
-              | 'full_name'
-              | 'email'
-              | 'password'
-              | 'password_confirmation',
+            | 'full_name'
+            | 'email'
+            | 'password'
+            | 'password_confirmation',
             {
               type: 'server',
               message: Array.isArray(messages) ? messages[0] : messages,
