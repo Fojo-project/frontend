@@ -6,6 +6,7 @@ export const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Support Us', href: '/support' },
 ];
+
 export const loadingIndicatorProperties = {
   color: '#FE6D00',
   height: 3.5,
