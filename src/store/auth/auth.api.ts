@@ -30,7 +30,6 @@ interface ForgetPasswordPayload {
 }
 
 interface AuthResponse {
-  token: any;
   success: boolean;
   message: string;
   data?: {
