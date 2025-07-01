@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import FacebookAuth from 'react-facebook-auth';
 import { useRouter } from 'next/navigation';
 import { useSocialLoginMutation } from '@/store/auth/auth.api';

@@ -1,3 +1,4 @@
+// https://icon-sets.iconify.design/
 export const MinusIcon = () => {
   return (
     <svg
@@ -14,14 +15,19 @@ export const MinusIcon = () => {
     </svg>
   );
 };
-export const FileIcon = ({ width = '15', height = '15', fill = '#FE6D00' }) => {
+export const FileIcon = ({
+  width = '15',
+  height = '15',
+  className,
+  fill = '#FE6D00',
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
       viewBox="0 0 24 24"
-      className={`opacity-${opacity}`}
+      className={className}
     >
       <path
         fill={fill}
@@ -103,6 +109,112 @@ export const GoogleIcon = () => {
         d="M10.1789 4.63331C11.8554 4.63331 12.9864 5.34303 13.6312 5.93612L16.1511 3.525C14.6035 2.11528 12.5895 1.25 10.1789 1.25C6.68676 1.25 3.67088 3.21387 2.20264 6.07218L5.08953 8.26943C5.81381 6.15972 7.81776 4.63331 10.1789 4.63331Z"
         fill="#EB4335"
       />
+    </svg>
+  );
+};
+
+export const LoadingIcon = ({
+  width = '24',
+  height = '24',
+  fill = 'currentColor',
+  className,
+}) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="2" r="0" fill={fill}>
+        <animate
+          attributeName="r"
+          begin="0"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(45 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.125s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(90 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.25s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(135 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.375s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(180 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.5s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(225 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.625s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(270 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.75s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
+      <circle cx="12" cy="2" r="0" fill={fill} transform="rotate(315 12 12)">
+        <animate
+          attributeName="r"
+          begin="0.875s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+          repeatCount="indefinite"
+          values="0;2;0;0"
+        />
+      </circle>
     </svg>
   );
 };

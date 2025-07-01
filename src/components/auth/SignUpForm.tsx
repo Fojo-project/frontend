@@ -11,7 +11,7 @@ import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import { AppleIcon, GoogleIcon, FacebookIcon } from "@/assets/icons"
 import Label from '../form/Label';
-import { setTokenCookie } from '@/utils/helper'; // Make sure this path is correct and the function exists
+import { setTokenCookie } from '@/utils/helper';
 
 type RegisterFormInputs = {
   full_name: string;
