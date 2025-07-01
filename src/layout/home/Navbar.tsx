@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 font-openSans">
-      <nav className="flex items-center justify-between px-6 md:px-16 py-6 text-white w-full">
+      <nav className="flex items-center justify-between px-6 md:px-16 py-6 text-white w-full max-w-[1512px] mx-auto">
         {/* Logo */}
         <Link href="/">
           <Image

@@ -1,7 +1,7 @@
 const HeroBanner = () => {
   return (
-    <section className="relative flex items-center justify-center h-screen bg-cover bg-center">
-      <div className="relative z-10 text-center px-6 max-w-5xl text-white">
+    <section className="relative flex items-center justify-center  bg-cover bg-center">
+      <div className="relative z-10 text-center px-6 max-w-5xl text-white max-w-[1512px] mx-auto">
         <h1 className="text-4xl font-cormorant md:text-6xl font-medium leading-[1.2]">
           DISCIPLESHIP RESOURCES FOR FOLLOWERS OF JESUS ONLY.
         </h1>

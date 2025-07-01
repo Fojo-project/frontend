@@ -3,6 +3,7 @@ import Image from "next/image";
 const LearningSection = () => {
   return (
     <section className="bg-[#000000] text-white w-full py-16 sm:py-20 px-4 sm:px-6 md:px-20 text-center">
+      <div className="max-w-[1512px] mx-auto">
       <p className="uppercase tracking-widest text-sm sm:text-[14px] font-lora mt-4 mb-2 sm:mb-2">
         Followers of Jesus Only
       </p>
@@ -70,6 +71,9 @@ const LearningSection = () => {
       <button className="bg-white mt-10 sm:mb-8 text-black font-semibold text-sm sm:text-base px-6 sm:px-6 py-4 sm:py-3 rounded-lg hover:bg-gray-200 transition-all">
         Start Learning Now →
       </button>
+
+      </div>
+
     </section>
   );
 };

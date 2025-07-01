@@ -14,6 +14,20 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.followersbg {
+  background-image: url('/images/home/jesus-image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000000;
+}
+
+@media (max-width: 768px) {
+  .followersbg {
+    background-image: url('/images/home/jesus-image-mobile.png');
+      background-position: center;
+  }
+}
 
 @theme {
  --font-outfit: 'Outfit', sans-serif;

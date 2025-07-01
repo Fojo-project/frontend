@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const DiscipleshipSection = () => {
   return (
-    <section className="md:mt-8 text-black px-6 sm:px-6 lg:px-20 py-14 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24 items-center">
-      <div className="relative">
+    <section className="md:mt-8 text-black px-6 sm:px-6 lg:px-20 py-14 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24 items-center max-w-[1512px] mx-auto">
+      <div className="relative ">
         <Image
           src="/images/home/disciple-cross.png"
           alt=""
@@ -32,16 +32,18 @@ const DiscipleshipSection = () => {
           We believe discipleship is not optional—it`s foundational. That`s why FOJO exists: to help you follow Jesus only.
         </p>
       </div>
-
-      <div className="flex justify-center lg:justify-end">
+      <div className="w-full flex justify-center lg:justify-end">
         <Image
           src="/images/home/Discipleship-image.png"
           alt="Bible study"
-          width={500}
-          height={500}
-          className="w-full max-w-sm sm:max-w-xl md:max-w-xl h-auto"
+          width={800}
+          height={800}
+          className="w-full h-auto object-contain"
+          priority
         />
       </div>
+
+
     </section>
   );
 };
