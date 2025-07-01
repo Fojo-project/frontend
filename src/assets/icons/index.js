@@ -117,7 +117,7 @@ export const LoadingIcon = ({
   width = '24',
   height = '24',
   fill = 'currentColor',
-  className,
+  className = '',
 }) => {
   return (
     <svg
