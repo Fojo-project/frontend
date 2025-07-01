@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
+import Cookies from 'js-cookie';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
-import { AppleIcon, GoogleIcon, FacebookIcon } from "@/assets/icons"
+import { AppleIcon, GoogleIcon, FacebookIcon } from '@/assets/icons';
 import Label from '../form/Label';
-import { setTokenCookie } from '@/utils/helper';
 
 type RegisterFormInputs = {
   full_name: string;
@@ -21,7 +21,10 @@ type RegisterFormInputs = {
 };
 
 export default function SignUpForm() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirm: false,
+  });
   const { showToast } = useToastify();
   const router = useRouter();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
@@ -34,6 +37,10 @@ export default function SignUpForm() {
     resolver: yupResolver(RegisterFormSchema),
   });
 
+  const togglePasswordVisibility = (field: 'password' | 'confirm') => {
+    setShowPassword((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
   const onSubmit = async (formData: RegisterFormInputs) => {
     try {
       const apiData = {
@@ -43,16 +50,28 @@ export default function SignUpForm() {
         password_confirmation: formData.password_confirmation,
       };
       const response = await registerUser(apiData).unwrap();
-      setTokenCookie(response?.data?.token)
+      if (response?.token) {
+        Cookies.set('access_token', response.token, {
+          expires: 7,
+          path: '/',
+        });
+      }
       showToast(response.message, 'success');
-      router.replace('/verify-email');
+      router.push('/dashboard');
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
-          setError(field as "full_name" | "email" | "password" | "password_confirmation", {
-            type: 'server',
-            message: Array.isArray(messages) ? messages[0] : messages,
-          })
+          setError(
+            field as
+              | 'full_name'
+              | 'email'
+              | 'password'
+              | 'password_confirmation',
+            {
+              type: 'server',
+              message: Array.isArray(messages) ? messages[0] : messages,
+            }
+          )
         );
       }
     }
@@ -133,13 +152,13 @@ export default function SignUpForm() {
                       placeholder="Enter password"
                       register={register}
                       error={errors.password}
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword.password ? 'text' : 'password'}
                     />
                     <span
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-7"
+                      onClick={() => togglePasswordVisibility('password')}
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
-                      {showPassword ? (
+                      {showPassword.password ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
                       ) : (
                         <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
@@ -158,13 +177,13 @@ export default function SignUpForm() {
                       placeholder="Confirm password"
                       register={register}
                       error={errors.password_confirmation}
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword.confirm ? 'text' : 'password'}
                     />
                     <span
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-7"
+                      onClick={() => togglePasswordVisibility('confirm')}
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
-                      {showPassword ? (
+                      {showPassword.confirm ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
                       ) : (
                         <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
