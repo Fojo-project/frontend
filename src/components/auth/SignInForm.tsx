@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeftIcon } from "@/icons";
+// import { ChevronLeftIcon } from "@/icons";
 import Link from "next/link";
 
 export default function SignInForm() {
@@ -12,7 +12,7 @@ export default function SignInForm() {
           href="/"
           className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
         >
-          <ChevronLeftIcon />
+          {/* <ChevronLeftIcon /> */}
           Back to dashboard
         </Link>
       </div>

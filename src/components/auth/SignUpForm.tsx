@@ -1,5 +1,4 @@
 'use client';
-import { EyeCloseIcon, EyeIcon } from '@/icons';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import InputForm from '../form/InputForm';
@@ -9,7 +8,7 @@ import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
-import { AppleIcon, GoogleIcon, FacebookIcon } from '@/assets/icons';
+import { AppleIcon, GoogleIcon, FacebookIcon, EyeIcon, EyeCloseIcon } from '@/assets/icons';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 
