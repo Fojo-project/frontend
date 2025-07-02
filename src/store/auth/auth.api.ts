@@ -47,10 +47,10 @@ export const AuthApi = createApi({
   baseQuery: axiosBaseQuery(),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
-      query: (body) => ({
+      query: (data) => ({
         url: '/api/login',
         method: 'POST',
-        body,
+        data,
       }),
     }),
     registerUser: builder.mutation<AuthResponse, RegisterRequest>({
@@ -88,13 +88,21 @@ export const AuthApi = createApi({
         body,
       }),
     }),
-    socialLogin: builder.mutation<AuthResponse, SocialLoginPayload>({
-      query: (body) => ({
-        url: '/api/social/{provider}',
-        method: 'POST',
-        body,
-      }),
+socialLogin: builder.mutation<AuthResponse, SocialLoginPayload & { full_name: string; email: string }>(
+  {
+    query: ({ provider, ...body }) => ({
+      url: `/api/auth/social/${provider}`,
+      method: 'POST',
+      data: {
+        provider, 
+        ...body,
+      },
     }),
+  }
+)
+
+
+
   }),
 });
 

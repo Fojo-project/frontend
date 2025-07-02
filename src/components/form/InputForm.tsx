@@ -26,7 +26,7 @@ const InputForm: React.FC<InputFormProps> = ({
         type={type}
         {...register(name)}
         placeholder={placeholder}
-        className={`w-full text-sm h-[56px] rounded p-3 border focus:outline-none focus:ring-1 focus:ring-gray-300 ${error ? "border-red-500" : "border-gray-200"
+        className={`w-full text-sm h-[56px] rounded-md p-3 border focus:outline-none focus:ring-1 focus:ring-gray-300 ${error ? "border-red-500" : "border-gray-200"
           }`}
       />
 
