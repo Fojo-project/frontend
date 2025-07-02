@@ -4,19 +4,19 @@ import Link from "next/link";
 //import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../../context/SidebarContext";
-import {
-  BoxCubeIcon,
-  CalenderIcon,
-  ChevronDownIcon,
-  GridIcon,
-  HorizontaLDots,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
-  TableIcon,
-  UserCircleIcon,
-} from "../../icons/index";
+// import {
+//   BoxCubeIcon,
+//   CalenderIcon,
+//   ChevronDownIcon,
+//   GridIcon,
+//   HorizontaLDots,
+//   ListIcon,
+//   PageIcon,
+//   PieChartIcon,
+//   PlugInIcon,
+//   TableIcon,
+//   UserCircleIcon,
+// } from "../../icons/index";
 
 type NavItem = {
   name: string;
@@ -27,34 +27,34 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
-    icon: <GridIcon />,
+    icon: '<GridIcon />',
     name: "Dashboard",
     subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
   {
-    icon: <CalenderIcon />,
+    icon: '<CalenderIcon />',
     name: "Calendar",
     path: "/calendar",
   },
   {
-    icon: <UserCircleIcon />,
+    icon: '<UserCircleIcon />',
     name: "User Profile",
     path: "/profile",
   },
 
   {
     name: "Forms",
-    icon: <ListIcon />,
+    icon: '<ListIcon />',
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
     name: "Tables",
-    icon: <TableIcon />,
+    icon: '<TableIcon />',
     subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
   },
   {
     name: "Pages",
-    icon: <PageIcon />,
+    icon: ' <PageIcon />',
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
       { name: "404 Error", path: "/error-404", pro: false },
@@ -64,7 +64,7 @@ const navItems: NavItem[] = [
 
 const othersItems: NavItem[] = [
   {
-    icon: <PieChartIcon />,
+    icon: '<PieChartIcon />',
     name: "Charts",
     subItems: [
       { name: "Line Chart", path: "/line-chart", pro: false },
@@ -72,7 +72,7 @@ const othersItems: NavItem[] = [
     ],
   },
   {
-    icon: <BoxCubeIcon />,
+    icon: '<BoxCubeIcon />',
     name: "UI Elements",
     subItems: [
       { name: "Alerts", path: "/alerts", pro: false },
@@ -84,7 +84,7 @@ const othersItems: NavItem[] = [
     ],
   },
   {
-    icon: <PlugInIcon />,
+    icon: '<PlugInIcon />',
     name: "Authentication",
     subItems: [
       { name: "Sign In", path: "/signin", pro: false },
@@ -126,14 +126,14 @@ const AppSidebar: React.FC = () => {
               {(isExpanded || isHovered || isMobileOpen) && (
                 <span className={`menu-item-text`}>{nav.name}</span>
               )}
-              {(isExpanded || isHovered || isMobileOpen) && (
-                <ChevronDownIcon
-                  className={`ml-auto w-5 h-5 transition-transform duration-200  ${openSubmenu?.type === menuType &&
-                    openSubmenu?.index === index
-                    ? "rotate-180 text-brand-500"
-                    : ""
-                    }`}
-                />
+              {(isExpanded || isHovered || isMobileOpen) && (null
+                // <ChevronDownIcon
+                //   className={`ml-auto w-5 h-5 transition-transform duration-200  ${openSubmenu?.type === menuType &&
+                //     openSubmenu?.index === index
+                //     ? "rotate-180 text-brand-500"
+                //     : ""
+                //     }`}
+                // />
               )}
             </button>
           ) : (
@@ -342,7 +342,7 @@ const AppSidebar: React.FC = () => {
                 {isExpanded || isHovered || isMobileOpen ? (
                   "Menu"
                 ) : (
-                  <HorizontaLDots />
+                  null // <HorizontaLDots />
                 )}
               </h2>
               {renderMenuItems(navItems, "main")}
@@ -354,7 +354,7 @@ const AppSidebar: React.FC = () => {
                   ? "lg:justify-center"
                   : "justify-start"
                   }`}
-              >
+              >{''}
                 {/* {isExpanded || isHovered || isMobileOpen ? (
                   "Others"
                 ) : (

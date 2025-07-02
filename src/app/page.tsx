@@ -2,7 +2,6 @@ import DiscipleshipSection from "../components/landing/discipleship";
 import HeroBanner from "../components/landing/HeroBanner";
 import Navbar from "../layout/home/Navbar";
 import React from "react";
-import Image from "next/image";
 import LearningSection from "../components/landing/learning";
 import CoursesSection from "../components/landing/courses";
 import NewsLetterSection from "../components/landing/newsletter";
