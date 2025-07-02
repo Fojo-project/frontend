@@ -18,7 +18,7 @@ import {
 } from '@/assets/icons';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
-
+import GoogleAuth from './socialauth/GoogleAuth';
 type RegisterFormInputs = {
   full_name: string;
   email: string;
@@ -92,9 +92,8 @@ export default function SignUpForm() {
           </div>
           <div>
             <div className="grid grid-cols-3 gap-3  sm:gap-5">
-              <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
-                <GoogleIcon />
-              </button>
+              <GoogleAuth authType="signup" onSuccessRedirect="/dashboard" />
+
               <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
                 <AppleIcon />
               </button>

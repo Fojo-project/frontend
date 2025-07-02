@@ -13,6 +13,7 @@
   url(../../public/authImages/FOJO.png);
   background-size: cover;
   background-repeat: no-repeat;
+    background-position: center;
 }
 .followersbg {
   background-image: url('/images/home/jesus-image.png');
