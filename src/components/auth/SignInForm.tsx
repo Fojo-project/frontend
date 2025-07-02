@@ -1,7 +1,7 @@
 'use client';
 import { EyeCloseIcon, EyeIcon } from '@/assets/icons';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -62,7 +62,7 @@ export default function SignInForm() {
             <h1 className="ml-0 mb-1 font-lora font-bold text-black text-title-sm sm:text-title-md">
               Welcome Back!
             </h1>
-            <p className="text-sm text-gray-500 font-normal font-lora text-[#555555] ">
+            <p className="text-sm text-gray-500 font-normal font-lora">
               Continue your journey of discipleship
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function SignInForm() {
                       )}
                     </span>
                   </div>
-                  <p className='float-right mt-1 text-sm text-gray-500'>Forgot Password?</p>
+                  <Link href='/forgot-password' className='float-right mt-1 text-sm text-gray-500'>Forgot Password?</Link>
                 </div>
                 <div>
                   <button

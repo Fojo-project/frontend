@@ -128,15 +128,12 @@ export default function ForgotPassword() {
               </button>
             </div>
             <div className="mt-5 flex items-center justify-center">
-              <p className="text-base font-bold  text-center text-black dark:text-gray-400 ">
-                Back to {''}
-                <Link
-                  href="/signin"
-                  className="text-black hover:underline font-bold"
-                >
-                  Sign In
-                </Link>
-              </p>
+              <Link
+                href="/signin"
+                className="hover:underline text-base font-bold  text-center text-black dark:text-gray-400 "
+              >
+                Back to  Sign In
+              </Link>
             </div>
           </form>
         </div>

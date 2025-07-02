@@ -14,9 +14,11 @@ export const loadingIndicatorProperties = {
   zIndex: 999999999,
 };
 export const cookieConfig = {
-  expires: Infinity,
-  path: '/',
-  secure: config.NODE_ENV === 'production',
-  sameSite: 'Lax',
-  domain: config.baseUrl,
+  expires: 365,
+  // path: '/',
+  // secure: config.NODE_ENV === 'production',
+  // sameSite: 'Lax',
+  // domain: config.baseUrl,
 };
+export const googleUserInfoUrl =
+  'https://www.googleapis.com/oauth2/v3/userinfo';
