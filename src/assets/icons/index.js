@@ -26,7 +26,7 @@ export const FileIcon = ({
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 24 24"
+      viewBox={`0 0 ${width} ${height}`}
       className={className}
     >
       <path
@@ -124,7 +124,7 @@ export const LoadingIcon = ({
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 24 24"
+      viewBox={`0 0 ${width} ${height}`}
     >
       <circle cx="12" cy="2" r="0" fill={fill}>
         <animate
@@ -228,7 +228,7 @@ export const EyeCloseIcon = ({
       fill={fill}
       width={width}
       height={height}
-      viewBox="0 0 24 24"
+      viewBox={`0 0 ${width} ${height}`}
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -251,7 +251,7 @@ export const EyeIcon = ({
       width={width}
       className={className}
       height={height}
-      viewBox="0 0 20 20"
+      viewBox={`0 0 ${width} ${height}`}
       fill={fill}
       xmlns="http://www.w3.org/2000/svg"
     >
