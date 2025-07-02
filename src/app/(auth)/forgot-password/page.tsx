@@ -1,4 +1,4 @@
-import ForgetPassword from '@/components/auth/ForgetPassword';
+import ForgotPassword from '@/components/auth/ForgotPassword';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function forgetPassword() {
-  return <ForgetPassword />;
+  return <ForgotPassword />;
 }

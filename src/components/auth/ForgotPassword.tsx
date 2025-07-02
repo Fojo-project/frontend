@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 import { ForgetPassordFormSchema } from '@/validation/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
-import { ClipLoader } from 'react-spinners';
+import { LoadingIcon } from '@/assets/icons';
 
-type ForgetPasswordFormInputs = {
+type ForgotPasswordFormInputs = {
   email: string;
 };
-export default function ForgetPassword() {
+export default function ForgotPassword() {
   const { showToast } = useToastify();
   const [forgetUser, { isLoading }] = useForgetPasswordMutation();
   const [cooldown, setCooldown] = useState(0);
@@ -25,7 +25,7 @@ export default function ForgetPassword() {
     setError,
     formState: { errors },
     // reset,
-  } = useForm<ForgetPasswordFormInputs>({
+  } = useForm<ForgotPasswordFormInputs>({
     resolver: yupResolver(ForgetPassordFormSchema),
   });
 
@@ -54,7 +54,7 @@ export default function ForgetPassword() {
     };
   }, [cooldown]);
 
-  const onSubmit = async (formData: ForgetPasswordFormInputs) => {
+  const onSubmit = async (formData: ForgotPasswordFormInputs) => {
     try {
       const apiData = {
         email: formData.email,
@@ -117,7 +117,7 @@ export default function ForgetPassword() {
                 disabled={isLoading || cooldown > 0}
               >
                 {isLoading ? (
-                  <ClipLoader size={20} color="#fff" />
+                  <LoadingIcon />
                 ) : cooldown > 0 ? (
                   `Resend in ${Math.floor(cooldown / 60)}:${(cooldown % 60)
                     .toString()

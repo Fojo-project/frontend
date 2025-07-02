@@ -8,7 +8,14 @@ import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
-import { AppleIcon, GoogleIcon, FacebookIcon, EyeIcon, EyeCloseIcon } from '@/assets/icons';
+import {
+  AppleIcon,
+  GoogleIcon,
+  FacebookIcon,
+  LoadingIcon,
+  EyeIcon,
+  EyeCloseIcon,
+} from '@/assets/icons';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 
@@ -192,7 +199,7 @@ export default function SignUpForm() {
                     className="flex mt-6 items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <span className="loader mr-2"></span> : null}
+                    {isLoading ? <LoadingIcon /> : null}
                     Sign Up
                   </button>
                 </div>
