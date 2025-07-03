@@ -20,9 +20,10 @@ interface OtpPayload {
 }
 
 interface ResetPasswordPayload {
+  token: string;
   email: string;
-  newPassword: string;
-  confirmPassword: string;
+  password: string;
+  password_confirmation: string;
 }
 
 interface ForgetPasswordPayload {
@@ -82,10 +83,10 @@ export const AuthApi = createApi({
       }),
     }),
     resetPassword: builder.mutation<AuthResponse, ResetPasswordPayload>({
-      query: (body) => ({
-        url: '/customauth/reset-password',
+      query: (data) => ({
+        url: '/api/reset-password',
         method: 'POST',
-        body,
+        data,
       }),
     }),
 socialLogin: builder.mutation<AuthResponse, SocialLoginPayload & { full_name: string; email: string }>(
