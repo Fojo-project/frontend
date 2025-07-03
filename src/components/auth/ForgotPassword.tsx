@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import InputForm from '../form/InputForm';
 import Label from '../form/Label';
 import { useForgetPasswordMutation } from '@/store/auth/auth.api';

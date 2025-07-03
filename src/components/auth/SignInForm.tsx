@@ -1,5 +1,5 @@
 'use client';
-import { EyeCloseIcon, EyeIcon } from '@/assets/icons';
+import { EyeCloseIcon, EyeIcon, LoadingIcon, AppleIcon, FacebookIcon } from '@/assets/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 import InputForm from '../form/InputForm';
@@ -9,10 +9,10 @@ import { SignInFormSchema } from '@/validation/schema';
 import { useLoginMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
-import { AppleIcon, GoogleIcon, FacebookIcon } from "@/assets/icons"
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from "../auth/socialauth/GoogleAuth"
+
 type SigninFormInputs = {
   email: string;
   password: string;
@@ -95,7 +95,7 @@ export default function SignInForm() {
                 {/* <!-- Email --> */}
                 <div className="sm:col-span-1">
                   <Label className="font-medium  text-gray-500">
-                    Email Address{' '}
+                    Email Address
                   </Label>
                   <InputForm
                     name="email"
@@ -118,7 +118,7 @@ export default function SignInForm() {
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-7"
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-8"
                     >
                       {showPassword ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
@@ -135,8 +135,7 @@ export default function SignInForm() {
                     className="flex mt-4 items-center justify-center w-full px-4 py-3 text-sm font-lora font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <span className="loader mr-2"></span> : null}
-                    Sign In
+                    {isLoading ? <LoadingIcon /> : 'Sign In'}
                   </button>
                 </div>
               </div>
@@ -144,7 +143,7 @@ export default function SignInForm() {
 
             <div className="mt-4 font-lora flex items-center justify-center">
               <p className="text-sm font-normal text-center text-gray-500 dark:text-gray-400 ">
-                Don't have an account?
+                Don`t have an account?
                 <Link
                   href="/signup"
                   className="text-black hover:underline font-bold"

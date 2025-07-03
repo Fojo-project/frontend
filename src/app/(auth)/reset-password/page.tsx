@@ -1,12 +1,12 @@
 import ResetPassword from '@/components/auth/ResetPassword';
 import AlertMessage from '@/components/common/AlertMessage';
 
-interface Props {
-  searchParams: { token?: string; email?: string };
+interface PageProps {
+  searchParams: Promise<{ token?: string; email?: string }>;
 }
 
-export default function Page({ searchParams }: Props) {
-  const { email, token } = searchParams;
+export default async function Page({ searchParams }: PageProps) {
+  const { email, token } = await searchParams;
 
   if (!token || !email) {
     return (

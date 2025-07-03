@@ -1,4 +1,4 @@
-import config from '@/config';
+// import config from '@/config';
 
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },

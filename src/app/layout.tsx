@@ -47,8 +47,7 @@ export default function RootLayout({
       </head>
       <body className="font-outfit dark:bg-gray-900">
         <NextTopLoader {...loadingIndicatorProperties} />
-        {/* <GoogleOAuthProvider clientId={config.googleClientId ?? ''}> */}
-        <GoogleOAuthProvider clientId="850457110173-4usmam6qqau4slkl3rhvdrkbvptsmpqq.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={config.googleClientId ?? ''}>
           <Providers>
             <ThemeProvider>
               <SidebarProvider>{children}</SidebarProvider>

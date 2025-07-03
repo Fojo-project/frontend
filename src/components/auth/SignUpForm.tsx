@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,7 +10,6 @@ import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import {
   AppleIcon,
-  GoogleIcon,
   FacebookIcon,
   LoadingIcon,
   EyeIcon,
@@ -19,6 +18,7 @@ import {
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from './socialauth/GoogleAuth';
+
 type RegisterFormInputs = {
   full_name: string;
   email: string;
@@ -156,7 +156,7 @@ export default function SignUpForm() {
                     />
                     <span
                       onClick={() => togglePasswordVisibility('password')}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-8"
                     >
                       {showPassword.password ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
@@ -181,7 +181,7 @@ export default function SignUpForm() {
                     />
                     <span
                       onClick={() => togglePasswordVisibility('confirm')}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-8"
                     >
                       {showPassword.confirm ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
@@ -198,8 +198,7 @@ export default function SignUpForm() {
                     className="flex mt-6 items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <LoadingIcon /> : null}
-                    Sign Up
+                    {isLoading ? <LoadingIcon /> : 'Sign Up'}
                   </button>
                 </div>
               </div>
