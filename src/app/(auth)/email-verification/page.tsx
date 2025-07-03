@@ -1,11 +1,10 @@
 import VerificationEmail from "@/components/auth/VerificationEmail";
 interface Props {
-  searchParams: { token?: string; email?: string };
+  searchParams: Promise<{ token?: string; email?: string }>;
 }
 
-export default function EmailVerification({ searchParams }: Props) {
-  const { email, token } = searchParams;
-
+export default async function EmailVerification({ searchParams }: Props) {
+  const { email, token } = await searchParams;
 
   if (!token || !email) {
     return (
@@ -15,5 +14,5 @@ export default function EmailVerification({ searchParams }: Props) {
     );
   }
 
-  return <VerificationEmail email={email} token={token}/>
+  return <VerificationEmail email={email} token={token} />
 }

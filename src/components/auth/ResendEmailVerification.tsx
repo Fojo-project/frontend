@@ -57,8 +57,8 @@ export default function ResendEmailVerification({ email }: VerifyEmailProps) {
       setCooldown(cooldownSeconds);
       const cooldownEndTime = Math.floor(Date.now() / 1000) + cooldownSeconds;
       localStorage.setItem('verifyEmailCooldownEnd', cooldownEndTime.toString());
-    } catch (error) {
-      showToast('Failed to resend email. Try again later.', 'error');
+    } catch (error: any) {
+      showToast(error?.response?.data?.message || error?.message, 'error');
     }
   };
 
