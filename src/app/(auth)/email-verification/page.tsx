@@ -1,11 +1,19 @@
-import { Metadata } from "next";
+import VerificationEmail from "@/components/auth/VerificationEmail";
+interface Props {
+  searchParams: { token?: string; email?: string };
+}
 
-export const metadata: Metadata = {
-    title: "Next.js SignUp Page | TailAdmin - Next.js Dashboard Template",
-    description: "This is Next.js SignUp Page TailAdmin Dashboard Template",
-    // other metadata
-};
+export default function EmailVerification({ searchParams }: Props) {
+  const { email, token } = searchParams;
 
-export default function SignUp() {
-    return <p>Email verification</p>;
+
+  if (!token || !email) {
+    return (
+      <div className="max-w-md mx-auto mt-10">
+        <h1>No email and token found</h1>
+      </div>
+    );
+  }
+
+  return <VerificationEmail email={email} token={token}/>
 }

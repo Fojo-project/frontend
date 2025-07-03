@@ -14,9 +14,9 @@ interface RegisterRequest {
   password_confirmation: string;
 }
 
-interface OtpPayload {
+interface VerifyEmailPayload {
   email: string;
-  otp: string;
+  token:string
 }
 
 interface ResetPasswordPayload {
@@ -61,18 +61,18 @@ export const AuthApi = createApi({
         data,
       }),
     }),
-    verifyEmail: builder.mutation<AuthResponse, OtpPayload>({
-      query: (body) => ({
-        url: '/customauth/verify-otp',
+    verifyEmail: builder.mutation<AuthResponse, VerifyEmailPayload>({
+      query: (data) => ({
+        url: '/api/verify-email',
         method: 'POST',
-        body,
+        data,
       }),
     }),
     resendVerifyEmail: builder.mutation<AuthResponse, { email: string }>({
-      query: (body) => ({
-        url: '/customauth/resend-otp',
+      query: (data) => ({
+        url: '/api/verify-email/resend',
         method: 'POST',
-        body,
+        data,
       }),
     }),
     forgetPassword: builder.mutation<AuthResponse, ForgetPasswordPayload>({
