@@ -14,7 +14,7 @@ export default function ResendEmailVerification({ email }: VerifyEmailProps) {
   const { showToast } = useToastify();
   const [resendVerifyEmail, { isLoading: resending }] = useResendVerifyEmailMutation();
 
-  const [cooldown, setCooldown] = useState(0); 
+  const [cooldown, setCooldown] = useState(0);
   const cooldownRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -79,11 +79,11 @@ export default function ResendEmailVerification({ email }: VerifyEmailProps) {
         </div>
         <h2 className="text-xl font-semibold mb-2 text-center">Confirm Your Email.</h2>
         <p className="text-gray-600 mb-6 text-sm text-center">
-          We’ve sent a confirmation link to your email address. <br />
+          We`ve sent a confirmation link to your email address. <br />
           Please check your inbox to activate your account.
         </p>
 
-        <p className="text-gray-600 mb-4 text-center">Didn’t get the email?</p>
+        <p className="text-gray-600 mb-4 text-center">Didn`t get the email?</p>
         <button
           className="bg-black text-white py-2 px-4 rounded mb-4 w-full max-w-[300px] mx-auto disabled:opacity-50"
           onClick={handleResend}
@@ -92,8 +92,8 @@ export default function ResendEmailVerification({ email }: VerifyEmailProps) {
           {resending
             ? 'Resending...'
             : cooldown > 0
-            ? `Resend in ${formatTime(cooldown)}`
-            : 'Resend Email'}
+              ? `Resend in ${formatTime(cooldown)}`
+              : 'Resend Email'}
         </button>
 
         <Link className="text-black underline text-sm mx-auto" href="/signin">

@@ -20,7 +20,7 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
       try {
         const response = await verifyEmail({ email, token }).unwrap();
         showToast(response.message, 'success');
-        router.push('/signin');
+        router.push('/dashboard');
       } catch (error: any) {
         const message =
           error?.data?.message || 'Verification failed. Please try again.';
