@@ -1,11 +1,13 @@
-import { Metadata } from "next";
+import ResendVerificationEmail from "@/components/auth/ResendEmailVerification";
 
-export const metadata: Metadata = {
-    title: "Next.js SignUp Page | TailAdmin - Next.js Dashboard Template",
-    description: "This is Next.js SignUp Page TailAdmin Dashboard Template",
-    // other metadata
-};
+interface VerifyEmailPageProps {
+  searchParams: { email?: string };
+}
 
-export default function SignUp() {
-    return <p>Verify page</p>;
+export default function Page({ searchParams }: VerifyEmailPageProps) {
+  const email = searchParams.email;
+
+  if (!email) return <div>Email is required</div>; 
+
+  return <ResendVerificationEmail email={email} />;
 }

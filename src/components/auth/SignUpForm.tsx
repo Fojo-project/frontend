@@ -47,36 +47,38 @@ export default function SignUpForm() {
     setShowPassword((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
-  const onSubmit = async (formData: RegisterFormInputs) => {
-    try {
-      const apiData = {
-        full_name: formData.full_name,
-        email: formData.email,
-        password: formData.password,
-        password_confirmation: formData.password_confirmation,
-      };
-      const response = await registerUser(apiData).unwrap();
-      setTokenCookie(response.data?.token);
-      showToast(response.message, 'success');
-      router.push('/verify-email');
-    } catch (error: any) {
-      if (error?.data?.errors) {
-        Object.entries(error.data.errors).forEach(([field, messages]) =>
-          setError(
-            field as
+const onSubmit = async (formData: RegisterFormInputs) => {
+  try {
+    const apiData = {
+      full_name: formData.full_name,
+      email: formData.email,
+      password: formData.password,
+      password_confirmation: formData.password_confirmation,
+    };
+    const response = await registerUser(apiData).unwrap();
+
+    setTokenCookie(response.data?.token);
+    showToast(response.message, 'success');
+
+    router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`);
+  } catch (error: any) {
+    if (error?.data?.errors) {
+      Object.entries(error.data.errors).forEach(([field, messages]) =>
+        setError(
+          field as
             | 'full_name'
             | 'email'
             | 'password'
             | 'password_confirmation',
-            {
-              type: 'server',
-              message: Array.isArray(messages) ? messages[0] : messages,
-            }
-          )
-        );
-      }
+          {
+            type: 'server',
+            message: Array.isArray(messages) ? messages[0] : messages,
+          }
+        )
+      );
     }
-  };
+  }
+};
 
   return (
     <div className="flex flex-col flex-1 lg:mx-18 my-[40px] shadow-[1px_4px_40px_0px_#0000000D] rounded-[20px] px-2 md:px-8 py-10  w-full overflow-y-auto no-scrollbar">
