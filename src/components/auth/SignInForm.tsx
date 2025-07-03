@@ -1,5 +1,11 @@
 'use client';
-import { EyeCloseIcon, EyeIcon, LoadingIcon, AppleIcon, FacebookIcon } from '@/assets/icons';
+import {
+  EyeCloseIcon,
+  EyeIcon,
+  LoadingIcon,
+  AppleIcon,
+  FacebookIcon,
+} from '@/assets/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 import InputForm from '../form/InputForm';
@@ -11,7 +17,9 @@ import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
-import GoogleAuth from "../auth/socialauth/GoogleAuth"
+import GoogleAuth from '../auth/socialauth/GoogleAuth';
+//import { loginSuccess } from '@/store/auth/auth.slice';
+//import { useDispatch } from 'react-redux';
 
 type SigninFormInputs = {
   email: string;
@@ -21,6 +29,7 @@ type SigninFormInputs = {
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { showToast } = useToastify();
+  //const dispatch = useDispatch();
   const router = useRouter();
   const [UserSignIn, { isLoading }] = useLoginMutation();
   const {
@@ -39,13 +48,18 @@ export default function SignInForm() {
         password: formData.password,
       };
       const response = await UserSignIn(apiData).unwrap();
-      setTokenCookie(response?.data?.token)
+      const token = response?.data?.token;
+      setTokenCookie(token);
+      //dispatch(loginSuccess({ token: token ?? '', user: null }));
       showToast(response.message, 'success');
-      router.replace('/dashboard');
+      router.push('/dashboard');
+      setTimeout(() => {
+        window.location.reload();
+      }, 200);
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
-          setError(field as | "email" | "password", {
+          setError(field as 'email' | 'password', {
             type: 'server',
             message: Array.isArray(messages) ? messages[0] : messages,
           })
@@ -91,7 +105,6 @@ export default function SignInForm() {
               className="w-full max-w-md space-y-6"
             >
               <div className="grid grid-cols-1 gap-3 ">
-
                 {/* <!-- Email --> */}
                 <div className="sm:col-span-1">
                   <Label className="font-medium  text-gray-500">
@@ -127,7 +140,12 @@ export default function SignInForm() {
                       )}
                     </span>
                   </div>
-                  <Link href='/forgot-password' className='float-right mt-1 text-sm text-gray-500'>Forgot Password?</Link>
+                  <Link
+                    href="/forgot-password"
+                    className="float-right mt-1 text-sm text-gray-500"
+                  >
+                    Forgot Password?
+                  </Link>
                 </div>
                 <div>
                   <button
