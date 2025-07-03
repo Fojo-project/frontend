@@ -82,7 +82,6 @@ export default function ForgetPassword() {
       setCooldown(cooldownSeconds);
       const cooldownEnd = Math.floor(Date.now() / 1000) + cooldownSeconds;
       localStorage.setItem('forgetPasswordCooldownEnd', cooldownEnd.toString());
-
       // reset();
     } catch (error: any) {
       if (error?.data?.errors) {
