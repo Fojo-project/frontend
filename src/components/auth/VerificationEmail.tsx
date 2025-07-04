@@ -16,21 +16,26 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
   const [verifyEmail] = useVerifyEmailMutation();
 
   useEffect(() => {
-    const submitVerification = async () => {
+    if (!email || !token) return;
+
+    const handleEmailVerification = async () => {
       try {
         const response = await verifyEmail({ email, token }).unwrap();
         showToast(response.message, 'success');
         router.push('/dashboard');
       } catch (error: any) {
-        const message =
-          error?.data?.message || 'Verification failed. Please try again.';
-        showToast(message, 'error');
+        const message = error?.data?.message || 'Verification failed. Please try again.';
+
+        if (message === 'Email already verified.') {
+          router.push('/dashboard');
+        } else {
+          showToast(message, 'error');
+          router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+        }
       }
     };
 
-    if (email && token) {
-      submitVerification();
-    }
+    handleEmailVerification();
   }, [email, token, verifyEmail, showToast, router]);
 
   return (

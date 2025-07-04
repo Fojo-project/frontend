@@ -87,7 +87,7 @@ export default function ResendEmailVerification({ email }: VerifyEmailProps) {
         <button
           className="bg-black text-white py-2 px-4 rounded mb-4 w-full max-w-[300px] mx-auto disabled:opacity-50"
           onClick={handleResend}
-          disabled={resending || cooldown > 0}
+          // disabled={resending || cooldown > 0}
         >
           {resending
             ? 'Resending...'
