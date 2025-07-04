@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import VerificationEmail from '@/components/auth/VerificationEmail';
 import AlertMessage from '@/components/common/AlertMessage';
@@ -48,5 +48,7 @@ export default function EmailVerification() {
     );
   }
 
-  return <VerificationEmail email={email} token={token} />;
+  return (<Suspense>
+    <VerificationEmail email={email} token={token} />;
+  </Suspense>)
 }
