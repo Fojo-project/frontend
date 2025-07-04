@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useVerifyEmailMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
+import { LoadingIcon } from '@/assets/icons';
 
 interface VerifyEmailProps {
   email: string;
@@ -13,7 +14,7 @@ interface VerifyEmailProps {
 export default function VerificationEmail({ email, token }: VerifyEmailProps) {
   const router = useRouter();
   const { showToast } = useToastify();
-  const [verifyEmail] = useVerifyEmailMutation();
+  const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
   useEffect(() => {
     if (!email || !token) return;
@@ -24,14 +25,10 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
         showToast(response.message, 'success');
         router.push('/dashboard');
       } catch (error: any) {
+        console.log(error)
         const message = error?.data?.message || 'Verification failed. Please try again.';
-
-        if (message === 'Email already verified.') {
-          router.push('/dashboard');
-        } else {
-          showToast(message, 'error');
-          router.push(`/verify-email?email=${encodeURIComponent(email)}`);
-        }
+        showToast(message, 'error');
+        router.push(`/verify-email?email=${encodeURIComponent(email)}`);
       }
     };
 
@@ -44,7 +41,9 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
         <h1 className="text-4xl font-lora font-semibold mb-4 text-black-600">
           Verifying your email...
         </h1>
-        <p className="text-gray-700">Please wait while we confirm your email.</p>
+        <p className="text-gray-700 mb-4">Please wait while we confirm your email.</p>
+
+        {isLoading && <LoadingIcon className="w-6 h-6 animate-spin text-black" />}
       </div>
     </div>
   );
