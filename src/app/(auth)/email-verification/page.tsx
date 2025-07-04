@@ -1,54 +1,23 @@
-'use client';
-
-import { Suspense, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import VerificationEmail from '@/components/auth/VerificationEmail';
 import AlertMessage from '@/components/common/AlertMessage';
 
-export default function EmailVerification() {
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email');
-  const token = searchParams.get('token');
+interface PageProps {
+  searchParams: Promise<{ token?: string; email?: string }>;
+}
 
-  const [alert, setAlert] = useState<{
-    type: 'success' | 'error';
-    message: string;
-    id?: number;
-  } | null>(null);
+export default async function EmailVerification({ searchParams }: PageProps) {
+  const { email, token } = await searchParams;
 
-  const showAlert = (alertObj: {
-    type: 'success' | 'error';
-    message: string;
-  }) => {
-    setAlert({ ...alertObj, id: Date.now() });
-  };
-
-  useEffect(() => {
-    if (!email || !token) {
-      showAlert({
-        type: 'error',
-        message: 'Email and token are required.',
-      });
-    }
-  }, [email, token]);
-
-  if (!email || !token) {
+  if (!token || !email) {
     return (
       <div className="max-w-md mx-auto mt-10">
-        {alert && (
-          <AlertMessage
-            key={alert.id}
-            type={alert.type}
-            message={alert.message}
-            duration={7000}
-            className="mb-4"
-          />
-        )}
+        <AlertMessage
+          type="error"
+          message="Email and token are required."
+        />
       </div>
     );
   }
 
-  return (<Suspense>
-    <VerificationEmail email={email} token={token} />;
-  </Suspense>)
+  return <VerificationEmail email={email} token={token} />;
 }
