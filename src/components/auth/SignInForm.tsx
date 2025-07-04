@@ -1,9 +1,5 @@
 'use client';
-import {
-  LoadingIcon,
-  AppleIcon,
-  FacebookIcon,
-} from '@/assets/icons';
+import { LoadingIcon, AppleIcon, FacebookIcon } from '@/assets/icons';
 import Link from 'next/link';
 import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
@@ -16,8 +12,6 @@ import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from '../auth/socialauth/GoogleAuth';
 import PasswordInputForm from '../form/PasswordInputForm';
-import { loginSuccess } from '@/store/auth/auth.slice';
-import { useDispatch } from 'react-redux';
 
 type SigninFormInputs = {
   email: string;
@@ -26,7 +20,6 @@ type SigninFormInputs = {
 
 export default function SignInForm() {
   const { showToast } = useToastify();
-  const dispatch = useDispatch();
   const router = useRouter();
   const [UserSignIn, { isLoading }] = useLoginMutation();
   const {
@@ -47,7 +40,6 @@ export default function SignInForm() {
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
       setTokenCookie(token);
-      dispatch(loginSuccess({ token: token ?? '', user: null }));
       showToast(response.message, 'success');
       router.push('/dashboard');
     } catch (error: any) {

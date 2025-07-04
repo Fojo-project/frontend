@@ -1,5 +1,5 @@
 'use client';
-import { LoadingIcon, SignOut } from '@/assets/icons';
+import { SignOut } from '@/assets/icons';
 import useToastify from '@/hooks/useToastify';
 import { useLogoutMutation } from '@/store/auth/auth.api';
 import { logout } from '@/store/auth/auth.slice';
@@ -17,10 +17,10 @@ export default function Logout() {
   const handleLogout = async () => {
     try {
       await logoutApi().unwrap();
+      router.push('/');
       showToast('Logout successful', 'success');
       removeTokenCookie();
       dispatch(logout());
-      router.push('/signin');
     } catch {
       showToast('Logout failed. Please try again.', 'error');
     }
@@ -35,18 +35,11 @@ export default function Logout() {
         className="flex items-center w-full  gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         aria-label="Logout"
       >
-        {isLoading ? (
-          <div className="flex items-center gap-2">
-            <LoadingIcon />
-            Signing out...
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            {' '}
-            <SignOut width={24} height={24} />
-            Sign Out
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {' '}
+          <SignOut width={24} height={24} />
+          Sign Out
+        </div>
       </button>
     </div>
   );
