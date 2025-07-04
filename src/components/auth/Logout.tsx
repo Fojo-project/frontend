@@ -20,7 +20,7 @@ export default function Logout() {
       showToast('Logout successful', 'success');
       removeTokenCookie();
       dispatch(logout());
-      router.push('/signin');
+      router.push('/');
     } catch {
       showToast('Logout failed. Please try again.', 'error');
     }
@@ -28,7 +28,6 @@ export default function Logout() {
 
   return (
     <div>
-      {' '}
       <button
         onClick={handleLogout}
         disabled={isLoading}
