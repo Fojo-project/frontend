@@ -35,14 +35,17 @@ export default function Logout() {
         className="flex items-center w-full  gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         aria-label="Logout"
       >
-        <SignOut width={24} height={24} />
         {isLoading ? (
           <div className="flex items-center gap-2">
             <LoadingIcon />
             Signing out...
           </div>
         ) : (
-          'Sign Out'
+          <div className="flex items-center gap-2">
+            {' '}
+            <SignOut width={24} height={24} />
+            Sign Out
+          </div>
         )}
       </button>
     </div>
