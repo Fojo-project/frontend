@@ -56,17 +56,8 @@ const Navbar = () => {
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 font-openSans">
-      <nav className="flex items-center justify-between px-6 md:px-16 py-6 text-white w-full max-w-[1512px] mx-auto">
-        {/* Logo */}
-        <Link href="/">
-          <Image
-            src="/images/home/logo.png"
-            alt="FOJO Logo"
-            width={60}
-            height={40}
-            className="object-contain"
-          />
-        </Link>
+      <nav className="flex items-center justify-between px-6 md:px-16 py-6 text-white w-full">
+      
     <AnimatePresence>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all ${
@@ -76,7 +67,7 @@ const Navbar = () => {
         animate={visible ? 'visible' : 'hidden'}
         variants={navbarVariants}
       >
-        <nav className="flex items-center justify-between px-6 md:px-16 py-4 md:py-6 font-openSans">
+        <nav className="flex items-center justify-between px-6 md:px-16 py-4 md:py-6 font-openSans mx-auto max-w-[1512px]">
           <Link href="/">
             <Image
               src="/images/home/logo.png"
