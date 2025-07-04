@@ -16,7 +16,7 @@ interface RegisterRequest {
 
 interface VerifyEmailPayload {
   email: string;
-  token:string
+  token: string;
 }
 
 interface ResetPasswordPayload {
