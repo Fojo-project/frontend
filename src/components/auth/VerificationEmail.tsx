@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useVerifyEmailMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
-import { LoadingIcon } from '@/assets/icons'; 
+import { LoadingIcon } from '@/assets/icons';
 
 interface VerifyEmailProps {
   email: string;
@@ -25,6 +25,7 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
         showToast(response.message, 'success');
         router.push('/dashboard');
       } catch (error: any) {
+        console.log(error)
         const message = error?.data?.message || 'Verification failed. Please try again.';
         showToast(message, 'error');
         router.push(`/verify-email?email=${encodeURIComponent(email)}`);
