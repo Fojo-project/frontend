@@ -17,8 +17,8 @@ const initialState: AuthState = {
 };
 
 interface LoginPayload {
-  user: User;
-  token: string;
+  user: User | null;
+  token: any;
 }
 
 const authSlice = createSlice({
@@ -34,8 +34,11 @@ const authSlice = createSlice({
       state.token = null;
       // removeAuthTokens();
     },
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, logout, setUser } = authSlice.actions;
 export default authSlice.reducer;

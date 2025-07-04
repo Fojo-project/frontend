@@ -43,6 +43,25 @@ interface SocialLoginPayload {
   provider: 'google' | 'facebook' | 'apple';
 }
 
+/* interface User {
+  data: boolean;
+  id: string;
+  full_name: string;
+  email: string;
+  // Add other user fields as needed
+} */
+interface MeResponse {
+  status: boolean;
+  message: string;
+  data: {
+    id: number;
+    full_name: string;
+    email: string;
+    role: string;
+    // add more fields if needed
+  };
+}
+
 export const AuthApi = createApi({
   reducerPath: 'authApi',
   baseQuery: axiosBaseQuery(),
@@ -52,6 +71,12 @@ export const AuthApi = createApi({
         url: '/api/login',
         method: 'POST',
         data,
+      }),
+    }),
+    getMe: builder.query<MeResponse, void>({
+      query: () => ({
+        url: '/api/me',
+        method: 'GET',
       }),
     }),
     registerUser: builder.mutation<AuthResponse, RegisterRequest>({
@@ -89,21 +114,26 @@ export const AuthApi = createApi({
         data,
       }),
     }),
-socialLogin: builder.mutation<AuthResponse, SocialLoginPayload & { full_name: string; email: string }>(
-  {
-    query: ({ provider, ...body }) => ({
-      url: `/api/auth/social/${provider}`,
-      method: 'POST',
-      data: {
-        provider, 
-        ...body,
-      },
+    socialLogin: builder.mutation<
+      AuthResponse,
+      SocialLoginPayload & { full_name: string; email: string }
+    >({
+      query: ({ provider, ...body }) => ({
+        url: `/api/auth/social/${provider}`,
+        method: 'POST',
+        data: {
+          provider,
+          ...body,
+        },
+      }),
     }),
-  }
-)
-
-
-
+    logout: builder.mutation<AuthResponse, FormData>({
+      query: (data) => ({
+        url: '/api/logout',
+        method: 'POST',
+        data,
+      }),
+    }),
   }),
 });
 
@@ -115,4 +145,6 @@ export const {
   useResendVerifyEmailMutation,
   useForgetPasswordMutation,
   useSocialLoginMutation,
+  useGetMeQuery,
+  useLogoutMutation,
 } = AuthApi;
