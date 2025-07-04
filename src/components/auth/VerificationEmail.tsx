@@ -25,13 +25,8 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
         router.push('/dashboard');
       } catch (error: any) {
         const message = error?.data?.message || 'Verification failed. Please try again.';
-
-        if (message === 'Email already verified.') {
-          router.push('/dashboard');
-        } else {
-          showToast(message, 'error');
+        showToast(message, 'error');
           router.push(`/verify-email?email=${encodeURIComponent(email)}`);
-        }
       }
     };
 
