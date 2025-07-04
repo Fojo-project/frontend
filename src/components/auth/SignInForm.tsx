@@ -1,13 +1,10 @@
 'use client';
 import {
-  EyeCloseIcon,
-  EyeIcon,
   LoadingIcon,
   AppleIcon,
   FacebookIcon,
 } from '@/assets/icons';
 import Link from 'next/link';
-import { useState } from 'react';
 import InputForm from '../form/InputForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,8 +15,9 @@ import { useRouter } from 'next/navigation';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from '../auth/socialauth/GoogleAuth';
-//import { loginSuccess } from '@/store/auth/auth.slice';
-//import { useDispatch } from 'react-redux';
+import PasswordInputForm from '../form/PasswordInputForm';
+import { loginSuccess } from '@/store/auth/auth.slice';
+import { useDispatch } from 'react-redux';
 
 type SigninFormInputs = {
   email: string;
@@ -27,9 +25,8 @@ type SigninFormInputs = {
 };
 
 export default function SignInForm() {
-  const [showPassword, setShowPassword] = useState(false);
   const { showToast } = useToastify();
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
   const [UserSignIn, { isLoading }] = useLoginMutation();
   const {
@@ -50,12 +47,9 @@ export default function SignInForm() {
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
       setTokenCookie(token);
-      //dispatch(loginSuccess({ token: token ?? '', user: null }));
+      dispatch(loginSuccess({ token: token ?? '', user: null }));
       showToast(response.message, 'success');
       router.push('/dashboard');
-      setTimeout(() => {
-        window.location.reload();
-      }, 200);
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
@@ -120,26 +114,13 @@ export default function SignInForm() {
                 </div>
                 {/* <!-- Password --> */}
                 <div>
-                  <Label className="font-medium  text-gray-500">Password</Label>
-                  <div className="relative ">
-                    <InputForm
-                      name="password"
-                      placeholder="Enter password"
-                      register={register}
-                      error={errors.password}
-                      type={showPassword ? 'text' : 'password'}
-                    />
-                    <span
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-8"
-                    >
-                      {showPassword ? (
-                        <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
-                      ) : (
-                        <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
-                      )}
-                    </span>
-                  </div>
+                  <PasswordInputForm
+                    name="password"
+                    placeholder="Enter password"
+                    register={register}
+                    error={errors.password}
+                    label="Password"
+                  />
                   <Link
                     href="/forgot-password"
                     className="float-right mt-1 text-sm text-gray-500"

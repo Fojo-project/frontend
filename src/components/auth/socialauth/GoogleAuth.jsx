@@ -21,13 +21,10 @@ export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/
           full_name,
           email,
         };
-
         const res = await socialLogin(payload).unwrap();
         setTokenCookie(res.data.token);
-
         const action = authType === 'signin' ? 'Login' : 'Signup';
         showToast(`${action} successful`, 'success');
-
         router.replace(onSuccessRedirect);
       } catch (error) {
         const message = error?.response?.data?.message || error?.message || 'Social login failed';

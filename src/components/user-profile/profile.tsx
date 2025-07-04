@@ -6,7 +6,7 @@ import { setUser } from '@/store/auth/auth.slice';
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const { data, isLoading } = useGetMeQuery(undefined, {
+  const { data } = useGetMeQuery(undefined, {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
     refetchOnFocus: true,
@@ -23,5 +23,5 @@ export default function Profile() {
     }
   }, [data, dispatch]);
 
-  return <div>{isLoading && 'loading.......'}</div>;
+  return <div></div>;
 }

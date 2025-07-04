@@ -104,7 +104,6 @@ export default function ResetPassword({
             key={alert.id}
             type={alert.type}
             message={alert.message}
-            duration={7000}
             className="mb-4"
           />
         )}

@@ -1,12 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CheckCircle, Info, AlertTriangle, XCircle } from 'lucide-react';
 
 interface AlertMessageProps {
   type?: 'success' | 'error' | 'info' | 'warning';
   message: string;
   className?: string;
-  duration?: number;
 }
 
 const iconMap = {
@@ -27,19 +26,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
   type = 'info',
   message,
   className = '',
-  duration = 5000,
 }) => {
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    if (duration && duration > 0) {
-      const timer = setTimeout(() => setVisible(false), duration);
-      return () => clearTimeout(timer);
-    }
-  }, [duration]);
-
-  if (!visible) return null;
-
   return (
     <div
       className={`flex items-start gap-2 p-4 rounded-md text-base ${baseStyles[type]} ${className}`}

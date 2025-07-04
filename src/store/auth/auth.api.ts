@@ -127,11 +127,10 @@ export const AuthApi = createApi({
         },
       }),
     }),
-    logout: builder.mutation<AuthResponse, FormData>({
-      query: (data) => ({
+    logout: builder.mutation<void, void>({
+      query: () => ({
         url: '/api/logout',
         method: 'POST',
-        data,
       }),
     }),
   }),

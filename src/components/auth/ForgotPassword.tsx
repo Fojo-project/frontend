@@ -13,6 +13,7 @@ import AlertMessage from '../common/AlertMessage';
 type ForgotPasswordFormInputs = {
   email: string;
 };
+
 export default function ForgetPassword() {
   const [forgetUser, { isLoading }] = useForgetPasswordMutation();
   const [cooldown, setCooldown] = useState(0);
@@ -28,33 +29,41 @@ export default function ForgetPassword() {
     handleSubmit,
     setError,
     formState: { errors },
-    // reset,
   } = useForm<ForgotPasswordFormInputs>({
     resolver: yupResolver(ForgetPassordFormSchema),
   });
 
-  useEffect(() => {
-    const cooldownEnd = localStorage.getItem('forgetPasswordCooldownEnd');
-    if (cooldownEnd) {
-      const end = parseInt(cooldownEnd, 10);
-      const now = Math.floor(Date.now() / 1000);
-      if (end > now) {
-        setCooldown(end - now);
-      } else {
-        localStorage.removeItem('forgetPasswordCooldownEnd');
-      }
-    }
-  }, []);
+  // Removed hydration and cooldown restore from localStorage
+  // useEffect(() => {
+  //   const cooldownEnd = localStorage.getItem('forgetPasswordCooldownEnd');
+  //   if (cooldownEnd) {
+  //     const end = parseInt(cooldownEnd, 10);
+  //     const now = Math.floor(Date.now() / 1000);
+  //     const remaining = end - now;
+  //     if (remaining > 0) {
+  //       setCooldown(remaining);
+  //     } else {
+  //       localStorage.removeItem('forgetPasswordCooldownEnd');
+  //     }
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (cooldown > 0) {
-      cooldownRef.current = setTimeout(() => setCooldown(cooldown - 1), 1000);
-    } else if (cooldownRef.current) {
-      clearTimeout(cooldownRef.current);
-      localStorage.removeItem('forgetPasswordCooldownEnd');
-    }
+    if (cooldown === 0) return;
+
+    cooldownRef.current = setInterval(() => {
+      setCooldown((prev) => {
+        if (prev <= 1) {
+          clearInterval(cooldownRef.current!);
+          // localStorage.removeItem('forgetPasswordCooldownEnd');
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
     return () => {
-      if (cooldownRef.current) clearTimeout(cooldownRef.current);
+      if (cooldownRef.current) clearInterval(cooldownRef.current);
     };
   }, [cooldown]);
 
@@ -67,22 +76,19 @@ export default function ForgetPassword() {
 
   const onSubmit = async (formData: ForgotPasswordFormInputs) => {
     try {
-      const apiData = {
-        email: formData.email,
-      };
-      const response = await forgetUser(apiData).unwrap();
+      const response = await forgetUser({ email: formData.email }).unwrap();
+
       showAlert({
         type: 'success',
         message:
           response.message ||
-          'Please check your email a reset link has been sent to your email',
+          'Please check your email, a reset link has been sent.',
       });
 
-      const cooldownSeconds = 300; // 5 minutes
+      const cooldownSeconds = 300;
+      // const cooldownEnd = Math.floor(Date.now() / 1000) + cooldownSeconds;
+      // localStorage.setItem('forgetPasswordCooldownEnd', cooldownEnd.toString());
       setCooldown(cooldownSeconds);
-      const cooldownEnd = Math.floor(Date.now() / 1000) + cooldownSeconds;
-      localStorage.setItem('forgetPasswordCooldownEnd', cooldownEnd.toString());
-      // reset();
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
@@ -103,35 +109,34 @@ export default function ForgetPassword() {
       }
     }
   };
+
   return (
-    <div className="flex flex-col flex-1 lg:mx-18 my-[40px] shadow-[1px_4px_40px_0px_#0000000D] rounded-[20px] px-2 md:px-8 py-10  w-full overflow-y-auto no-scrollbar">
+    <div className="flex flex-col flex-1 lg:mx-18 my-[40px] shadow-[1px_4px_40px_0px_#0000000D] rounded-[20px] px-2 md:px-8 py-10 w-full overflow-y-auto no-scrollbar">
       <div className="flex flex-col font-lora justify-center flex-1 w-full max-w-md mx-auto">
         {alert && (
           <AlertMessage
             key={alert.id}
             type={alert.type}
             message={alert.message}
-            duration={7000}
             className="mb-4"
           />
         )}
         <div>
           <div className="mb-5 sm:mb-8">
             <h1 className="mb-2 font-semibold text-black text-title-sm sm:text-title-md">
-              Forgot Your Password?{' '}
+              Forgot Your Password?
             </h1>
-            <p className="text-sm text-gray-500 ">
-              We&apos;ll send you a link to reset it.{' '}
+            <p className="text-sm text-gray-500">
+              We&apos;ll send you a link to reset it.
             </p>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-md space-y-6"
           >
-            <div className="grid grid-cols-1 gap-3 ">
-              {/* <!-- First Name --> */}
+            <div className="grid grid-cols-1 gap-3">
               <div className="sm:col-span-1">
-                <Label className="font-medium  text-gray-500">
+                <Label className="font-medium text-gray-500">
                   Email Address
                 </Label>
                 <InputForm
@@ -144,11 +149,10 @@ export default function ForgetPassword() {
                 />
               </div>
             </div>
-            {/* <!-- Button --> */}
             <div>
               <button
                 type="submit"
-                className="flex mt-6 items-center justify-center w-full px-4 py-3 text-base font-bold text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex mt-6 items-center justify-center w-full px-4 py-3 text-base font-bold text-white transition rounded-lg bg-black shadow-theme-xs disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading || cooldown > 0}
               >
                 {isLoading ? (
@@ -165,9 +169,9 @@ export default function ForgetPassword() {
             <div className="mt-5 flex items-center justify-center">
               <Link
                 href="/signin"
-                className="hover:underline text-base font-bold  text-center text-black dark:text-gray-400 "
+                className="hover:underline text-base font-bold text-center text-black dark:text-gray-400"
               >
-                Back to  Sign In
+                Back to Sign In
               </Link>
             </div>
           </form>
