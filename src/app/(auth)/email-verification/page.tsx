@@ -13,7 +13,7 @@ export default async function EmailVerificationPage({ searchParams }: PageProps)
       <div className="max-w-md mx-auto mt-10">
         <AlertMessage
           type="error"
-          message="Missing or invalid verification token or email."
+          message="Email and token required"
         />
       </div>
     );
