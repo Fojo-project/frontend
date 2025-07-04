@@ -15,7 +15,7 @@ export const loadingIndicatorProperties = {
 };
 export const cookieConfig = {
   expires: 365,
-  // path: '/',
+  path: '/',
   // secure: config.NODE_ENV === 'production',
   // sameSite: 'Lax',
   // domain: config.baseUrl,
