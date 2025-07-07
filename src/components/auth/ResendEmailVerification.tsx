@@ -32,8 +32,8 @@ export default function ResendEmailVerification({ email }: VerifyEmailProps) {
   const handleResend = async () => {
     try {
       await resendVerifyEmail({ email }).unwrap();
-      showToast('Verification email resent!', 'success');
       setCooldown(300);
+      showToast('Verification email resent!', 'success');
     } catch (error: any) {
       showToast(error?.response?.data?.message || error?.message || 'Something went wrong', 'error');
     }

@@ -1,6 +1,6 @@
 // lib/config.ts
 function displayError(key: string) {
-  console.error(`Environment variable "${key}" is not defined.`);
+  console.log(`Environment variable "${key}" is not defined.`);
 }
 
 const config = {

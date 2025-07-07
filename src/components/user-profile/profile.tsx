@@ -12,7 +12,7 @@ export default function Profile() {
     refetchOnFocus: true,
   });
   useEffect(() => {
-    if (data && data.data) {
+    if (data) {
       dispatch(
         setUser({
           id: String(data.data.id),

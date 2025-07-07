@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('FOJO_TOKEN')?.value;
   const pathname = request.nextUrl.pathname;
 
-  if (pathname === '/signin' && token) {
+  if ((pathname === '/signin' || pathname === '/signup') && token) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 

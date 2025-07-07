@@ -7,11 +7,7 @@ import { RegisterFormSchema } from '@/validation/schema';
 import { useRegisterUserMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
-import {
-  AppleIcon,
-  FacebookIcon,
-  LoadingIcon,
-} from '@/assets/icons';
+import { LoadingIcon } from '@/assets/icons';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from './socialauth/GoogleAuth';
@@ -46,20 +42,18 @@ export default function SignUpForm() {
         password_confirmation: formData.password_confirmation,
       };
       const response = await registerUser(apiData).unwrap();
-
       setTokenCookie(response.data?.token);
-      showToast(response.message, 'success');
-
       router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`);
+      showToast(response.message, 'success');
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
           setError(
             field as
-              | 'full_name'
-              | 'email'
-              | 'password'
-              | 'password_confirmation',
+            | 'full_name'
+            | 'email'
+            | 'password'
+            | 'password_confirmation',
             {
               type: 'server',
               message: Array.isArray(messages) ? messages[0] : messages,
@@ -85,12 +79,6 @@ export default function SignUpForm() {
           <div>
             <div className="grid grid-cols-3 gap-3  sm:gap-5">
               <GoogleAuth authType="signup" onSuccessRedirect="/dashboard" />
-              <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
-                <AppleIcon />
-              </button>
-              <button className="flex items-center justify-center border-[#E4E7EC] border-[1px] rounded-lg  py-[18px] text-sm font-normal transition-colors ">
-                <FacebookIcon />
-              </button>
             </div>
             <div className="relative py-3 sm:py-5">
               <div className="absolute inset-0 flex items-center">

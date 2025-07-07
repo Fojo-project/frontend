@@ -65,8 +65,8 @@ export default function ResetPassword({
         password_confirmation: formData.password_confirmation,
       };
       const response = await resetUser(apiData).unwrap();
-      showToast(response.message, 'success');
       router.push('/signin');
+      showToast(response.message, 'success');
     } catch (error: any) {
       if (error?.data?.status === false && error?.data?.message) {
         showAlert({

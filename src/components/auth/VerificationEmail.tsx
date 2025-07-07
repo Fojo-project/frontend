@@ -22,13 +22,12 @@ export default function VerificationEmail({ email, token }: VerifyEmailProps) {
     const handleEmailVerification = async () => {
       try {
         const response = await verifyEmail({ email, token }).unwrap();
-        showToast(response.message, 'success');
         router.push('/dashboard');
+        showToast(response.message, 'success');
       } catch (error: any) {
-        console.log(error)
         const message = error?.data?.message || 'Verification failed. Please try again.';
-        showToast(message, 'error');
         router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+        showToast(message, 'error');
       }
     };
 

@@ -24,8 +24,8 @@ export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/
         const res = await socialLogin(payload).unwrap();
         setTokenCookie(res.data.token);
         const action = authType === 'signin' ? 'Login' : 'Signup';
-        showToast(`${action} successful`, 'success');
         router.replace(onSuccessRedirect);
+        showToast(`${action} successful`, 'success');
       } catch (error) {
         const message = error?.response?.data?.message || error?.message || 'Social login failed';
         showToast(message, 'error');

@@ -40,16 +40,9 @@ interface AuthResponse {
 
 interface SocialLoginPayload {
   token: string;
-  provider: 'google' | 'facebook' | 'apple';
+  provider: 'google';
 }
 
-/* interface User {
-  data: boolean;
-  id: string;
-  full_name: string;
-  email: string;
-  // Add other user fields as needed
-} */
 interface MeResponse {
   status: boolean;
   message: string;
@@ -58,7 +51,6 @@ interface MeResponse {
     full_name: string;
     email: string;
     role: string;
-    // add more fields if needed
   };
 }
 
