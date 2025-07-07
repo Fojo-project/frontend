@@ -1,30 +1,8 @@
-import React from "react";
+'use client'
 import Image from "next/image";
+import { courseCategories } from "@/utils/data";
+
 const CoursesSection = () => {
-    const courses = [
-        {
-            title: 'Foundations Of The Faith.',
-            description: 'Start your journey with core  teachings on salvation, prayer, and Scripture.',
-            image: '/images/home/Foundations.png',
-        },
-        {
-            title: 'Walking As A Disciple.',
-            description: 'Learn to follow Jesus daily with obedience and intimacy.',
-            image: '/images/home/Disciple.png',
-        },
-        {
-            title: 'Serving In The Ministry.',
-            description: 'Discover your calling and how to serve effectively in the body of Christ.',
-            image: '/images/home/Ministry.png',
-        },
-        {
-            title: 'Leading Like Christ.',
-            description: 'Grow into a Christ-centered leader — humble, bold, and Spirit-led.',
-            image: '/images/home/Christ.png',
-        },
-    ];
-
-
     return (
         <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto text-center">
@@ -39,7 +17,7 @@ const CoursesSection = () => {
                     are a great place to begin.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {courses.map((course, index) => (
+                    {courseCategories.map((course, index) => (
                         <div key={index} className="bg-white border shadow-sm overflow-hidden transition-transform hover:scale-[1.02]">
                             <div className="relative w-full h-[280px]">
                                 <Image
