@@ -1,25 +1,30 @@
 export const courseCategories = [
   {
-    title: 'Foundations Of The Faith.',
+    title: 'Foundations',
     description:
-      'Start your journey with core  teachings on salvation, prayer, and Scripture.',
+      'Start your journey with core teachings on salvation, prayer, and Scripture.',
     image: '/images/home/Foundations.png',
+    lessons: 15,
   },
   {
-    title: 'Walking As A Disciple.',
-    description: 'Learn to follow Jesus daily with obedience and intimacy.',
+    title: ' Disciple',
+    description:
+      'Learn to follow Jesus daily with obedience and intimacy.',
     image: '/images/home/Disciple.png',
+    lessons: 15,
   },
   {
-    title: 'Serving In The Ministry.',
+    title: ' Ministry',
     description:
       'Discover your calling and how to serve effectively in the body of Christ.',
     image: '/images/home/Ministry.png',
+    lessons: 15,
   },
   {
-    title: 'Leading Like Christ.',
+    title: 'Leadership',
     description:
       'Grow into a Christ-centered leader — humble, bold, and Spirit-led.',
     image: '/images/home/Christ.png',
+    lessons: 15,
   },
 ];

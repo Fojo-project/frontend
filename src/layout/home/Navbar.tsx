@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { NAV_LINKS } from '@/utils/constant';
-import { Hamburger } from '@/assets/icons';
+import { Hamburger, ArrowIcon, AccountIcon } from '@/assets/icons';
+import Cookies from 'js-cookie';
 
 const navbarVariants: Variants = {
   visible: {
@@ -40,7 +41,10 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const current = window.pageYOffset;
@@ -54,85 +58,116 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
+  // Auth check
+  useEffect(() => {
+    const token = Cookies.get('FOJO_TOKEN');
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 font-openSans">
-      <nav className="flex items-center justify-between px-6 md:px-16 py-6 text-white w-full max-w-[1512px] mx-auto">
-        {/* Logo */}
-        <Link href="/">
-          <Image
-            src="/images/home/logo.png"
-            alt="FOJO Logo"
-            width={60}
-            height={40}
-            className="object-contain"
-          />
-        </Link>
     <AnimatePresence>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all ${
-          scrolled ? 'bg-gray-900 shadow-md' : 'bg-transparent'
+          scrolled ? 'bg-[#000000] shadow-lg' : 'bg-transparent'
         }`}
         initial="visible"
         animate={visible ? 'visible' : 'hidden'}
         variants={navbarVariants}
       >
-        <nav className="flex items-center justify-between px-6 md:px-16 py-4 md:py-6 font-openSans">
+        <nav className="flex items-center justify-between px-6 md:px-16 py-4 md:py-6 font-openSans max-w-[1512px] mx-auto text-white">
+          {/* Logo */}
           <Link href="/">
             <Image
               src="/images/home/logo.png"
               alt="FOJO Logo"
               width={60}
               height={40}
-              className="object-contain"
+              className="object-contain cursor-pointer"
             />
           </Link>
 
-          {/* desktop */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-12">
             <ul className="flex items-center gap-10">
-              {NAV_LINKS.map(({ label, href }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    className={`text-sm font-medium transition-colors duration-200 ${
-                      pathname === href ? 'text-white font-semibold' : 'text-white hover:text-gray-300'
-                    }`}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
+              {NAV_LINKS.map((link) =>
+                link.children ? (
+                  <li key={link.label} className="relative group">
+                    <span className="flex items-center gap-1 text-sm font-medium cursor-pointer text-white transition-colors duration-200 group-hover:text-gray-300">
+                      {link.label}
+                      <span className="transition-transform duration-300 group-hover:rotate-180">
+                        <ArrowIcon width={20} height={20} />
+                      </span>
+                    </span>
+                    <ul className="absolute left-0 mt-2 w-44 bg-white text-black rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform transition-all duration-200 translate-y-2 z-10">
+                      {link.children.map((child) => (
+                        <li key={child.label}>
+                          <Link
+                            href={child.href}
+                            className="block px-4 py-2 text-sm hover:bg-gray-100"
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className={`text-sm font-medium transition-colors duration-200 ${
+                        pathname === link.href
+                          ? 'text-white font-semibold'
+                          : 'text-white hover:text-gray-300'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
-            <div className="flex items-center gap-3">
+
+            {/* Auth Button */}
+            {isLoggedIn ? (
               <Link
-                href="/signup"
-                className="text-sm px-6 py-2 border rounded-lg bg-black text-white font-medium  transition-colors"
+                href="/dashboard"
+                className="text-sm px-6 py-2 rounded-lg  text-black font-medium transition-colors"
               >
-                Sign Up
+                  <AccountIcon width={24} height={24} />
               </Link>
-              <Link
-                href="/signin"
-                className="text-sm px-6 py-2 border rounded-lg text-white font-medium  transition-colors"
-              >
-                Login
-              </Link>
-            </div>
+            ) : (
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/signup"
+                  className="text-sm px-6 py-2 border rounded-lg bg-white text-black font-medium transition-colors"
+                >
+                  Sign Up
+                </Link>
+                <Link
+                  href="/signin"
+                  className="text-sm px-6 py-2 border rounded-lg text-white font-medium transition-colors"
+                >
+                  Login
+                </Link>
+              </div>
+            )}
           </div>
 
-          {/* mobile toggle */}
+          {/* Mobile Toggle */}
           <button
             className="md:hidden text-white focus:outline-none"
             onClick={() => setMenuOpen((o) => !o)}
           >
-           <Hamburger/>
+            <Hamburger />
           </button>
         </nav>
 
-        {/* mobile menu */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              className="md:hidden fixed top-0 right-0 w-full h-[500px] bg-black bg-opacity-90 px-6 py-6"
+              className="md:hidden fixed top-0 right-0 w-full h-[500px] bg-[#000000] bg-opacity-90 px-6 py-6 overflow-y-auto"
               initial="closed"
               animate="open"
               exit="closed"
@@ -156,42 +191,87 @@ const Navbar = () => {
               </div>
 
               <ul className="space-y-4">
-                {NAV_LINKS.map(({ label, href }) => (
-                  <li key={label}>
-                    <Link
-                      href={href}
-                      className="block text-lg text-white font-medium hover:text-gray-300 transition-colors duration-200"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
+                {NAV_LINKS.map((link) =>
+                  link.children ? (
+                    <li key={link.label}>
+                      <div
+                        onClick={() => setResourcesOpen((prev) => !prev)}
+                        className="flex items-center justify-between text-white font-medium mb-2 cursor-pointer"
+                      >
+                        <span>{link.label}</span>
+                        <span
+                          className={`transition-transform duration-300 ${
+                            resourcesOpen ? 'rotate-180' : ''
+                          }`}
+                        >
+                          <ArrowIcon width={16} height={16} />
+                        </span>
+                      </div>
+                      {resourcesOpen && (
+                        <ul className="pl-4 space-y-2">
+                          {link.children.map((child) => (
+                            <li key={child.label}>
+                              <Link
+                                href={child.href}
+                                className="block text-sm text-white hover:text-gray-300"
+                                onClick={() => setMenuOpen(false)}
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ) : (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="block text-lg text-white font-medium hover:text-gray-300 transition-colors duration-200"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                )}
               </ul>
 
+              {/* Mobile Auth */}
               <div className="mt-8 flex flex-col gap-3">
-                <Link
-                  href="/signup"
-                  className="block text-center text-sm text-black bg-white px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Sign Up
-                </Link>
-                <Link
-                  href="/signin"
-                  className="block text-center text-sm border border-white px-6 py-2 rounded-lg text-white font-medium hover:bg-white hover:text-black transition-colors duration-200"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Login
-                </Link>
+                {isLoggedIn ? (
+                  <Link
+                    href="/dashboard"
+                    className="block text-center text-sm text-black bg-white px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                  <AccountIcon width={24} height={24} />
+
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/signup"
+                      className="block text-center text-sm text-black bg-white px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Sign Up
+                    </Link>
+                    <Link
+                      href="/signin"
+                      className="block text-center text-sm border border-white px-6 py-2 rounded-lg text-white font-medium hover:bg-white hover:text-black transition-colors duration-200"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Login
+                    </Link>
+                  </>
+                )}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.header>
     </AnimatePresence>
-    </nav>
-    </header>
   );
 };
 

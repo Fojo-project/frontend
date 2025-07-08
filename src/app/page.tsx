@@ -25,18 +25,18 @@ export default function Page() {
       <CoursesSection />
       <section className="followersbg relative h-[500px] max-w-full lg:max-w-7xl mx-auto px-4 mb-10 md:mb-20">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 bg-black/60 z-0" />
-          <div className="absolute inset-0 flex justify-center items-center px-4 z-10">
+          <div className="absolute  bg-black/60 z-0" />
+          <div className="absolute bg-[#00000] inset-0 flex justify-center items-center px-4 z-10">
             <div className="max-w-md text-white text-center sm:text-left sm:ml-auto sm:mr-20">
               <p className="uppercase text-xs font-lora tracking-widest text-gray-300">
                 Followers of Jesus Only
               </p>
-              <h1 className="text-4xl md:text-4xl font-cormorant font-semibold leading-snug">
+              <h1 className="text-4xl md:text-5xl font-cormorant font-semibold leading-snug">
                 <span className="block sm:inline">READY TO GROW</span>{' '}
                 <span className="block sm:inline">IN YOUR WALK</span>{' '}
                 <span className="block sm:inline">WITH JESUS?</span>
               </h1>
-              <p className="text-sm text-gray-300 font-cormorant leading-relaxed">
+              <p className="text-md text-gray-300 font-cormorant leading-relaxed">
                 Start learning today with free, Bible-centered courses
                 <span className="block sm:inline sm:mt-0">
                   made to deepen your faith and disciple others.

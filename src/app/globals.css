@@ -17,9 +17,9 @@
 }
 .followersbg {
   background-image: url('/images/home/jesus-image.png');
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: contain;
   background-color: #000000;
 }
 
