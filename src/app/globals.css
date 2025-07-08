@@ -94,7 +94,7 @@
   --color-blue-light-900: #0b4a6f;
   --color-blue-light-950: #062c41;
 
-  --color-gray-25: #fcfcfd;
+  --color-gray-25: #f9f9f9;
   --color-gray-50: #f9fafb;
   --color-gray-100: #a0a0a0;
   --color-gray-200: #e4e7ec;
@@ -218,15 +218,15 @@
 }
 
 @utility menu-item {
-  @apply relative flex items-center w-full gap-3 px-3 py-2 font-medium rounded-lg text-theme-sm;
+  @apply relative flex items-center w-full gap-3 px-4 py-4 font-medium rounded-lg text-theme-sm;
 }
 
 @utility menu-item-active {
-  @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+  @apply bg-brand-50 text-black-100 dark:bg-brand-500/[0.12] dark:text-brand-400;
 }
 
 @utility menu-item-inactive {
-  @apply text-gray-700 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+  @apply text-black-100 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
 }
 
 @utility menu-item-icon {
