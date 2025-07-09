@@ -32,7 +32,7 @@ export default function CourseDetails({ id }: CourseDetailsProps) {
   return (
     <div className=" flex flex-col font-lora gap-7">
       <div className="text-sm flex font-open-sans gap-2 text-gray-600">
-        <Link href="/mycourses">
+        <Link href="/dashboard/my-courses">
           <span className="flex items-center gap-1 hover:underline text-gray-500">
             <BackIcon width={20} height={20} />
             Explore Courses
