@@ -3,7 +3,7 @@
 import { LoadingIcon } from '@/assets/icons';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
-type Variant = 'primary' | 'secondary' | 'outline';
+type Variant = 'primary' | 'secondary' | 'outline' | '';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -37,7 +37,8 @@ export default function Button({
       ? 'text-black-100 flex items-center font-semibold '
       : 'border text-gray-100 bg-gray-200 flex items-center ';
 
-  const disabledClass = isLoading || disabled ? ' cursor-not-allowed' : '';
+  const disabledClass =
+    isLoading || disabled ? ' cursor-not-allowed text-gray-100' : '';
   const widthClass = fullWidth ? 'w-full' : '';
   const paddingClass =
     className.includes('px-') || className.includes('py-') ? '' : 'px-4 py-2';

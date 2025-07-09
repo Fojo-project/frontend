@@ -1,7 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-export default function Header() {
+interface HeaderProps {
+  Heading: string;
+}
+export default function Header({ Heading }: HeaderProps) {
   return (
-    <div className=''>Header</div>
-  )
+    <div className="font-lora text-[28px] font-semibold dark:text-white text-gray-800">
+      <h3>{Heading}</h3>
+    </div>
+  );
 }

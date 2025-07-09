@@ -8,6 +8,16 @@
 .lora {
   font-family: 'Lora', serif;
 }
+.backfill {
+  background-image: url('/images/home/backfill.png');
+  background-size: cover;
+}
+.backfillMin {
+  background-image: url('/images/home/backfillMins.png');
+}
+.backfilDisp {
+  background-image: url('/images/home/backfillDisp.png');
+}
 .authbg {
   background-image: url(../../public/authImages/FOJO.png);
   background-size: cover;
@@ -87,7 +97,7 @@
   --color-blue-light-200: #b9e6fe;
   --color-blue-light-300: #7cd4fd;
   --color-blue-light-400: #36bffa;
-  --color-blue-light-500: #0ba5ec;
+  --color-blue-light-500: #a0a0a0;
   --color-blue-light-600: #0086c9;
   --color-blue-light-700: #026aa2;
   --color-blue-light-800: #065986;
@@ -98,12 +108,12 @@
   --color-gray-50: #f9fafb;
   --color-gray-100: #a0a0a0;
   --color-gray-200: #e4e7ec;
-  --color-gray-300: #d0d5dd;
+  --color-gray-300: #f0f2f5;
   --color-gray-400: #98a2b3;
   --color-gray-500: #555555;
   --color-gray-600: #475467;
   --color-gray-700: #344054;
-  --color-gray-800: #1d2939;
+  --color-gray-800: #101928;
   --color-gray-900: #101828;
   --color-gray-950: #667085;
   --color-gray-dark: #1a2231;
