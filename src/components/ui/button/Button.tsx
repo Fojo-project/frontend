@@ -1,55 +1,59 @@
-import React, { ReactNode } from "react";
+'use client';
 
-interface ButtonProps {
-  children: ReactNode; // Button text or content
-  size?: "sm" | "md"; // Button size
-  variant?: "primary" | "outline"; // Button variant
-  startIcon?: ReactNode; // Icon before the text
-  endIcon?: ReactNode; // Icon after the text
-  onClick?: () => void; // Click handler
-  disabled?: boolean; // Disabled state
-  className?: string; // Disabled state
+import { LoadingIcon } from '@/assets/icons';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+
+type Variant = 'primary' | 'secondary' | 'outline';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  isLoading?: boolean;
+  variant?: Variant;
+  fullWidth?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
+export default function Button({
   children,
-  size = "md",
-  variant = "primary",
-  startIcon,
-  endIcon,
-  onClick,
-  className = "",
-  disabled = false,
-}) => {
-  // Size Classes
-  const sizeClasses = {
-    sm: "px-4 py-3 text-sm",
-    md: "px-5 py-3.5 text-sm",
-  };
+  isLoading,
+  variant,
+  fullWidth,
+  className = '',
+  disabled,
+  leftIcon,
+  rightIcon,
+  ...rest
+}: ButtonProps) {
+  const base =
+    'flex items-center justify-center rounded-md text-sm font-medium transition';
 
-  // Variant Classes
-  const variantClasses = {
-    primary:
-      "bg-brand-500 text-white shadow-theme-xs hover:bg-brand-600 disabled:bg-brand-300",
-    outline:
-      "bg-white text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:ring-gray-700 dark:hover:bg-white/[0.03] dark:hover:text-gray-300",
-  };
+  const variantClass =
+    variant === 'primary'
+      ? 'bg-black-100 flex items-center font-semibold text-white hover:bg-[#1c1b1b]'
+      : variant === 'secondary'
+      ? 'bg-gray-100 flex items-center text-gray-800 hover:bg-gray-200'
+      : variant === 'outline'
+      ? 'text-black-100 flex items-center font-semibold '
+      : 'border text-gray-100 bg-gray-200 flex items-center ';
+
+  const disabledClass = isLoading || disabled ? ' cursor-not-allowed' : '';
+  const widthClass = fullWidth ? 'w-full' : '';
+  const paddingClass =
+    className.includes('px-') || className.includes('py-') ? '' : 'px-4 py-2';
+  const allClasses =
+    `${base} ${variantClass} ${paddingClass} ${widthClass} ${disabledClass} ${className}`.trim();
 
   return (
-    <button
-      className={`inline-flex items-center justify-center font-medium gap-2 rounded-lg transition ${className} ${
-        sizeClasses[size]
-      } ${variantClasses[variant]} ${
-        disabled ? "cursor-not-allowed opacity-50" : ""
-      }`}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {startIcon && <span className="flex items-center">{startIcon}</span>}
+    <button className={allClasses} disabled={isLoading || disabled} {...rest}>
+      {isLoading && (
+        <span className="mr-2">
+          <LoadingIcon />
+        </span>
+      )}
+      {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
       {children}
-      {endIcon && <span className="flex items-center">{endIcon}</span>}
+      {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
     </button>
   );
-};
-
-export default Button;
+}
