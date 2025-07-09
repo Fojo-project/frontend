@@ -4,7 +4,13 @@ export const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
   { label: 'About', href: '/about' },
-  { label: 'Support Us', href: '/support' },
+{
+    label: 'Resources',
+    children: [
+      { label: 'Watch Live', href: '/resources/blog' },
+      { label: 'Listen Live', href: '/resources/docs' },
+    ],
+  },
 ];
 
 export const loadingIndicatorProperties = {

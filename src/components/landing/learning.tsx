@@ -18,7 +18,7 @@ const LearningSection = () => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:pt-18 sm:gap-10 mb-10 sm:mb-12">
-          <div className="hover:bg-gray-600 p-4 transition-all rounded-md group">
+          <div className="hover:bg-gray-400 p-4 transition-all rounded-md group">
             <div className="mb-4 flex justify-center">
               <Image src="/images/home/bible_icon.svg" alt="Bible Icon" width={60} height={60} />
             </div>
@@ -33,14 +33,14 @@ const LearningSection = () => {
               <span className="absolute left-0 -bottom-0.5 h-[1px] w-0 bg-white transition-all duration-700 group-hover:w-full"></span>
             </a>
           </div>
-          <div className="hover:bg-gray-600 p-4 transition-all rounded-md group">
+          <div className="hover:bg-gray-400 p-4 transition-all rounded-md group">
             <div className="mb-4 mt-12 md:mt-0 flex justify-center">
               <Image src="/images/home/video_icon.svg" alt="Video Icon" width={60} height={60} />
             </div>
             <h3 className="text-[22px] font-cormorant">Learn At Your Pace.</h3>
             <p className="text-[14px] sm:text-sm mb-2">
-              Watch videos, listen to audio teachings, or read notes
-              <br />
+              Watch videos, listen to audio teachings, or read  <br /> notes
+             
               all at your convenience.
             </p>
             <a href="#" className="relative inline-block text-white text-sm font-medium group">
@@ -48,7 +48,7 @@ const LearningSection = () => {
               <span className="absolute left-0 -bottom-0.5 h-[1px] w-0 bg-white transition-all duration-700 group-hover:w-full"></span>
             </a>
           </div>
-          <div className="hover:bg-gray-600 p-4 transition-all rounded-md group">
+          <div className="hover:bg-gray-400 p-4 transition-all rounded-md group">
             <div className="mb-4 mt-12 md:mt-0 flex justify-center">
               <Image src="/images/home/cross_icon.svg" alt="Cross Icon" width={60} height={60} />
             </div>

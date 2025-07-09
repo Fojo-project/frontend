@@ -77,7 +77,7 @@ export default function SignUpForm() {
             </p>
           </div>
           <div>
-            <div className="grid grid-cols-3 gap-3  sm:gap-5">
+            <div className="">
               <GoogleAuth authType="signup" onSuccessRedirect="/dashboard" />
             </div>
             <div className="relative py-3 sm:py-5">

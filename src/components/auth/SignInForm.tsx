@@ -67,7 +67,7 @@ export default function SignInForm() {
             </p>
           </div>
           <div>
-            <div className="grid grid-cols-3 gap-3  sm:gap-5">
+            <div className="">
               <GoogleAuth authType="signin" onSuccessRedirect="/dashboard" />
             </div>
             <div className="relative py-3 sm:py-2">
