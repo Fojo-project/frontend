@@ -21,9 +21,9 @@ export default function CourseTabs({ courseData }: Props) {
       <div className="flex space-x-6 border-b">
         <button
           onClick={() => setActiveTab('about')}
-          className={`pb-2 transition-all ${
+          className={`pb-2 transition-all dark:text-white ${
             activeTab === 'about'
-              ? 'font-semibold border-b-2 border-black'
+              ? 'font-semibold border-b-2 border-black-100'
               : 'text-gray-600'
           }`}
         >
@@ -32,9 +32,9 @@ export default function CourseTabs({ courseData }: Props) {
 
         <button
           onClick={() => setActiveTab('core')}
-          className={`pb-2 transition-all ${
+          className={`pb-2 transition-all dark:text-white ${
             activeTab === 'core'
-              ? 'font-semibold border-b-2 border-black'
+              ? 'font-semibold border-b-2 border-black-100'
               : 'text-gray-600'
           }`}
         >
@@ -70,14 +70,14 @@ export default function CourseTabs({ courseData }: Props) {
                           Lesson {lesson.number}.
                         </span>
                         <span
-                          className={`w-full font-medium text-xl text-black-100 cursor-pointer ${
+                          className={`w-full dark:text-white font-medium text-xl text-black-100 cursor-pointer ${
                             lesson.status
                               ? 'hover:underline'
                               : 'text-gray-400 cursor-not-allowed'
                           }`}
                           onClick={() => {
                             if (lesson.status) {
-                              router.push(`/mycourses/${lesson.id}`);
+                              router.push(`/dashboard/my-courses/${lesson.id}`);
                             }
                           }}
                           role="button"
@@ -90,9 +90,19 @@ export default function CourseTabs({ courseData }: Props) {
                         <Button
                           variant="outline"
                           disabled={!lesson.status}
-                          rightIcon={<DownloadIcon width={14} height={14} />}
+                          rightIcon={
+                            <DownloadIcon
+                              width={14}
+                              height={14}
+                              className="dark:text-white"
+                            />
+                          }
                         >
-                          <h3 className="font-semibold text-sm">
+                          <h3
+                            className={`font-semibold text-sm ${
+                              !lesson.status && 'dark:opacity-60'
+                            }  `}
+                          >
                             Download Note
                           </h3>
                         </Button>

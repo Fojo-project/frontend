@@ -34,7 +34,7 @@ export default function Button({
       : variant === 'secondary'
       ? 'bg-gray-100 flex items-center text-gray-800 hover:bg-gray-200'
       : variant === 'outline'
-      ? 'text-black-100 flex items-center font-semibold '
+      ? 'text-black-100 flex items-center font-semibold dark:text-white '
       : 'border text-gray-100 bg-gray-200 flex items-center ';
 
   const disabledClass =
