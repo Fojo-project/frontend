@@ -11,7 +11,7 @@ const CoursesSection = () => {
                     Grow in Christ, one course at a time.
                 </h2>
                 <p className="text-gray-600 text-base font-lora leading-relaxed max-w-2xl mx-auto break-words mb-12">
-                    Whether you’re new to the faith or deepening your walk, these courses
+                    Whether you`re new to the faith or deepening your walk, these courses
                     <span className="hidden lg:inline"><br /></span>
                     <span className="inline lg:hidden"> </span>
                     are a great place to begin.
