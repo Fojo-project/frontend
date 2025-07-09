@@ -47,7 +47,9 @@ export default function CourseDetails({ id }: CourseDetailsProps) {
       <div className="flex flex-col md:flex-row gap-4">
         <Image src={video} alt="" className="flex-2/3 " />
         <div className="flex-1/3  gap-2 -mt-2 flex-col">
-          <h3 className="font-medium">Next Lesson</h3>
+          <h3 className="font-medium text-black-100 dark:text-white">
+            Next Lesson
+          </h3>
           <Cards className="flex flex-col gap-3">
             {[...Array(2)].map((_, index) => (
               <div
@@ -65,7 +67,7 @@ export default function CourseDetails({ id }: CourseDetailsProps) {
                   <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
                     Lesson {index + 1}.
                   </span>
-                  <h3 className="font-medium text-sm text-black-100">
+                  <h3 className="font-medium text-sm text-black-100 dark:text-white">
                     You are Spirit!/Your Spirit is Sinless.
                   </h3>
                 </div>
@@ -80,9 +82,11 @@ export default function CourseDetails({ id }: CourseDetailsProps) {
             <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
               Lesson {foundLesson.number}.
             </span>
-            <h1 className="text-2xl font-bold">{foundLesson.title}</h1>
+            <h1 className="text-2xl font-bold dark:text-white">
+              {foundLesson.title}
+            </h1>
           </div>
-          <h3>
+          <h3 className="dark:text-white">
             The Foundations of the Faith course is designed to help you build
             your walk with Jesus on solid, unshakable ground. In a world full of
             spiritual confusion, distractions, and cultural compromise,
@@ -94,7 +98,7 @@ export default function CourseDetails({ id }: CourseDetailsProps) {
         </Cards>
         <Cards className="flex-1/3 font-open-sans">
           <div className="gap-2 flex justify-between border-b-2 border-gray-200  p-2">
-            <h1 className="text-2xl font-bold">Lesson Note</h1>
+            <h1 className="text-2xl font-bold dark:text-white">Lesson Note</h1>
             <Button
               variant="outline"
               rightIcon={<DownloadIcon width={14} height={14} />}
