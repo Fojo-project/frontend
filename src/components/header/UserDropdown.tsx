@@ -6,7 +6,6 @@ import { DropdownItem } from '../ui/dropdown/DropdownItem';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Logout from '../auth/Logout';
-import { LoadingIcon } from '@/assets/icons';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +35,7 @@ export default function UserDropdown() {
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">
-          {user?.name ?? <LoadingIcon />}
+          {user?.name}
         </span>
 
         <svg

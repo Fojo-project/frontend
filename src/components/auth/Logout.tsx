@@ -1,5 +1,5 @@
 'use client';
-import { SignOut } from '@/assets/icons';
+import { LoadingIcon, SignOut } from '@/assets/icons';
 import useToastify from '@/hooks/useToastify';
 import { useLogoutMutation } from '@/store/auth/auth.api';
 import { logout } from '@/store/auth/auth.slice';
@@ -35,9 +35,9 @@ export default function Logout() {
         aria-label="Logout"
       >
         <div className="flex items-center gap-2">
-          {' '}
           <SignOut width={24} height={24} />
           Sign Out
+          {isLoading ? <LoadingIcon /> : null}
         </div>
       </button>
     </div>
