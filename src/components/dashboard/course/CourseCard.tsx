@@ -16,7 +16,6 @@ export default function CourseCard() {
   const isCourseKey = (key: string): key is CourseKey =>
     ['foundations', 'discipleship', 'ministry'].includes(key);
 
-  // Safe fallback
   const courseKey: CourseKey = isCourseKey(lastSegment ?? '')
     ? (lastSegment as CourseKey)
     : DEFAULT_COURSE_KEY;
