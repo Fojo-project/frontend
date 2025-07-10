@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadingIndicatorProperties } from '@/utils/constant';
 import './globals.css';
+import GlobalAuthHandler from '@/components/auth/GlobalAuthHandler';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -74,6 +75,7 @@ export default function RootLayout({
         <NextTopLoader {...loadingIndicatorProperties} />
         <GoogleOAuthProvider clientId={config.googleClientId ?? ''}>
           <Providers>
+            <GlobalAuthHandler />
             <ThemeProvider>
               <SidebarProvider>{children}</SidebarProvider>
             </ThemeProvider>

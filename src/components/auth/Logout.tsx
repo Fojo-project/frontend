@@ -5,7 +5,6 @@ import { useLogoutMutation } from '@/store/auth/auth.api';
 import { logout } from '@/store/auth/auth.slice';
 import { removeTokenCookie } from '@/utils/helper';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import { useDispatch } from 'react-redux';
 
 export default function Logout() {
