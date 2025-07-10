@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { CourseRouteInfo, CourseKey } from '@/data/CourseRouteInfo';
 import CourseTabs from './CourseTabs';
+import NoResource from "@/components/common/NoResource";
 
 // Default course key
 const DEFAULT_COURSE_KEY: CourseKey = 'foundations';
@@ -24,9 +25,17 @@ export default function CourseCard() {
 
   return (
     <div className="flex flex-col gap-4 ">
+    {/* <NoResource
+      title="No Lessons Yet"
+      subtitle="Start creating shipments"
+      icon="/images/home/empty_resource.png"
+      buttonText="Start Learning"
+      href="/dashboard/explore-courses" 
+    /> */}
       <section
         className={`rounded-xl p-6 ${courseData.bgImage}   text-white relative overflow-hidden `}
       >
+
         <div className="relative z-10 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-lora font-medium">

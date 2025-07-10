@@ -36,7 +36,7 @@ const AppSidebar: React.FC = () => {
     {
       icon: <ExploreIcon width={18} height={18} className="" />,
       name: 'Explore Courses',
-      path: '/Explore',
+      path: '/dashboard/explore-courses',
     },
     {
       icon: <EventsIcon width={20} height={20} className="" />,
