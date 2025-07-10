@@ -56,7 +56,7 @@ const AppSidebar: React.FC = () => {
               className={`menu-item group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${
                 active
                   ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
-                  : 'hover:bg-gray-25 hover:border border-gray-200 text-black-100 dark:text-white hover:text-black'
+                  : 'hover:bg-gray-25  border-gray-200 text-black-100 dark:text-white hover:text-black'
               }`}
             >
               <span

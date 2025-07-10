@@ -45,7 +45,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Scroll effect
-  useEffect(() => {
+   useEffect(() => {
     const handleScroll = () => {
       const current = window.pageYOffset;
       const down = prevScrollPos < current;
@@ -57,12 +57,12 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
-
+ 
   // Auth check
   useEffect(() => {
     const token = Cookies.get('FOJO_TOKEN');
     setIsLoggedIn(!!token);
-  }, []);
+  }, []); 
 
   return (
     <AnimatePresence>
