@@ -25,8 +25,8 @@ export default function UserDropdown() {
         onClick={toggleDropdown}
         className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle"
       >
-        <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
-          <UserIcon width={44} height={44} />
+        <span className="mr-3 flex justify-center items-center border-1 dark:border-0 overflow-hidden rounded-full h-11 w-11">
+          <UserIcon width={30} height={30} />
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">

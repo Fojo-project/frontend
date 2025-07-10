@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { NAV_LINKS } from '@/utils/constant';
 import { Hamburger, ArrowIcon, AccountIcon } from '@/assets/icons';
-import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 const navbarVariants: Variants = {
   visible: {
@@ -42,7 +43,7 @@ const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [resourcesOpen, setResourcesOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   // Scroll effect
   useEffect(() => {
@@ -58,18 +59,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
-  // Auth check
-  useEffect(() => {
-    const token = Cookies.get('FOJO_TOKEN');
-    setIsLoggedIn(!!token);
-  }, []);
-
   return (
     <AnimatePresence>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all ${
-          scrolled ? 'bg-[#000000] shadow-lg' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all ${scrolled ? 'bg-[#000000] shadow-lg' : 'bg-transparent'
+          }`}
         initial="visible"
         animate={visible ? 'visible' : 'hidden'}
         variants={navbarVariants}
@@ -115,11 +109,10 @@ const Navbar = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className={`text-sm font-medium transition-colors duration-200 ${
-                        pathname === link.href
-                          ? 'text-white font-semibold'
-                          : 'text-white hover:text-gray-300'
-                      }`}
+                      className={`text-sm font-medium transition-colors duration-200 ${pathname === link.href
+                        ? 'text-white font-semibold'
+                        : 'text-white hover:text-gray-300'
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -134,7 +127,7 @@ const Navbar = () => {
                 href="/dashboard"
                 className="text-sm px-6 py-2 rounded-lg  text-black font-medium transition-colors"
               >
-                  <AccountIcon width={24} height={24} />
+                <AccountIcon width={24} height={24} />
               </Link>
             ) : (
               <div className="flex items-center gap-3">
@@ -200,9 +193,8 @@ const Navbar = () => {
                       >
                         <span>{link.label}</span>
                         <span
-                          className={`transition-transform duration-300 ${
-                            resourcesOpen ? 'rotate-180' : ''
-                          }`}
+                          className={`transition-transform duration-300 ${resourcesOpen ? 'rotate-180' : ''
+                            }`}
                         >
                           <ArrowIcon width={16} height={16} />
                         </span>
@@ -245,7 +237,7 @@ const Navbar = () => {
                     className="block text-center text-sm text-black bg-white px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
                     onClick={() => setMenuOpen(false)}
                   >
-                  <AccountIcon width={24} height={24} />
+                    <AccountIcon width={24} height={24} />
 
                   </Link>
                 ) : (

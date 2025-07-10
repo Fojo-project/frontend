@@ -8,7 +8,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const { data } = useGetMeQuery(undefined, {
     refetchOnMountOrArgChange: true,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
     refetchOnFocus: true,
   });
   useEffect(() => {

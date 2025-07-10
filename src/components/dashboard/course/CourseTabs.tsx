@@ -73,7 +73,7 @@ export default function CourseTabs({ courseData }: Props) {
                           className={`w-full dark:text-white font-medium text-xl text-black-100 cursor-pointer ${
                             lesson.status
                               ? 'hover:underline'
-                              : 'text-gray-400 cursor-not-allowed'
+                              : 'text-gray-400 cursor-not-allowed dark:opacity-60'
                           }`}
                           onClick={() => {
                             if (lesson.status) {
