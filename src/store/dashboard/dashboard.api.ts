@@ -10,7 +10,7 @@ interface AllCourse {
   about_course: string;
   course_image: string;
   description: string;
-  lesson_count?: number; 
+  lesson_count?: number;
 }
 interface AllCourseResponse {
   success: boolean;
@@ -76,6 +76,12 @@ export const DashboardApi = createApi({
   endpoints: (builder) => ({
     allCourses: builder.query<AllCourseResponse, void>({
       query: () => ({
+        url: '/api/courses/user/course',
+        method: 'GET',
+      }),
+    }),
+    ExploreCourses: builder.query<AllCourseResponse, void>({
+      query: () => ({
         url: '/api/courses',
         method: 'GET',
       }),
@@ -86,6 +92,7 @@ export const DashboardApi = createApi({
         method: 'GET',
       }),
     }),
+
     ShowALesson: builder.query<ShowLessonResponse, LessonQueryArg>({
       query: ({ lesson }) => ({
         url: `/api/lessons/${lesson}`,
@@ -106,4 +113,5 @@ export const {
   useCourseQuery,
   useShowALessonQuery,
   useMarkLessonMutation,
+  useExploreCoursesQuery,
 } = DashboardApi;

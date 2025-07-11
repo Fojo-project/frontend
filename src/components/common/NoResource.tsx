@@ -6,17 +6,17 @@ import Link from 'next/link';
 interface EmptyStateProps {
   title: string;
   subtitle: string;
-  icon: string;
+  icon: any;
   buttonText?: string;
-  href?: string; 
+  href?: string;
 }
 
 export default function NoResource({
   title,
   subtitle,
   icon,
-  buttonText = "Get Started",
-  href = "/dashboard/explore-courses",
+  buttonText = 'Get Started',
+  href = '/dashboard/explore-courses',
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-20">
