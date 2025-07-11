@@ -500,7 +500,7 @@ export const SignOut = ({ width, height }) => {
     </svg>
   );
 };
-export const UserIcon = ({ width, height }) => {
+export const UserIcon = ({ width, height, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -508,7 +508,7 @@ export const UserIcon = ({ width, height }) => {
       height={height}
       viewBox="0 0 16 16"
       fill="none"
-      className="text-gray-600 dark:text-gray-400"
+      className={className}
     >
       <path
         d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"
@@ -536,7 +536,6 @@ export const ArrowIcon = ({ width, height }) => {
     </svg>
   );
 };
-
 export const AccountIcon = ({ width, height }) => {
   return (
     <svg

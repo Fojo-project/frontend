@@ -10,7 +10,7 @@ export default function LessonPage() {
   return (
     <div className="flex flex-col gap-3">
       <Header Heading="My Courses" />
-      <CourseDetails id={id as string} />
+      <CourseDetails id={id as string} courseTitle="Course Title" />
     </div>
   );
 }

@@ -10,7 +10,6 @@ import { UserIcon } from '@/assets/icons';
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user);
-
   function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -23,7 +22,7 @@ export default function UserDropdown() {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle"
+        className="flex items-center  text-gray-700 dark:text-gray-400 dropdown-toggle"
       >
         <span className="mr-3 flex justify-center items-center border-1 dark:border-0 overflow-hidden rounded-full h-11 w-11">
           <UserIcon width={30} height={30} />
