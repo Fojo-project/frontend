@@ -6,7 +6,7 @@ import LearningSection from "../components/landing/learning";
 import CoursesSection from "../components/landing/courses";
 import NewsLetterSection from "../components/landing/newsletter";
 import Footer from "../layout/home/Footer";
-
+import Link from "next/link";
 export default function Page() {
   return (
     <div className="relative h-screen w-full">
@@ -23,10 +23,10 @@ export default function Page() {
       <DiscipleshipSection />
       <LearningSection />
       <CoursesSection />
-      <section className="followersbg relative h-[500px] max-w-full lg:max-w-7xl mx-auto px-4 mb-10 md:mb-20">
+      <section className="followersbg relative min-h-[800px] md:min-h-[600px] max-w-full lg:max-w-7xl mx-auto px-4 mb-10 md:mb-20 py-16 sm:py-24">
         <div className="relative w-full h-full">
           <div className="absolute  bg-black/60 z-0" />
-          <div className="absolute bg-[#00000] inset-0 flex justify-center items-center px-4 z-10">
+          <div className=" bg-[#00000] inset-0 flex justify-center items-center px-4 z-10">
             <div className="max-w-md text-white text-center sm:text-left sm:ml-auto sm:mr-20">
               <p className="uppercase text-xs font-lora tracking-widest text-gray-300">
                 Followers of Jesus Only
@@ -42,10 +42,14 @@ export default function Page() {
                   made to deepen your faith and disciple others.
                 </span>
               </p>
-              <button className="bg-white mt-4 text-black text-xs md:text-[14px] font-semibold py-2 px-4 sm:px-5 sm:py-3 rounded-lg hover:bg-gray-200 transition flex items-center gap-2 mx-auto sm:mx-0">
+              <Link
+                href="/signup"
+                className="inline-flex bg-white mt-4 text-black text-xs md:text-[14px] font-semibold py-2 px-4 sm:px-5 sm:py-3 rounded-lg hover:bg-gray-200 transition items-center gap-2 mx-auto sm:mx-0"
+              >
                 Start Learning Now!
                 <span className="transform -translate-y-[1px] font-bold">→</span>
-              </button>
+              </Link>
+
             </div>
           </div>
         </div>

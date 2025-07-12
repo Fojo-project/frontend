@@ -34,8 +34,10 @@
 
 @media (max-width: 768px) {
   .followersbg {
-    background-image: url('/images/home/jesus-image-mobile.png');
+   background-image: url('/images/home/jesus-image-mobile.png');
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
   }
 }
 

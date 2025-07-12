@@ -80,6 +80,12 @@ export const DashboardApi = createApi({
         method: 'GET',
       }),
     }),
+    homepageCourses: builder.query<AllCourseResponse, void>({
+      query: () => ({
+        url: '/api/all-courses',
+        method: 'GET',
+      }),
+    }),
     Course: builder.query<CourseResponse, CourseQueryArg>({
       query: ({ course }) => ({
         url: `/api/courses/${course}`,
@@ -104,6 +110,7 @@ export const DashboardApi = createApi({
 export const {
   useAllCoursesQuery,
   useCourseQuery,
+   useHomepageCoursesQuery,
   useShowALessonQuery,
   useMarkLessonMutation,
 } = DashboardApi;

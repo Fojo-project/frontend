@@ -1,11 +1,22 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const Footer = () => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
+
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+const courseLink = isLoggedIn 
+  ? "/dashboard/explore-courses" 
+  : "/signup";
+
   return (
     <div className="bg-[#000000]">
-      <footer className=" text-white px-6 md:px-20 pt-56 pb-6 text-sm relative z-0 max-w-[1512px] mx-auto">
+      <footer className="text-white px-6 md:px-20 pt-56 pb-6 text-sm relative z-0 max-w-[1512px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="max-w-md mb-8 text-center mx-auto md:text-left md:mx-0">
             <Link href="/">
@@ -27,7 +38,7 @@ const Footer = () => {
 
           <div className="grid grid-cols-2 gap-12">
             <ul className="space-y-2 font-lora text-[14px] lg:text-[16px]">
-              <li><Link href="/courses">Courses</Link></li>
+              <li><Link href={courseLink}>Courses</Link></li>
               <li><Link href="/about">About FOJO</Link></li>
               <li><Link href="#">Join Community</Link></li>
             </ul>
@@ -43,10 +54,8 @@ const Footer = () => {
           © {year} FOJO. All rights reserved.
         </div>
       </footer>
-
     </div>
   );
 };
 
 export default Footer;
-

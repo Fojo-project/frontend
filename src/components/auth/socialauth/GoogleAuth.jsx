@@ -41,7 +41,7 @@ export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/
       type="button"
       onClick={() => login()}
       disabled={isLoading}
-      className="flex w-full items-center justify-center gap-2 border border-[#E4E7EC] rounded-lg py-[14px] px-[18px] transition-colors bg-white hover:bg-gray-100"
+      className="flex w-full items-center justify-center gap-2 border border-[#E4E7EC] rounded-lg py-[14px] px-[18px] transition-colors bg-white"
     >
       {isLoading ? (
         <LoadingIcon className="w-5 h-5 text-gray-700" />
