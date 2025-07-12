@@ -1,25 +1,42 @@
 'use client';
 import React from 'react';
-import CourseTabs from './CourseTabs';
-import { useCourseQuery } from '@/store/dashboard/dashboard.api';
+import {
+  useCourseQuery,
+  useStartCourseMutation,
+} from '@/store/dashboard/dashboard.api';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
 import MediaPlayer from '@/components/ui/video/MediaPlayer';
+import CourseTabs from '../course/CourseTabs';
+import Header from '@/layout/dashboard/Header';
+import Button from '@/components/ui/button/Button';
+import { useRouter } from 'next/navigation';
 import { formatDuration } from '@/utils/TimeFormatter';
 
 interface CourseDetailProps {
   courseTitle: string;
 }
 
-export default function CourseDetail({ courseTitle }: CourseDetailProps) {
+export default function ExploreCoursesDetails({
+  courseTitle,
+}: CourseDetailProps) {
+  const router = useRouter();
   const { data, isLoading, isError } = useCourseQuery({ course: courseTitle });
+  const [startCourse, { isLoading: isStarting }] = useStartCourseMutation();
   const response = data?.data;
-  console.log(response);
 
+  const handleStartCourse = async () => {
+    try {
+      await startCourse({ course: courseTitle }).unwrap();
+      router.push('/dashboard/my-courses');
+    } catch (error) {
+      console.error('Failed to start course:', error);
+    }
+  };
   const lowerTitle = courseTitle.toLowerCase();
-
   if (isLoading) {
     return (
       <div className="flex flex-col w-full gap-6">
+        <Header Heading={'Explore Courses'} />
         {[...Array(2)].map((_, idx) => (
           <div key={idx} className="w-full ">
             <CardSkeleton />
@@ -31,8 +48,23 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
   if (isError) {
     return <div>Error loading courses</div>;
   }
+
   return (
     <div className="flex flex-col gap-4">
+      <div className="flex justify-between items-center">
+        <Header Heading={'Explore Courses'} />
+        {!response?.isStarted && (
+          <Button
+            variant={'primary'}
+            onClick={handleStartCourse}
+            disabled={isStarting}
+            className="px-[27px] py-[10px]"
+            isLoading={isStarting}
+          >
+            Start Course
+          </Button>
+        )}
+      </div>
       <section
         className={`rounded-xl p-6 text-white relative overflow-hidden ${
           lowerTitle || 'foundations'
@@ -50,7 +82,7 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
                 Number of Lessons:
                 <span
                   className="ml-4 px-2 py-1 rounded"
-                  style={{ backgroundColor: response?.color_code || '#cccccc' }} // fallback color
+                  style={{ backgroundColor: response?.color_code || '#cccccc' }}
                 >
                   {response?.lesson_progress?.completed_lessons} /{' '}
                   {response?.lesson_progress?.total_lessons} Lesson
@@ -61,7 +93,7 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
                 Total Lesson Length:
                 <span
                   className="ml-3 px-2 py-1 rounded "
-                  style={{ backgroundColor: response?.color_code || '#cccccc' }} // fallback color
+                  style={{ backgroundColor: response?.color_code || '#cccccc' }}
                 >
                   {formatDuration(response?.total_lessons_duration ?? 0)}
                 </span>

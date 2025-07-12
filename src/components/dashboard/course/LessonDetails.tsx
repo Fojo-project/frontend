@@ -20,7 +20,8 @@ interface CourseDetailsProps {
 }
 
 export default function LessonDetails({ lesson }: CourseDetailsProps) {
-  const { data, isLoading, isError } = useShowALessonQuery({ lesson });
+  const { data, isLoading, isError, refetch } = useShowALessonQuery({ lesson });
+  console.log('dtaa', data);
   const { showToast } = useToastify();
   const [markLesson] = useMarkLessonMutation();
   const response = data?.data;
@@ -32,6 +33,8 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
     try {
       const res = await markLesson({ lesson: lessonSlug }).unwrap();
       showToast(res?.message || 'Lesson completed successfully', 'success');
+      // Trigger background refetch to update the lesson data
+      refetch();
     } catch (error) {
       showToast(
         (error as { message?: string })?.message ||
@@ -64,10 +67,10 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
   return (
     <div className=" flex flex-col font-lora gap-7">
       <div className="text-sm flex font-open-sans gap-2 text-gray-600">
-        <Link href="/dashboard/my-courses">
+        <Link href={`/dashboard/my-courses/${lesson}`}>
           <span className="flex items-center gap-1 hover:underline text-gray-500">
             <BackIcon width={20} height={20} />
-            Explore Courses
+            My Courses
           </span>
         </Link>
         {' / '}
@@ -103,7 +106,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
                   <Image
                     src={Foundation}
                     alt=""
-                    className="w-[65px] h-full rounded-[5px] object-cover"
+                    className="w-[65px] h-[65px] rounded-[5px] object-cover"
                   />
                   <div
                     onClick={() => {
@@ -116,7 +119,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
                     <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
                       Lesson {nextLesson.lesson_order}.
                     </span>
-                    <h3 className="font-medium text-sm text-black-100 dark:text-white">
+                    <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
                       {nextLesson.title}
                     </h3>
                   </div>
@@ -162,7 +165,9 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
               <h3 className="font-semibold text-sm">Download Note</h3>
             </Button>
           </div>
-          <h3 className="p-2">{response?.lesson?.lesson_note}</h3>
+          <h3 className="p-2 font-lora text-sm">
+            {response?.lesson?.lesson_note}
+          </h3>
         </Cards>
       </div>
     </div>

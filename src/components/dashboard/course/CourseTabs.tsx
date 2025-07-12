@@ -6,6 +6,7 @@ import { DownloadIcon } from 'lucide-react';
 import { downloadTextFile } from '@/utils/downloadTextFileFromResponse';
 
 type Lesson = {
+  isCompleted?: boolean;
   id: string;
   slug: string;
   title: string;
@@ -16,6 +17,7 @@ type Lesson = {
 
 type CourseData = {
   about_course: string;
+  status: boolean;
   lessons: Lesson[];
 };
 
@@ -24,19 +26,18 @@ type Props = {
 };
 
 export default function CourseTabs({ courseData }: Props) {
-  const [activeTab, setActiveTab] = React.useState<'about' | 'core'>('core');
+  const [activeTab, setActiveTab] = React.useState<'about' | 'core'>('about');
   const router = useRouter();
 
   return (
     <div className="mt-4">
-      {/* Tab headers */}
       <div className="flex space-x-6 border-b">
         <button
           onClick={() => setActiveTab('about')}
           className={`pb-2 transition-all dark:text-white ${
             activeTab === 'about'
               ? 'font-semibold border-b-2 border-black-100'
-              : 'text-gray-600'
+              : 'text-gray-600 font-semibold'
           }`}
         >
           About Course
@@ -47,7 +48,7 @@ export default function CourseTabs({ courseData }: Props) {
           className={`pb-2 transition-all dark:text-white ${
             activeTab === 'core'
               ? 'font-semibold border-b-2 border-black-100'
-              : 'text-gray-600'
+              : 'text-gray-600 font-semibold'
           }`}
         >
           Core Courses
@@ -70,8 +71,8 @@ export default function CourseTabs({ courseData }: Props) {
 
           {activeTab === 'core' && (
             <div className="space-y-3">
-              {courseData.lessons.map((lesson, index) => {
-                const isLast = index === courseData.lessons.length - 1;
+              {courseData.lessons.map((lesson: Lesson, index: number) => {
+                const isLast: boolean = index === courseData.lessons.length - 1;
                 return (
                   <div key={lesson.slug}>
                     <div
@@ -84,14 +85,21 @@ export default function CourseTabs({ courseData }: Props) {
                           Lesson {lesson.lesson_order}.
                         </span>
                         <span
-                          className="w-full dark:text-white font-medium text-xl text-black-100 cursor-pointer hover:underline "
+                          className={`w-full font-medium text-xl ${
+                            courseData.status
+                              ? 'cursor-pointer hover:underline text-black-100 dark:text-white'
+                              : 'cursor-not-allowed text-gray-400'
+                          }`}
                           onClick={() => {
-                            router.push(
-                              `/dashboard/my-courses/lesson/${lesson.slug}`
-                            );
+                            if (courseData.status) {
+                              router.push(
+                                `/dashboard/my-courses/lesson/${lesson.slug}`
+                              );
+                            }
                           }}
                           role="button"
-                          tabIndex={lesson.status ? 0 : -1}
+                          tabIndex={courseData.status ? 0 : -1}
+                          aria-disabled={!courseData.status}
                         >
                           {lesson.title}
                         </span>
@@ -99,6 +107,7 @@ export default function CourseTabs({ courseData }: Props) {
                       <div className="w-full flex items-center font-open-sans justify-end gap-2">
                         <Button
                           variant="outline"
+                          disabled={!courseData.status}
                           onClick={() =>
                             downloadTextFile(
                               lesson?.lesson_note,
@@ -120,7 +129,8 @@ export default function CourseTabs({ courseData }: Props) {
                           </h3>
                         </Button>
                         <Button
-                          variant={'primary'}
+                          variant={lesson?.isCompleted ? 'primary' : ''}
+                          disabled={!courseData?.status}
                           className="px-10 py-4 text-xs"
                         >
                           Watched

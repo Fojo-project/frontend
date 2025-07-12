@@ -8,15 +8,18 @@
 .lora {
   font-family: 'Lora', serif;
 }
-.backfill {
+.foundations {
   background-image: url('/images/home/backfill.png');
   background-size: cover;
 }
-.backfillMin {
+.ministry {
   background-image: url('/images/home/backfillMins.png');
 }
-.backfilDisp {
+.discipleship {
   background-image: url('/images/home/backfillDisp.png');
+}
+.leadership {
+  background-image: url('/images/home/leadership.png');
 }
 .authbg {
   background-image: url(../../public/authImages/FOJO.png);
