@@ -6,11 +6,11 @@ import React from 'react';
 
 export default function page() {
   const params = useParams();
-  const courseTitle = params?.slug;
+  const courseTitle = params?.lesson;
 
   return (
     <div className="flex flex-col gap-6">
-      <Header Heading={'My Courses'} />
+      <Header Heading={'My Courses'} link='/dashboard/my-courses' />
       <LessonDetails lesson={courseTitle} />
     </div>
   );

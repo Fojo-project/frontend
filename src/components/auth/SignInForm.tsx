@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInFormSchema } from '@/validation/schema';
 import { useLoginMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
-import { useRouter,useSearchParams  } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Label from '../form/Label';
 import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from '../auth/socialauth/GoogleAuth';
@@ -21,7 +21,7 @@ type SigninFormInputs = {
 export default function SignInForm() {
   const { showToast } = useToastify();
   const router = useRouter();
-    const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const redirectPath = searchParams.get('redirect') || '/dashboard';
   const [UserSignIn, { isLoading }] = useLoginMutation();
   const {
@@ -42,7 +42,7 @@ export default function SignInForm() {
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
       setTokenCookie(token);
-        router.push(redirectPath);
+      router.push(redirectPath);
       showToast(response.message, 'success');
     } catch (error: any) {
       if (error?.data?.errors) {

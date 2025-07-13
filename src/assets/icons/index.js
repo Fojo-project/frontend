@@ -318,7 +318,6 @@ export const DownloadIcon = ({ width, height, className = '' }) => {
     </svg>
   );
 };
-
 export const HomeIcon = ({ width, height, className = '' }) => {
   return (
     <svg
@@ -338,7 +337,6 @@ export const HomeIcon = ({ width, height, className = '' }) => {
     </svg>
   );
 };
-
 export const CourseIcon = ({ width, height, className = '' }) => {
   return (
     <svg
@@ -373,7 +371,6 @@ export const EventsIcon = ({ width, height, className = '' }) => {
     </svg>
   );
 };
-
 export const ExploreIcon = ({ width, height, className = '' }) => {
   return (
     <svg

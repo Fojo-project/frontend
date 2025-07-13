@@ -4,7 +4,7 @@ import Header from '@/layout/dashboard/Header';
 export default function page() {
   return (
     <div className="flex flex-col gap-6">
-      <Header Heading={'My Courses'} />
+      <Header Heading={'My Courses'} link='/dashboard/my-courses' />
       <CourseCard />
     </div>
   );

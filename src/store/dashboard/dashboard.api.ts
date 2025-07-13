@@ -5,12 +5,18 @@ interface DashboardResponse {
   message: string;
 }
 interface AllCourse {
+  completed_lesson: number;
+  slug: string;
   id: number;
   title: string;
   about_course: string;
   course_image: string;
   description: string;
-  lesson_count?: number; 
+  lesson_count?: number;
+  lesson_progress?: {
+    completed_lessons: number;
+    total_lessons: number;
+  };
 }
 interface AllCourseResponse {
   success: boolean;
@@ -33,6 +39,14 @@ interface Course {
   color_code: string;
   lesson_count: number;
   course_video: string;
+  isStarted: boolean;
+  lesson_progress?: {
+    completed_lessons: number;
+    total_lessons: number;
+  };
+  completed_lessons: number;
+  total_lesson: number;
+  total_lessons_duration: number;
 }
 interface CourseResponse {
   success: boolean;
@@ -59,6 +73,7 @@ interface Lesson {
   color_code: string;
   lesson_count: number;
   lesson_video: string;
+  isCompleted: any;
 }
 interface LessonQueryArg {
   lesson: string;
@@ -69,12 +84,23 @@ interface CourseQueryArg {
 interface MarkLessonPayload {
   lesson: string;
 }
+interface StartCoursePayload {
+  course: string;
+}
 
 export const DashboardApi = createApi({
   reducerPath: 'dashboardApi',
   baseQuery: axiosBaseQuery(),
+  tagTypes: ['Course', 'AllCourses'],
   endpoints: (builder) => ({
     allCourses: builder.query<AllCourseResponse, void>({
+      query: () => ({
+        url: '/api/courses/user/course',
+        method: 'GET',
+      }),
+      providesTags: ['AllCourses'],
+    }),
+    ExploreCourses: builder.query<AllCourseResponse, void>({
       query: () => ({
         url: '/api/courses',
         method: 'GET',
@@ -91,6 +117,9 @@ export const DashboardApi = createApi({
         url: `/api/courses/${course}`,
         method: 'GET',
       }),
+      providesTags: (result, error, arg) => [
+        { type: 'Course', id: arg.course },
+      ],
     }),
     ShowALesson: builder.query<ShowLessonResponse, LessonQueryArg>({
       query: ({ lesson }) => ({
@@ -103,6 +132,16 @@ export const DashboardApi = createApi({
         url: `/api/lessons/${lesson}/complete`,
         method: 'POST',
       }),
+      invalidatesTags: ['AllCourses'],
+    }),
+    StartCourse: builder.mutation<DashboardResponse, StartCoursePayload>({
+      query: ({ course }) => ({
+        url: `/api/courses/${course}/start`,
+        method: 'POST',
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Course', id: arg.course },
+      ],
     }),
   }),
 });
@@ -113,4 +152,6 @@ export const {
    useHomepageCoursesQuery,
   useShowALessonQuery,
   useMarkLessonMutation,
+  useExploreCoursesQuery,
+  useStartCourseMutation,
 } = DashboardApi;

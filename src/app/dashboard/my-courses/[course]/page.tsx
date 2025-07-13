@@ -5,11 +5,11 @@ import { useParams } from 'next/navigation';
 
 export default function CoursePage() {
   const params = useParams();
-  const courseTitle = params?.slug;
+  const courseTitle = params?.course;
 
   return (
     <div className="flex flex-col gap-6">
-      <Header Heading={'My Courses'} />
+      <Header Heading={'My Courses'} link='/dashboard/my-courses' />
       <CourseDetails courseTitle={courseTitle as string} />
     </div>
   );
