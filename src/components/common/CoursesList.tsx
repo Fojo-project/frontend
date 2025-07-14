@@ -16,7 +16,7 @@ interface CoursesListProps {
 export default function CoursesList({ title, description, lessons, route, courseImage, type, completed }: CoursesListProps) {
 
   return (
-    <div className="bg-gray-25 border-1 h-full border-gray-200 rounded-lg  overflow-hidden flex flex-col">
+    <div className="bg-gray-25 border-1 h-full border-gray-200 rounded-xl  overflow-hidden flex flex-col">
       <Image
         src={courseImage}
         alt={title}
@@ -27,10 +27,10 @@ export default function CoursesList({ title, description, lessons, route, course
       <div className="p-4 flex-1 flex flex-col justify-between bg-[#F9F9F9]">
         <div>
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold capitalize font-lora">
+            <h3 className="text-[22px] font-normal capitalize lora">
               {title}
             </h3>
-            <span className="text-xs bg-gray-300 text-gray-100 px-2 py-1.5 rounded-sm font-lora">
+            <span className="text-xs bg-gray-300 text-gray-100 px-2 py-1 rounded-sm font-lora">
               {type === 'my-courses' ? `${completed} / ` : null}
               {lessons} Lesson{lessons > 1 ? 's' : ''}
             </span>

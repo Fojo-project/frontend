@@ -42,10 +42,10 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
             <h1 className="text-3xl capitalize font-lora font-medium">
               {response?.slug}
             </h1>
-            <p className="mt-2 text-sm w-[296px]">{response?.description}</p>
+            <p className="mt-2 text-sm w-[296px] font-lora">{response?.description}</p>
 
             <div className="mt-4 text-sm space-y-2">
-              <p>
+              <p className='mb-4'>
                 Number of Lessons:
                 <span
                   className="ml-4 px-2 py-1 rounded"

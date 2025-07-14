@@ -91,7 +91,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
           <h3 className="font-medium text-black-100 dark:text-white">
             Next Lesson
           </h3>
-          <Cards className="flex max-h-[320px] flex-col gap-3  no-scrollbar overflow-y-auto">
+          <Cards className="flex mt-2 max-h-[360px] flex-col gap-3 custom-scrollbar overflow-y-auto">
             {response &&
               response.next_lessons &&
               response.next_lessons.length > 0 ? (
@@ -140,13 +140,13 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
               {response?.lesson?.title}
             </h1>
           </div>
-          <h3 className="dark:text-white">
+          <h3 className="dark:text-white Lora">
             {response?.lesson?.lesson_content}
           </h3>
         </Cards>
         <Cards className="flex-1/3 font-open-sans h-[400px]  no-scrollbar overflow-y-auto">
-          <div className="gap-2 mb-4 flex justify-between border-b-2  border-gray-200 p-2 top-0 bg-white dark:bg-black z-10">
-            <h1 className="text-2xl font-bold dark:text-white">Lesson Note</h1>
+          <div className="gap-6 mb-4 flex justify-between border-b-2  border-gray-200 py-2  top-0  dark:bg-black z-10 ">
+            <h1 className="lg:text-[18px] md:text-[14px] font-bold dark:text-white mt-1">Lesson Note</h1>
             <Button
               variant="outline"
               onClick={() =>
@@ -159,7 +159,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
               }
               rightIcon={<DownloadIcon width={14} height={14} />}
             >
-              <h3 className="font-semibold text-sm">Download Note</h3>
+              <h3 className="font-semibold text-xs">Download Note</h3>
             </Button>
           </div>
           <h3 className="p-2 font-lora text-sm">

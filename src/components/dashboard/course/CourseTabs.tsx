@@ -52,7 +52,7 @@ export default function CourseTabs({ courseData }: Props) {
               Lesson {lesson.lesson_order}.
             </span>
             <Link
-              className={`w-full font-medium text-xl ${courseData.status
+              className={`w-full font-medium text-lg ${courseData.status
                 ? 'cursor-pointer hover:underline text-black-100 dark:text-white'
                 : 'cursor-not-allowed text-gray-400'
                 }`}
@@ -71,18 +71,19 @@ export default function CourseTabs({ courseData }: Props) {
               variant="outline"
               disabled={!courseData.status}
               onClick={() => downloadTextFile(lesson.lesson_note, noteFileName)}
-              rightIcon={<DownloadIcon width={14} height={14} className="dark:text-white" />}
+              rightIcon={<DownloadIcon width={14} height={14} className="dark:text-white text-gray-100" />}
             >
-              <span className="font-semibold text-sm dark:opacity-60">Download Note</span>
+              <span className="font-semibold text-sm dark:opacity-60 text-gray-100">Download Note</span>
             </Button>
 
             <Button
               variant={lesson.isCompleted ? 'primary' : 'outline'}
               disabled={!courseData.status}
-              className="px-10 py-4 text-xs"
+              className="px-10 py-4 text-xs bg-gray-300 text-gray-400 border border-gray-300 cursor-default"
             >
               Watched
             </Button>
+
           </div>
         </div>
       </div>
@@ -98,7 +99,7 @@ export default function CourseTabs({ courseData }: Props) {
             key={key}
             onClick={() => setActiveTab(key as TabKey)}
             className={`pb-2 transition-all dark:text-white ${activeTab === key
-              ? 'font-semibold border-b-2 border-black-100'
+              ? 'font-semibold  border-black-100'
               : 'text-gray-600 font-semibold'
               }`}
           >
@@ -112,7 +113,7 @@ export default function CourseTabs({ courseData }: Props) {
         <Cards>
           {activeTab === 'ABOUT' && (
             <section className="flex flex-col gap-2">
-              <h3 className="border-b pb-2 border-gray-200">About The Course</h3>
+              <h3 className="border-b pb-2 border-gray-200 font-semibold lora">About The Course</h3>
               <p className="whitespace-pre-line text-sm">{courseData.about_course}</p>
             </section>
           )}

@@ -43,6 +43,7 @@ export default function ExploreCoursesDetails({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-between items-center">
+        
         <Button
           variant={'primary'}
           onClick={handleStartCourse}
@@ -62,10 +63,10 @@ export default function ExploreCoursesDetails({
             <h1 className="text-3xl capitalize font-lora font-medium">
               {response?.slug}
             </h1>
-            <p className="mt-2 text-sm w-[296px]">{response?.description}</p>
+            <p className="mt-2 text-sm w-[296px] lora">{response?.description}</p>
 
             <div className="mt-4 text-sm space-y-2">
-              <p>
+              <p className='mb-4'>
                 Number of Lessons:
                 <span
                   className="ml-4 px-2 py-1 rounded"
