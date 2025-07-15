@@ -10,6 +10,8 @@ import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
 import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import { useParams } from 'next/navigation';
 import useToastify from '@/hooks/useToastify';
+import Alert from '@/components/ui/alert/Alert';
+import AlertMessage from '@/components/common/AlertMessage';
 
 interface CourseDetailsProps {
   lesson: string;
@@ -98,34 +100,36 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
               response.next_lessons.map((nextLesson, index) => (
                 <div
                   key={index}
-                  className={`flex items-center gap-3 ${index !== response.next_lessons.length - 1
+                  className={`flex items-start gap-3 ${index !== response.next_lessons.length - 1
                     ? 'border-b-2 border-b-gray-200 pb-2'
                     : ''
                     }`}
                 >
-                  <Image
-                    src={Foundation}
-                    alt=""
-                    className="w-[65px] h-[65px] rounded-[5px] object-cover"
-                  />
-                  <Link href={`/dashboard/my-courses/${courseSlug}/lesson/${nextLesson?.slug}`}>
-                    <div
-                      className="flex-1/3 cursor-pointer flex-col flex items-start gap-2"
-                    >
-                      <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
-                        Lesson {nextLesson.lesson_order}.
-                      </span>
-                      <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
-                        {nextLesson.title}
-                      </h3>
-                    </div>
-                  </Link>
+                  <div className='w-[85px] h-[85px]'>
+                    <Image
+                      src={Foundation}
+                      alt=""
+                      className="w-[65px] h-[65px] rounded-[5px] object-cover"
+                    />
+                  </div>
+                  <div className='w-full'>
+                    <Link href={`/dashboard/my-courses/${courseSlug}/lesson/${nextLesson?.slug}`}>
+                      <div
+                        className="flex-1/3 cursor-pointer flex-col flex items-start gap-2"
+                      >
+                        <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
+                          Lesson {nextLesson.lesson_order}.
+                        </span>
+                        <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
+                          {nextLesson.title}
+                        </h3>
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               ))
             ) : (
-              <p className="text-sm text-gray-500 italic">
-                No next video available.
-              </p>
+              <AlertMessage type='info' message='No next lessons available.' />
             )}
           </Cards>
         </div>

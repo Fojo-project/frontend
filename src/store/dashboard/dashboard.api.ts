@@ -149,7 +149,7 @@ export const DashboardApi = createApi({
 export const {
   useAllCoursesQuery,
   useCourseQuery,
-   useHomepageCoursesQuery,
+  useHomepageCoursesQuery,
   useShowALessonQuery,
   useMarkLessonMutation,
   useExploreCoursesQuery,
