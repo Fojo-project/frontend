@@ -12,6 +12,8 @@ import Label from '../form/Label';
 import { setSessionCookie } from '@/lib/session';
 import GoogleAuth from '../auth/socialauth/GoogleAuth';
 import PasswordInputForm from '../form/PasswordInputForm';
+import { Suspense } from 'react';
+import Loading from '../common/Loading';
 
 type SigninFormInputs = {
   email: string;
@@ -42,8 +44,9 @@ export default function SignInForm() {
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
       setSessionCookie(token);
-      router.push(redirectPath);
       showToast(response.message, 'success');
+      console.log(redirectPath)
+      router.replace(redirectPath);
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
@@ -70,7 +73,9 @@ export default function SignInForm() {
           </div>
           <div>
             <div className="">
-              <GoogleAuth authType="signin" onSuccessRedirect="/dashboard" />
+              <Suspense fallback={<Loading />}>
+                <GoogleAuth authType="signin" />
+              </Suspense>
             </div>
             <div className="relative py-3 sm:py-2">
               <div className="absolute inset-0 flex items-center">
@@ -122,7 +127,7 @@ export default function SignInForm() {
                     className="flex mt-4 items-center justify-center w-full px-4 py-3 text-sm font-lora font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <LoadingIcon /> : 'Sign In'}
+                    {isLoading ? <LoadingIcon width='20' height='20' /> : 'Sign In'}
                   </button>
                 </div>
               </div>

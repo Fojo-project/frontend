@@ -26,19 +26,19 @@ export default function Logout() {
   };
 
   return (
-    <div>
-      <button
-        onClick={handleLogout}
-        disabled={isLoading}
-        className="flex items-center w-full  gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-        aria-label="Logout"
-      >
-        <div className="flex items-center gap-2">
+    <button
+      onClick={handleLogout}
+      disabled={isLoading}
+      className="flex items-center w-full  gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+      aria-label="Logout"
+    >
+      <div className="flex items-center justify-between w-full">
+        <div className='flex items-center gap-2'>
           <SignOut width={24} height={24} />
           Sign Out
-          {isLoading ? <LoadingIcon /> : null}
         </div>
-      </button>
-    </div>
+        {isLoading ? <LoadingIcon width='17' height='17' /> : null}
+      </div>
+    </button>
   );
 }

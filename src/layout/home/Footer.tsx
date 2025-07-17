@@ -2,17 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 
 const Footer = () => {
   const year = new Date().getFullYear();
-
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
-const courseLink = isLoggedIn 
-  ? "/dashboard/explore-courses" 
-  : "/signup";
 
   return (
     <div className="bg-[#000000]">
@@ -38,14 +30,14 @@ const courseLink = isLoggedIn
 
           <div className="grid grid-cols-2 gap-12">
             <ul className="space-y-2 font-lora text-[14px] lg:text-[16px]">
-              <li><Link href={courseLink}>Courses</Link></li>
+              <li><Link href='/dashboard/explore-courses'>Courses</Link></li>
               <li><Link href="/about">About FOJO</Link></li>
               <li><Link href="#">Join Community</Link></li>
             </ul>
             <ul className="space-y-2 font-lora text-[14px] lg:text-[16px]">
               <li><Link href="/contact">Contact Us</Link></li>
               <li><Link href="#">Privacy Policy</Link></li>
-              <li><Link href="#">How FOJO Works</Link></li>
+              <li><Link href="/about">How FOJO Works</Link></li>
             </ul>
           </div>
         </div>

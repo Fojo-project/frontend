@@ -1,14 +1,16 @@
 'use client';
 
 import { useGoogleLogin } from '@react-oauth/google';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSocialLoginMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
 import { fetchGoogleUserInfo } from '@/utils/helper';
 import { GoogleIcon, LoadingIcon } from '@/assets/icons';
 import { setSessionCookie } from '@/lib/session';
 
-export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/dashboard' }) {
+export default function GoogleAuth({ authType = 'signin' }) {
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get('redirect') || '/dashboard';
   const [socialLogin, { isLoading }] = useSocialLoginMutation();
   const { showToast } = useToastify();
   const router = useRouter();
@@ -25,8 +27,8 @@ export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/
         const res = await socialLogin(payload).unwrap();
         await setSessionCookie(res.data.token);
         const action = authType === 'signin' ? 'Login' : 'Signup';
-        router.replace(onSuccessRedirect);
         showToast(`${action} successful`, 'success');
+        router.replace(redirectPath);
       } catch (error) {
         const message = error?.response?.data?.message || error?.message || 'Social login failed';
         showToast(message, 'error');

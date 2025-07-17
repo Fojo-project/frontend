@@ -12,6 +12,8 @@ import Label from '../form/Label';
 import GoogleAuth from './socialauth/GoogleAuth';
 import PasswordInputForm from '../form/PasswordInputForm';
 import { setSessionCookie } from '@/lib/session';
+import { Suspense } from 'react';
+import Loading from '../common/Loading';
 
 type RegisterFormInputs = {
   full_name: string;
@@ -43,8 +45,8 @@ export default function SignUpForm() {
       };
       const response = await registerUser(apiData).unwrap();
       await setSessionCookie(response.data?.token);
-      router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       showToast(response.message, 'success');
+      router.replace(`/verify-email?email=${encodeURIComponent(formData.email)}`);
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
@@ -78,7 +80,9 @@ export default function SignUpForm() {
           </div>
           <div>
             <div className="">
-              <GoogleAuth authType="signup" onSuccessRedirect="/dashboard" />
+              <Suspense fallback={<Loading />}>
+                <GoogleAuth authType="signup" />
+              </Suspense>
             </div>
             <div className="relative py-3 sm:py-5">
               <div className="absolute inset-0 flex items-center">
@@ -145,7 +149,7 @@ export default function SignUpForm() {
                     className="flex mt-6 items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <LoadingIcon /> : 'Sign Up'}
+                    {isLoading ? <LoadingIcon width='20' height='20' /> : 'Sign Up'}
                   </button>
                 </div>
               </div>

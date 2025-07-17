@@ -1,4 +1,5 @@
 'use server';
+import { cookieConfig } from '@/utils/constant';
 import { cookies } from 'next/headers';
 
 export async function getSessionCookie() {
@@ -16,18 +17,9 @@ export async function setSessionCookie(session) {
   const cookieStore = await cookies();
   const sessionValue = JSON.stringify(session);
 
-  cookieStore.set('SESSION_COOKIE', sessionValue, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7,
-  });
+  cookieStore.set('SESSION_COOKIE', sessionValue, cookieConfig);
 }
 export async function clearSessionCookie() {
   const cookieStore = await cookies();
-  cookieStore.delete('SESSION_COOKIE', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-  });
+  cookieStore.delete('SESSION_COOKIE', cookieConfig);
 }

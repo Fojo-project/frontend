@@ -8,8 +8,7 @@ export const courseCategories = [
   },
   {
     title: ' Disciple',
-    description:
-      'Learn to follow Jesus daily with obedience and intimacy.',
+    description: 'Learn to follow Jesus daily with obedience and intimacy.',
     image: '/images/home/Disciple.png',
     lessons: 15,
   },
@@ -26,5 +25,50 @@ export const courseCategories = [
       'Grow into a Christ-centered leader — humble, bold, and Spirit-led.',
     image: '/images/home/Christ.png',
     lessons: 15,
+  },
+];
+
+export const courseFeatures = [
+  {
+    icon: '/images/home/bible_icon.svg',
+    alt: 'Bible Icon',
+    title: 'Browse Biblical Courses.',
+    description: (
+      <>
+        Explore our free library of Bible-based discipleship
+        <br />
+        courses created to help you grow in Christ.
+      </>
+    ),
+    linkText: 'Explore Courses →',
+    href: '/dashboard/explore-courses',
+  },
+  {
+    icon: '/images/home/video_icon.svg',
+    alt: 'Video Icon',
+    title: 'Learn At Your Pace.',
+    description: (
+      <>
+        Watch videos, listen to audio teachings, or read
+        <br />
+        notes all at your convenience.
+      </>
+    ),
+    linkText: 'Browse Library →',
+    href: '/dashboard/explore-courses',
+  },
+  {
+    icon: '/images/home/cross_icon.svg',
+    alt: 'Cross Icon',
+    title: 'Grow In Christ.',
+    description: (
+      <>
+        Apply what you learn as we help you become a
+        <br />
+        disciple who reflects Jesus in everyday life.
+      </>
+    ),
+    linkText: 'Start Growing →',
+    href: '/dashboard/explore-courses',
   },
 ];

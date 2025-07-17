@@ -1,4 +1,5 @@
 import SignInForm from "@/components/auth/SignInForm";
+import Loading from "@/components/common/Loading";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function SignIn() {
-  return (<Suspense fallback={<div>Loading...</div>}>
+  return (<Suspense fallback={<Loading />}>
     <SignInForm />;
   </Suspense>)
 }
