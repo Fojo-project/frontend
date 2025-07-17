@@ -43,7 +43,7 @@ export default function SignInForm() {
       };
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
-      setSessionCookie(token);
+      await setSessionCookie(token);
       showToast(response.message, 'success');
       router.replace(redirectPath);
     } catch (error: any) {
