@@ -3,28 +3,27 @@ import Header from '@/layout/dashboard/Header';
 import { generateMetadata as generateCourseMetadata } from '@/utils/metadata';
 import { Metadata } from 'next';
 
-type Props = {
-  params: {
-    lesson: string;
-  };
+interface PageProps {
+  params: Promise<{ course: string; lesson: string }>;
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const lessonTitle = decodeURIComponent(params.lesson);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const courseTitle = decodeURIComponent((await params).course ?? '');
+  const lessonTitle = decodeURIComponent((await params).lesson ?? '');
 
   return generateCourseMetadata({
-    title: `FOJO | Dashboard - Lesson - ${lessonTitle}`,
-    description: `Details and content for lesson "${lessonTitle}"  on FOJO.`,
-    url: `/dashboard/my-courses`,
+    title: `FOJO | Dashboard – ${courseTitle} – ${lessonTitle}`,
+    description: `Lesson "${lessonTitle}" from the course "${courseTitle}" on FOJO.`,
+    url: `/dashboard/my-courses/${courseTitle}/lesson/${lessonTitle}`,
   });
 }
 
-export default function page({ params }: Props) {
-  const lessonTitle = params?.lesson;
+export default async function Page({ params }: PageProps) {
+  const lessonTitle = decodeURIComponent((await params).lesson ?? "");
 
   return (
     <div className="flex flex-col gap-6">
-      <Header Heading={'My Courses'} link='/dashboard/my-courses' />
+      <Header Heading="My Courses" link="/dashboard/my-courses" />
       <LessonDetails lesson={lessonTitle} />
     </div>
   );

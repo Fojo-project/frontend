@@ -3,23 +3,22 @@ import Header from '@/layout/dashboard/Header';
 import { generateMetadata as generateCourseMetadata } from '@/utils/metadata';
 import { Metadata } from 'next';
 
-type Props = {
-  params: {
-    course: string;
-  };
+interface PageProps {
+  params: Promise<{ course: string }>;
 }
-export function generateMetadata({ params }: Props): Metadata {
-  const courseTitle = decodeURIComponent(params.course);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const courseTitle = decodeURIComponent((await params).course ?? '');
 
   return generateCourseMetadata({
     title: `FOJO | Dashboard - My Course - ${courseTitle}`,
     description: `Details and content for course "${courseTitle}" on FOJO.`,
-    url: `/dashboard/my-courses/${params.course}`,
+    url: `/dashboard/my-courses/${courseTitle}`,
   });
 }
 
-export default function CoursePage({ params }: Props) {
-  const courseTitle = params?.course;
+export default async function CoursePage({ params }: PageProps) {
+  const { course } = await params;
+  const courseTitle = decodeURIComponent(course ?? '');
 
   return (
     <div className="flex flex-col gap-6">

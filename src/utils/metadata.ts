@@ -37,7 +37,7 @@ export function generateMetadata({
       title,
       description,
       type: 'website',
-      url: config.baseUrl + url,
+      url: url ? config.baseUrl + url : config.baseUrl,
       images: [
         {
           url: image,
@@ -53,7 +53,7 @@ export function generateMetadata({
       description,
       images: [image],
     },
-    metadataBase: new URL(config.baseUrl + url),
+    metadataBase: new URL(url ? config.baseUrl + url : config.baseUrl),
     icons: {
       icon: '/favicon/favicon.ico',
     },
