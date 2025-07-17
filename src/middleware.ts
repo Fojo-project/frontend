@@ -10,12 +10,8 @@ export async function middleware(request: NextRequest) {
 
   if (token && authPages.includes(pathname)) {
     const url = request.nextUrl.clone();
-    const redirect = url.searchParams.get('redirect');
-    return NextResponse.redirect(
-      redirect
-        ? new URL(redirect, request.url)
-        : new URL('/dashboard', request.url)
-    );
+    const redirect = url.searchParams.get('redirect') || '/dashboard';
+    return NextResponse.redirect(new URL(redirect, request.url));
   }
 
   if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {

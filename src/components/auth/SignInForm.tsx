@@ -45,7 +45,6 @@ export default function SignInForm() {
       const token = response?.data?.token;
       setSessionCookie(token);
       showToast(response.message, 'success');
-      console.log(redirectPath)
       router.replace(redirectPath);
     } catch (error: any) {
       if (error?.data?.errors) {
@@ -134,11 +133,11 @@ export default function SignInForm() {
             </form>
 
             <div className="mt-4 font-lora flex items-center justify-center">
-              <p className="text-sm font-normal text-center text-gray-500 dark:text-gray-400 ">
+              <p className="text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                 Don`t have an account?
                 <Link
                   href="/signup"
-                  className="text-black hover:underline font-bold"
+                  className="text-black hover:underline font-bold mx-1"
                 >
                   Sign Up
                 </Link>
