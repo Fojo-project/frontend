@@ -1,5 +1,9 @@
 import Footer from "@/layout/home/Footer";
 import Navbar from "@/layout/home/Navbar";
+import { generateMetadata } from "@/utils/metadata";
+import { Metadata } from "next";
+
+export const metadata: Metadata = generateMetadata({ title: 'FOJO | About', description: 'About FOJO - A community of believers passionately committed to walking in the footsteps of Jesus Christ.', url: '/about' });
 
 export default function AboutPage() {
     return (

@@ -1,5 +1,9 @@
 import VerificationEmail from '@/components/auth/VerificationEmail';
 import AlertMessage from '@/components/common/AlertMessage';
+import { generateMetadata } from '@/utils/metadata';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = generateMetadata({ title: 'FOJO | Email Verification' });
 
 interface PageProps {
   searchParams: Promise<{ token?: string; email?: string }>;

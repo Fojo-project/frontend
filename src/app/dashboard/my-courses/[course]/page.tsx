@@ -1,10 +1,24 @@
-'use client';
 import CourseDetails from '@/components/dashboard/course/CourseDetails';
 import Header from '@/layout/dashboard/Header';
-import { useParams } from 'next/navigation';
+import { generateMetadata as generateCourseMetadata } from '@/utils/metadata';
+import { Metadata } from 'next';
 
-export default function CoursePage() {
-  const params = useParams();
+type Props = {
+  params: {
+    course: string;
+  };
+}
+export function generateMetadata({ params }: Props): Metadata {
+  const courseTitle = decodeURIComponent(params.course);
+
+  return generateCourseMetadata({
+    title: `FOJO | Dashboard - My Course - ${courseTitle}`,
+    description: `Details and content for course "${courseTitle}" on FOJO.`,
+    url: `/dashboard/my-courses/${params.course}`,
+  });
+}
+
+export default function CoursePage({ params }: Props) {
   const courseTitle = params?.course;
 
   return (

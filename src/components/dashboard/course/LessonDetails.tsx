@@ -1,3 +1,4 @@
+'use client';
 import { BackIcon, DownloadIcon } from '@/assets/icons';
 import Cards from '@/components/ui/cards/Cards';
 import Image from 'next/image';
