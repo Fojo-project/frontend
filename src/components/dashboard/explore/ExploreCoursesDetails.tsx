@@ -2,10 +2,10 @@
 import { useCourseQuery, useStartCourseMutation, } from '@/store/dashboard/dashboard.api';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
 import MediaPlayer from '@/components/ui/video/MediaPlayer';
-import CourseTabs from '../course/CourseTabs';
 import Button from '@/components/ui/button/Button';
 import { useRouter } from 'next/navigation';
 import { formatDuration } from '@/utils/helper';
+import ExploreCourseTabs from './ExploreCourseTabs';
 
 interface CourseDetailProps {
   courseTitle: string;
@@ -43,7 +43,7 @@ export default function ExploreCoursesDetails({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-between items-center">
-        
+
         <Button
           variant={'primary'}
           onClick={handleStartCourse}
@@ -97,7 +97,7 @@ export default function ExploreCoursesDetails({
       </section>
 
       {response && (
-        <CourseTabs
+        <ExploreCourseTabs
           courseData={{
             about_course: response.about_course,
             status: response.isStarted,

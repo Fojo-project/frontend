@@ -7,6 +7,11 @@ import CoursesSection from "../components/landing/courses";
 import NewsLetterSection from "../components/landing/newsletter";
 import Footer from "../layout/home/Footer";
 import Link from "next/link";
+import { Metadata } from "next";
+import { generateMetadata } from "@/utils/metadata";
+
+export const metadata: Metadata = generateMetadata({});
+
 export default function Page() {
   return (
     <div className="relative h-screen w-full">
