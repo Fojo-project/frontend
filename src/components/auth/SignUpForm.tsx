@@ -9,9 +9,9 @@ import useToastify from '@/hooks/useToastify';
 import { useRouter } from 'next/navigation';
 import { LoadingIcon } from '@/assets/icons';
 import Label from '../form/Label';
-import { setTokenCookie } from '@/utils/helper';
 import GoogleAuth from './socialauth/GoogleAuth';
 import PasswordInputForm from '../form/PasswordInputForm';
+import { setSessionCookie } from '@/lib/session';
 
 type RegisterFormInputs = {
   full_name: string;
@@ -42,7 +42,7 @@ export default function SignUpForm() {
         password_confirmation: formData.password_confirmation,
       };
       const response = await registerUser(apiData).unwrap();
-      setTokenCookie(response.data?.token);
+      await setSessionCookie(response.data?.token);
       router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       showToast(response.message, 'success');
     } catch (error: any) {

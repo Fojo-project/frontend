@@ -9,7 +9,7 @@ import { useLoginMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Label from '../form/Label';
-import { setTokenCookie } from '@/utils/helper';
+import { setSessionCookie } from '@/lib/session';
 import GoogleAuth from '../auth/socialauth/GoogleAuth';
 import PasswordInputForm from '../form/PasswordInputForm';
 
@@ -41,7 +41,7 @@ export default function SignInForm() {
       };
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
-      setTokenCookie(token);
+      setSessionCookie(token);
       router.push(redirectPath);
       showToast(response.message, 'success');
     } catch (error: any) {

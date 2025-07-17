@@ -1,13 +1,5 @@
-import Cookies from 'js-cookie';
-import { cookieConfig, googleUserInfoUrl } from './constant';
+import { googleUserInfoUrl } from './constant';
 
-export const setTokenCookie = (token) => {
-  Cookies.set('FOJO_TOKEN', token, cookieConfig);
-};
-export const removeTokenCookie = () => {
-  Cookies.remove('FOJO_TOKEN');
-};
-export const token = Cookies.get('FOJO_TOKEN');
 export async function fetchGoogleUserInfo(accessToken) {
   const response = await fetch(googleUserInfoUrl, {
     headers: {
@@ -33,10 +25,7 @@ export async function fetchGoogleUserInfo(accessToken) {
   return { name, email };
 }
 export function downloadTextFile(content, filename) {
-  if (!content || !filename) {
-    console.warn('Missing content or filename for text file download.');
-    return;
-  }
+  if (!content || !filename) return;
 
   const blob = new Blob([content], { type: 'text/plain' });
   const link = document.createElement('a');

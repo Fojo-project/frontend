@@ -28,9 +28,9 @@ const useToastify = (): UseToastifyReturn => {
       const toastOptions: ToastOptions = {
         position: 'top-right',
         autoClose: 4000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         draggable: true,
         ...options,
       };

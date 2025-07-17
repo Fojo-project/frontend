@@ -10,7 +10,6 @@ import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
 import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import { useParams } from 'next/navigation';
 import useToastify from '@/hooks/useToastify';
-import Alert from '@/components/ui/alert/Alert';
 import AlertMessage from '@/components/common/AlertMessage';
 
 interface CourseDetailsProps {

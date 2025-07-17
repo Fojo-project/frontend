@@ -4,8 +4,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/navigation';
 import { useSocialLoginMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
-import { fetchGoogleUserInfo, setTokenCookie } from '@/utils/helper';
+import { fetchGoogleUserInfo } from '@/utils/helper';
 import { GoogleIcon, LoadingIcon } from '@/assets/icons';
+import { setSessionCookie } from '@/lib/session';
 
 export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/dashboard' }) {
   const [socialLogin, { isLoading }] = useSocialLoginMutation();
@@ -22,7 +23,7 @@ export default function GoogleAuth({ authType = 'signin', onSuccessRedirect = '/
           email,
         };
         const res = await socialLogin(payload).unwrap();
-        setTokenCookie(res.data.token);
+        await setSessionCookie(res.data.token);
         const action = authType === 'signin' ? 'Login' : 'Signup';
         router.replace(onSuccessRedirect);
         showToast(`${action} successful`, 'success');

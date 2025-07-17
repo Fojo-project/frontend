@@ -1,9 +1,9 @@
 'use client';
 import { LoadingIcon, SignOut } from '@/assets/icons';
 import useToastify from '@/hooks/useToastify';
+import { clearSessionCookie } from '@/lib/session';
 import { useLogoutMutation } from '@/store/auth/auth.api';
 import { logout } from '@/store/auth/auth.slice';
-import { removeTokenCookie } from '@/utils/helper';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
@@ -16,10 +16,10 @@ export default function Logout() {
   const handleLogout = async () => {
     try {
       await logoutApi().unwrap();
-      router.push('/');
-      removeTokenCookie();
+      await clearSessionCookie();
       dispatch(logout());
       showToast('Logout successful', 'success');
+      router.push('/');
     } catch {
       showToast('Logout failed. Please try again.', 'error');
     }
