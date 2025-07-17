@@ -5,14 +5,13 @@ import { getSessionCookie } from './lib/session';
 export async function middleware(request: NextRequest) {
   const token = await getSessionCookie();
   const pathname = request.nextUrl.pathname;
+  const authPages = ['/signin', '/signup'];
 
-  if ((pathname === '/signin' || pathname === '/signup') && token) {
+  if (token && authPages.includes(pathname))
     return NextResponse.redirect(new URL('/dashboard', request.url));
-  }
 
-  if (pathname.startsWith('/dashboard') && !token) {
+  if (pathname.startsWith('/dashboard') && !token)
     return NextResponse.redirect(new URL('/signin', request.url));
-  }
 
   return NextResponse.next();
 }
