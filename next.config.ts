@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+    images: {
+    domains: ['i.pravatar.cc'],
+  },
 };
 
 export default nextConfig;
