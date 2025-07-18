@@ -3,7 +3,7 @@ import { LoadingIcon, SignOut } from '@/assets/icons';
 import useToastify from '@/hooks/useToastify';
 import { clearSessionCookie } from '@/lib/session';
 import { useLogoutMutation } from '@/store/auth/auth.api';
-import { logout } from '@/store/auth/auth.slice';
+import { setUser } from '@/store/profile/profile.slice';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
@@ -17,7 +17,7 @@ export default function Logout() {
     try {
       await logoutApi().unwrap();
       await clearSessionCookie();
-      dispatch(logout());
+      dispatch(setUser({ id: '', full_name: '', email: '', provider: '', role: '' }));
       showToast('Logout successful', 'success');
       router.push('/');
     } catch {

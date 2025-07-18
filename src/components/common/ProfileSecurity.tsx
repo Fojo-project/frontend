@@ -5,15 +5,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ChevronRight } from "lucide-react";
-import InputForm from "../../components/form/InputForm";
-import {
-  PasswordSettingsSchema,
-  DeleteAccountSchema,
-} from "@/validation/schema";
-import {
-  useDeleteAccountMutation,
-  useResetAccountPasswordMutation,
-} from "@/store/auth/auth.api";
+import { PasswordSettingsSchema, DeleteAccountSchema } from "@/validation/schema";
+import { useDeleteAccountMutation, useResetAccountPasswordMutation } from "@/store/profile/profile.api";
 import useToastify from "@/hooks/useToastify";
 import { useRouter } from "next/navigation";
 import PasswordInputForm from "../form/PasswordInputForm";
@@ -38,20 +31,18 @@ const SwitchRow = ({
     <div onClick={onClick} className="cursor-pointer group py-2 space-y-1">
       <div className="flex items-center gap-1">
         <p
-          className={`text-sm font-semibold [font-family:var(--font-open-sans)] ${
-            active && isDelete ? "text-red-500" : "text-black"
-          }`}
+          className={`text-sm font-semibold [font-family:var(--font-open-sans)] ${active && isDelete ? "text-red-500" : "text-black"
+            }`}
         >
           {label}
         </p>
         <ChevronRight
-          className={`transition duration-200 ${
-            active && isDelete
-              ? "text-red-500"
-              : active
+          className={`transition duration-200 ${active && isDelete
+            ? "text-red-500"
+            : active
               ? "text-black"
               : "text-gray-400 group-hover:text-black"
-          }`}
+            }`}
           size={16}
         />
       </div>
@@ -65,7 +56,7 @@ const SwitchRow = ({
 const ProfileSecurity = () => {
   const [activeSection, setActiveSection] = useState<"password" | "delete">("password");
   const { showToast } = useToastify();
- const router = useRouter(); 
+  const router = useRouter();
   const {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
@@ -104,14 +95,14 @@ const ProfileSecurity = () => {
       console.error("Reset password error", error);
       showToast(
         error?.data?.message ||
-          error?.data?.errors?.new_password?.[0] ||
-          "Password change failed",
+        error?.data?.errors?.new_password?.[0] ||
+        "Password change failed",
         "error"
       );
     }
   };
 
- const onSubmitDelete = async (data: DeleteFormData) => {
+  const onSubmitDelete = async (data: DeleteFormData) => {
     try {
       await deleteAccount(data).unwrap();
       showToast("Account deleted successfully", "success");

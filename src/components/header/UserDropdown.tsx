@@ -9,7 +9,7 @@ import { UserIcon } from '@/assets/icons';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.profile.user);
   function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -29,7 +29,7 @@ export default function UserDropdown() {
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">
-          {user?.name}
+          {user?.full_name}
         </span>
 
         <svg
@@ -58,7 +58,7 @@ export default function UserDropdown() {
       >
         <div>
           <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
-            {user?.name}
+            {user?.full_name}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
             {user?.email}

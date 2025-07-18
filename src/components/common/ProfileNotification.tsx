@@ -45,15 +45,13 @@ const SwitchToggle = ({
     </div>
     <button
       onClick={onToggle}
-      className={`w-8 h-4 flex items-center rounded-full transition-colors duration-300 ${
-        enabled ? "bg-green-500" : "bg-gray-300"
-      }`}
-    >
-      <div
-        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-          enabled ? "translate-x-4" : ""
+      className={`w-8 h-4 flex items-center rounded-full transition-colors duration-300 ${enabled ? "bg-green-500" : "bg-gray-300"
         }`}
-      />
+    >{''}
+      <div
+        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${enabled ? "translate-x-4" : ""
+          }`}
+      ></div>
     </button>
   </div>
 );
@@ -75,9 +73,8 @@ const NotificationRow = ({
         {label}
       </p>
       <ChevronRight
-        className={`transition duration-200 ${
-          active ? "text-black" : "text-gray-400 group-hover:text-black"
-        }`}
+        className={`transition duration-200 ${active ? "text-black" : "text-gray-400 group-hover:text-black"
+          }`}
         size={16}
       />
     </div>

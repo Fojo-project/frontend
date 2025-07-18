@@ -45,7 +45,7 @@ const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.profile.isLoggedIn);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -267,19 +267,19 @@ const Navbar = () => {
                         <ArrowIcon width={16} height={16} />
                       </span>
                     </div>
-                {accountOpen && (
-  <ul className="mt-4 w-full bg-white text-black rounded-md shadow-lg py-2 px-4 space-y-2">
-    <li className="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded-md">
-      <HomeIcon width={24} height={24} className="fill-black" />
-      <Link href="/dashboard" className="text-sm" onClick={() => setMenuOpen(false)}>
-        Dashboard
-      </Link>
-    </li>
-    <li>
-      <Logout />
-    </li>
-  </ul>
-)}
+                    {accountOpen && (
+                      <ul className="mt-4 w-full bg-white text-black rounded-md shadow-lg py-2 px-4 space-y-2">
+                        <li className="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded-md">
+                          <HomeIcon width={24} height={24} className="fill-black" />
+                          <Link href="/dashboard" className="text-sm" onClick={() => setMenuOpen(false)}>
+                            Dashboard
+                          </Link>
+                        </li>
+                        <li>
+                          <Logout />
+                        </li>
+                      </ul>
+                    )}
 
 
 

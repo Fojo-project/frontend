@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
 const ProfileHeader = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.profile.user);
 
   return (
     <div className="w-full relative h-25 rounded-xl overflow-hidden mb-6">
@@ -29,7 +29,7 @@ const ProfileHeader = () => {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold text-black">{user?.name}</h2>
+          <h2 className="text-xl font-semibold text-black">{user?.full_name}</h2>
           <p className="text-sm text-gray-400">{user?.email}</p>
         </div>
       </div>

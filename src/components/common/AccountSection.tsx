@@ -6,10 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import InputForm from "../../components/form/InputForm";
 import { ChevronRight } from "lucide-react";
 import { AccountInfoSchema } from "@/validation/schema";
-import {
-  useUpdateUserProfileMutation,
-  useGetMeQuery,
-} from "@/store/auth/auth.api";
+import { useUpdateUserProfileMutation, useGetMeQuery } from "@/store/profile/profile.api";
 import useToastify from "@/hooks/useToastify";
 import { LoadingIcon } from "@/assets/icons";
 import Image from "next/image";

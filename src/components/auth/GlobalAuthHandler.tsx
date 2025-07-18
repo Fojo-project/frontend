@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useToastify from '@/hooks/useToastify';
 import { useDispatch } from 'react-redux';
-import { logout } from '@/store/auth/auth.slice';
+import { setUser } from '@/store/profile/profile.slice';
 import { clearSessionCookie } from '@/lib/session';
 
 
@@ -16,7 +16,7 @@ export default function GlobalAuthHandler() {
     useEffect(() => {
         const handleUnauthorized = () => {
             clearSessionCookie()
-            dispatch(logout());
+            dispatch(setUser({ id: '', full_name: '', email: '', provider: '', role: '' }));
             showToast('Session expired. Please log in again.', 'error');
             router.push('/');
         };
