@@ -12,6 +12,8 @@ import {
 } from "@/store/auth/auth.api";
 import useToastify from "@/hooks/useToastify";
 import { LoadingIcon } from "@/assets/icons";
+import Image from "next/image";
+
 
 interface AccountFormData {
   full_name: string;
@@ -72,7 +74,7 @@ const AccountSection = () => {
 
 
   const handleUnlinkGoogle = () => {
-    setValue("provider", ""); 
+    setValue("provider", "");
     showToast("Google account unlinked locally. Click 'Update Changes' to save.", "info");
   };
 
@@ -136,9 +138,11 @@ const AccountSection = () => {
                 <label className="block text-sm font-medium mb-1">Linked Account</label>
                 <div className="flex items-center justify-between border border-gray-200 px-4 py-3 rounded-md">
                   <div className="flex items-center gap-3">
-                    <img
+                    <Image
                       src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                       alt="Google"
+                      width={20}
+                      height={20}
                       className="w-5 h-5"
                     />
                     <div className="flex flex-col text-left">
