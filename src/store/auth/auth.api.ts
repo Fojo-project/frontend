@@ -51,9 +51,31 @@ interface MeResponse {
     full_name: string;
     email: string;
     role: string;
+     provider?: string
   };
 }
+interface UpdateProfileRequest {
+  full_name: string;
+  email: string;
+  
+}
 
+interface UpdateProfileResponse {
+  status: boolean;
+  message: string;
+  data: {
+    id: number;
+    full_name: string;
+    email: string;
+    role: string;
+  provider?: string
+  };
+}
+interface ResetAccountPasswordPayload {
+  current_password: string;
+  new_password: string;
+  new_password_confirmation: string;
+}
 export const AuthApi = createApi({
   reducerPath: 'authApi',
   baseQuery: axiosBaseQuery(),
@@ -125,6 +147,29 @@ export const AuthApi = createApi({
         method: 'POST',
       }),
     }),
+    
+  updateUserProfile: builder.mutation<UpdateProfileResponse, UpdateProfileRequest>({
+      query: (data) => ({
+        url: '/api/profile/update',
+        method: 'PUT',
+        data,
+      }),
+    }),
+   deleteAccount: builder.mutation<any, { reason: string; deletePassword?: string }>({
+  query: (data) => ({
+    url: "api/profile",
+    method: "DELETE",
+    data,
+  }),
+}),
+
+    resetAccountPassword: builder.mutation<AuthResponse, ResetAccountPasswordPayload>({
+      query: (data) => ({
+        url: 'api/profile/password',
+        method: 'PUT',
+        data,
+      }),
+       }),
   }),
 });
 
@@ -138,4 +183,7 @@ export const {
   useSocialLoginMutation,
   useGetMeQuery,
   useLogoutMutation,
+   useUpdateUserProfileMutation,
+     useDeleteAccountMutation,
+  useResetAccountPasswordMutation,
 } = AuthApi;

@@ -55,3 +55,26 @@ export const ResetPasswordSchema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Passwords must match.')
     .required('Confirm password is required'),
 });
+
+
+export const AccountInfoSchema = yup.object().shape({
+  full_name: yup.string().required('Full name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+});
+
+export const PasswordSettingsSchema = yup.object({
+  current_password: yup.string().required("Current password is required"),
+  new_password: yup
+    .string()
+    .required("New password is required")
+    .notOneOf([yup.ref("current_password")], "New password must be different from current password"),
+  new_password_confirmation: yup
+    .string()
+    .oneOf([yup.ref("new_password")], "Passwords do not match")
+    .required("Confirm new password"),
+});
+
+export const DeleteAccountSchema = yup.object().shape({
+  reason: yup.string().required('Reason is required'),
+  deletePassword: yup.string().required('Password is required'),
+});
