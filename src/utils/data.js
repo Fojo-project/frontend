@@ -72,3 +72,48 @@ export const courseFeatures = [
     href: '/dashboard/explore-courses',
   },
 ];
+
+export const switchConfigs = {
+  account: [
+    {
+      key: "personal",
+      label: "Personal Information",
+      description: "Edit your personal information.",
+    },
+  ],
+  notification: [
+    {
+      key: "push",
+      label: "Push Notifications",
+      description: "Control alerts for new activities and updates.",
+    },
+    {
+      key: "lesson",
+      label: "Lesson Notifications",
+      description: "Receive notifications about your lesson progress.",
+    },
+    {
+      key: "live",
+      label: "Live & Special Events",
+      description: "Get notified about special events, fasts, or prayer meetings.",
+    },
+    {
+      key: "general",
+      label: "General Notifications",
+      description: "Manage announcements and feedback requests.",
+    },
+  ],
+  security: [
+    {
+      key: "password",
+      label: "Password Settings",
+      description: "Change to a new password.",
+    },
+    {
+      key: "delete",
+      label: "Delete Account",
+      description: "Request permanent deletion of my account",
+    },
+  ],
+};
+

@@ -8,7 +8,7 @@ const tabs: { id: TabId; label: string }[] = [
   { id: 'security', label: 'Security' },
 ];
 
-export default function AccountTab({
+export default function ProfileTab({
   activeTab,
   setActiveTab,
 }: {
