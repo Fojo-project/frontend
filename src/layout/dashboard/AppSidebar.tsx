@@ -41,7 +41,7 @@ const AppSidebar: React.FC = () => {
     {
       icon: <EventsIcon width={20} height={20} className="" />,
       name: 'Events',
-      path: '/events',
+      path: '/dashboard/events',
     },
   ];
 
@@ -53,26 +53,23 @@ const AppSidebar: React.FC = () => {
           <li key={item.name}>
             <Link
               href={item.path}
-              className={`menu-item group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${
-                active
-                  ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
-                  : 'hover:bg-gray-25  border-gray-200 text-black-100 dark:text-white hover:text-black'
-              }`}
+              className={`menu-item group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${active
+                ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
+                : 'hover:bg-gray-25  border-gray-200 text-black-100 dark:text-white hover:text-black'
+                }`}
             >
               <span
-                className={`transition-colors ${
-                  active ? 'text-black' : 'group-hover:text-black text-inherit'
-                }`}
+                className={`transition-colors ${active ? 'text-black' : 'group-hover:text-black text-inherit'
+                  }`}
               >
                 {item.icon}
               </span>
               {(isExpanded || isHovered || isMobileOpen) && (
                 <span
-                  className={`menu-item-text transition-colors ${
-                    active
-                      ? 'text-black'
-                      : 'group-hover:text-black text-inherit'
-                  }`}
+                  className={`menu-item-text transition-colors ${active
+                    ? 'text-black'
+                    : 'group-hover:text-black text-inherit'
+                    }`}
                 >
                   {item.name}
                 </span>
@@ -87,23 +84,20 @@ const AppSidebar: React.FC = () => {
   return (
     <aside
       className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-        ${
-          isExpanded || isMobileOpen
-            ? 'w-[290px]'
-            : isHovered
+        ${isExpanded || isMobileOpen
+          ? 'w-[290px]'
+          : isHovered
             ? 'w-[290px]'
             : 'w-[90px]'
         }
-        ${
-          isMobileOpen ? 'translate-x-0' : '-translate-x-full'
+        ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0`}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`py-8 flex ${
-          !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
-        }`}
+        className={`py-8 flex ${!isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
+          }`}
       >
         <Link href="/">
           {isExpanded || isHovered || isMobileOpen ? (
@@ -139,11 +133,10 @@ const AppSidebar: React.FC = () => {
       <div className="flex flex-col overflow-y-auto  no-scrollbar">
         <nav className="mb-6">
           <h2
-            className={`mb-4 text-xs uppercase text-gray-400 ${
-              !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
-            } flex leading-[20px]`}
+            className={`mb-4 text-xs uppercase text-gray-400 ${!isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
+              } flex leading-[20px]`}
           >
-            {/* Optionally: "Menu" */}
+            {''}
           </h2>
           {renderMenuItems(navItems)}
         </nav>
