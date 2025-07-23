@@ -11,7 +11,7 @@ type Props = {
     time: string;
     imageUrl: string;
     isLive?: boolean;
-    dayLabel?: string; 
+    dayLabel?: string;
 };
 
 export default function EventCard({

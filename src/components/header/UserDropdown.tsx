@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Logout from '../auth/Logout';
 import { UserIcon } from '@/assets/icons';
+import Image from 'next/image';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,10 +23,16 @@ export default function UserDropdown() {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="flex items-center  text-gray-700 dark:text-gray-400 dropdown-toggle"
+        className="flex items-center  text-gray-700 dark:text-gray-400 dropdown-toggle "
       >
-        <span className="mr-3 flex justify-center items-center border-1 dark:border-0 overflow-hidden rounded-full h-11 w-11">
-          <UserIcon width={30} height={30} />
+        <span className="mr-3 flex justify-center items-center border-1 dark:border-0 overflow-hidden rounded-full h-11 w-11 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100">
+          {user?.avatar ? <Image
+            src={user?.avatar as string}
+            width={40}
+            height={40}
+            alt="User"
+            className="w-full overflow-hidden rounded-full"
+          /> : <UserIcon width={18} height={18} />}
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">

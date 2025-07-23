@@ -6,8 +6,8 @@ interface User {
   email?: string;
   provider?: string;
   role?: string;
+  avatar?: string;
 }
-
 interface AuthState {
   user: User | null;
   isLoggedIn: boolean;

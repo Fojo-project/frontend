@@ -18,6 +18,7 @@ interface MeResponse {
     email: string;
     role: string;
     provider?: string;
+    avatar?: string;
   };
 }
 interface UpdateProfileRequest {
@@ -34,6 +35,7 @@ interface UpdateProfileResponse {
     email: string;
     role: string;
     provider?: string;
+    avatar?: string;
   };
 }
 interface ResetAccountPasswordPayload {

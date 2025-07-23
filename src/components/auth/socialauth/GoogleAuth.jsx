@@ -18,11 +18,12 @@ export default function GoogleAuth({ authType = 'signin' }) {
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        const { name: full_name, email } = await fetchGoogleUserInfo(tokenResponse.access_token);
+        const { name: full_name, email, picture: avatar } = await fetchGoogleUserInfo(tokenResponse.access_token);
         const payload = {
           provider: 'google',
           full_name,
           email,
+          avatar
         };
         const res = await socialLogin(payload).unwrap();
         await setSessionCookie(res.data.token);

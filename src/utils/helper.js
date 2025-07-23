@@ -16,13 +16,14 @@ export async function fetchGoogleUserInfo(accessToken) {
   }
 
   const data = await response.json();
-  const { name, email } = data;
+
+  const { name, email, picture } = data;
 
   if (!name || !email) {
     throw new Error('Incomplete user info returned from Google');
   }
 
-  return { name, email };
+  return { name, email, picture };
 }
 export function downloadTextFile(content, filename) {
   if (!content || !filename) return;

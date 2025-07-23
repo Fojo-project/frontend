@@ -1,5 +1,3 @@
-// app/dashboard/events/page.tsx or pages/dashboard/events.tsx
-
 import Header from '@/layout/dashboard/Header';
 import EventTabs from '../../../components/dashboard/events/EventTabs';
 import { generateMetadata } from '@/utils/metadata';

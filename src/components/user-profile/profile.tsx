@@ -19,7 +19,8 @@ export default function Profile() {
           full_name: data.data.full_name,
           email: data.data.email,
           provider: data.data.provider,
-          role: data.data.role
+          role: data.data.role,
+          avatar: data.data.avatar
         })
       );
     }

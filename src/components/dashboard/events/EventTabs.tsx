@@ -83,7 +83,6 @@ export default function EventTabs() {
                         className={`pb-3 transition-all ${activeTab === key
                             ? 'text-black border-b-3 border-black font-bold'
                             : 'border-b-3 border-transparent hover:text-gray-700 '
-
                             }`}
                     >
                         {label}

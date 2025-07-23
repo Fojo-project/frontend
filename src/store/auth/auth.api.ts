@@ -84,7 +84,7 @@ export const AuthApi = createApi({
     }),
     socialLogin: builder.mutation<
       AuthResponse,
-      SocialLoginPayload & { full_name: string; email: string }
+      SocialLoginPayload & { full_name: string; email: string; avatar: string }
     >({
       query: ({ provider, ...body }) => ({
         url: `/api/auth/social/${provider}`,
