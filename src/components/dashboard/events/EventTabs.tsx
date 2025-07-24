@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import EventCard from '../events/EventCard';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
-import NoEvent from '../events/NoEvent';
+import NoResource from '@/components/common/NoResource';
+import AlertMessage from '@/components/common/AlertMessage'; // ✅ import this
 
 type Event = {
     title: string;
@@ -27,6 +28,7 @@ export default function EventTabs() {
 
     const isLoading = false;
     const isError = false;
+
     const events: Event[] = [
         {
             title: 'Sunday Worship Service',
@@ -46,7 +48,6 @@ export default function EventTabs() {
         },
     ];
 
-
     const filteredEvents = events.filter((e) => {
         if (activeTab === 'LIVE') return e.isLive;
         if (activeTab === 'UPCOMING') return !e.isLive;
@@ -55,9 +56,9 @@ export default function EventTabs() {
 
     if (isLoading) {
         return (
-            <div className="flex flex-wrap gap-6">
-                {[...Array(3)].map((_, i) => (
-                    <div key={i} className="w-full md:w-[48%]">
+            <div className="flex flex-col gap-4">
+                {[...Array(5)].map((_, idx) => (
+                    <div key={idx} className="w-full">
                         <CardSkeleton />
                     </div>
                 ))}
@@ -66,11 +67,29 @@ export default function EventTabs() {
     }
 
     if (isError) {
-        return <div className="text-red-500">Error loading events.</div>;
+        return (
+            <div className="flex flex-col gap-4 items-center w-full">
+                <AlertMessage
+                    type="error"
+                    message="Failed to load events. Please check your network and try again."
+                />
+                <div className="w-full flex flex-col gap-4">
+                    {[...Array(2)].map((_, idx) => (
+                        <CardSkeleton key={idx} />
+                    ))}
+                </div>
+            </div>
+        );
     }
 
     if (filteredEvents.length === 0) {
-        return <NoEvent />;
+        return (
+            <NoResource
+                title="No course started yet"
+                subtitle="Go to the 'explore courses' to start a course"
+                icon="/images/event/no-event.png"
+            />
+        );
     }
 
     return (
@@ -80,9 +99,9 @@ export default function EventTabs() {
                     <button
                         key={key}
                         onClick={() => setActiveTab(key as TabKey)}
-                        className={`pb-3 transition-all ${activeTab === key
-                            ? 'text-black border-b-3 border-black font-bold'
-                            : 'border-b-3 border-transparent hover:text-gray-700 '
+                        className={`relative pb-3 transition-all duration-200 ${activeTab === key
+                                ? 'font-semibold font-open-sans  text-black after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[#000]'
+                                : 'text-gray-600 font-open-sans  hover:text-black'
                             }`}
                     >
                         {label}
@@ -104,6 +123,5 @@ export default function EventTabs() {
                 ))}
             </div>
         </div>
-
     );
 }
