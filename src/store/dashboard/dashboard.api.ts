@@ -13,13 +13,10 @@ interface AllCourse {
   course_image: string;
   description: string;
   lesson_count?: number;
-<<<<<<< HEAD
-=======
   lesson_progress?: {
     completed_lessons: number;
     total_lessons: number;
   };
->>>>>>> 1d190d7dbae346af32dd11879de1530b13ee9f2e
 }
 interface AllCourseResponse {
   success: boolean;
@@ -101,10 +98,7 @@ export const DashboardApi = createApi({
         url: '/api/courses/user/course',
         method: 'GET',
       }),
-<<<<<<< HEAD
-=======
       providesTags: ['AllCourses'],
->>>>>>> 1d190d7dbae346af32dd11879de1530b13ee9f2e
     }),
     ExploreCourses: builder.query<AllCourseResponse, void>({
       query: () => ({
@@ -160,8 +154,5 @@ export const {
   useShowALessonQuery,
   useMarkLessonMutation,
   useExploreCoursesQuery,
-<<<<<<< HEAD
-=======
   useStartCourseMutation,
->>>>>>> 1d190d7dbae346af32dd11879de1530b13ee9f2e
 } = DashboardApi;
