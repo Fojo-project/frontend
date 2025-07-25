@@ -1,35 +1,29 @@
 import { axiosBaseQuery } from '@/lib/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-// Example types — adjust based on your backend response shape
 interface LoginRequest {
   email: string;
   password: string;
 }
-
 interface RegisterRequest {
   full_name: string;
   email: string;
   password: string;
   password_confirmation: string;
 }
-
 interface VerifyEmailPayload {
   email: string;
   token: string;
 }
-
 interface ResetPasswordPayload {
   token: string;
   email: string;
   password: string;
   password_confirmation: string;
 }
-
 interface ForgetPasswordPayload {
   email: string;
 }
-
 interface AuthResponse {
   success: boolean;
   message: string;
@@ -37,21 +31,9 @@ interface AuthResponse {
     token?: string;
   };
 }
-
 interface SocialLoginPayload {
   token: string;
   provider: 'google';
-}
-
-interface MeResponse {
-  status: boolean;
-  message: string;
-  data: {
-    id: number;
-    full_name: string;
-    email: string;
-    role: string;
-  };
 }
 
 export const AuthApi = createApi({
@@ -63,12 +45,6 @@ export const AuthApi = createApi({
         url: '/api/login',
         method: 'POST',
         data,
-      }),
-    }),
-    getMe: builder.query<MeResponse, void>({
-      query: () => ({
-        url: '/api/me',
-        method: 'GET',
       }),
     }),
     registerUser: builder.mutation<AuthResponse, RegisterRequest>({
@@ -108,7 +84,7 @@ export const AuthApi = createApi({
     }),
     socialLogin: builder.mutation<
       AuthResponse,
-      SocialLoginPayload & { full_name: string; email: string }
+      SocialLoginPayload & { full_name: string; email: string; avatar: string }
     >({
       query: ({ provider, ...body }) => ({
         url: `/api/auth/social/${provider}`,
@@ -136,6 +112,5 @@ export const {
   useResendVerifyEmailMutation,
   useForgetPasswordMutation,
   useSocialLoginMutation,
-  useGetMeQuery,
   useLogoutMutation,
 } = AuthApi;

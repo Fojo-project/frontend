@@ -6,10 +6,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import Logout from '../auth/Logout';
 import { UserIcon } from '@/assets/icons';
+import Image from 'next/image';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.profile.user);
   function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -22,14 +23,20 @@ export default function UserDropdown() {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="flex items-center  text-gray-700 dark:text-gray-400 dropdown-toggle"
+        className="flex items-center  text-gray-700 dark:text-gray-400 dropdown-toggle "
       >
-        <span className="mr-3 flex justify-center items-center border-1 dark:border-0 overflow-hidden rounded-full h-11 w-11">
-          <UserIcon width={30} height={30} />
+        <span className="mr-3 flex justify-center items-center border-1 dark:border-0 overflow-hidden rounded-full h-11 w-11 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100">
+          {user?.avatar ? <Image
+            src={user?.avatar as string}
+            width={40}
+            height={40}
+            alt="User"
+            className="w-full overflow-hidden rounded-full"
+          /> : <UserIcon width={18} height={18} />}
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">
-          {user?.name}
+          {user?.full_name}
         </span>
 
         <svg
@@ -58,7 +65,7 @@ export default function UserDropdown() {
       >
         <div>
           <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
-            {user?.name}
+            {user?.full_name}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
             {user?.email}
@@ -70,7 +77,7 @@ export default function UserDropdown() {
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
-              href="/profile"
+              href="/dashboard/profile"
               className="flex items-center gap-3 px-3 py-2 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
               <svg
@@ -88,7 +95,7 @@ export default function UserDropdown() {
                   fill=""
                 />
               </svg>
-              Edit profile
+              Profile
             </DropdownItem>
           </li>
           <li>

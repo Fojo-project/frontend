@@ -1,7 +1,9 @@
+
+import Link from "next/link";
 const HeroBanner = () => {
   return (
     <section className="relative flex items-center justify-center  bg-cover bg-center">
-      <div className="relative z-10 text-center px-6 max-w-5xl text-white max-w-[1512px] mx-auto">
+      <div className="relative z-10 text-center px-6 text-white max-w-[1512px] mx-auto">
         <h1 className="text-4xl font-cormorant md:text-6xl font-medium leading-[1.2]">
           DISCIPLESHIP RESOURCES FOR FOLLOWERS OF JESUS ONLY.
         </h1>
@@ -11,12 +13,12 @@ const HeroBanner = () => {
         </p>
 
         <div className="mt-6 flex flex-row  gap-2 justify-center">
-          <button className="bg-white text-black  px-4 py-2 md:px-8 md:py-3 rounded-lg sm:text-[16px] font-medium hover:bg-gray-300 transition">
+          <Link href="/signup" className="bg-white text-black  px-4 py-2 md:px-8 md:py-3 rounded-lg sm:text-[16px] font-medium hover:bg-gray-300 transition">
             Start Learning
-          </button>
-          <button className="border border-white px-4 py-2 md:px-8 md:py-3 rounded-lg text-[16px] font-medium hover:bg-white hover:text-black transition">
+          </Link>
+          <Link href='/dashboard/explore-courses' className="border border-white px-4 py-2 md:px-8 md:py-3 rounded-lg text-[16px] font-medium hover:bg-white hover:text-black transition">
             Browse Courses
-          </button>
+          </Link>
         </div>
       </div>
     </section>

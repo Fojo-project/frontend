@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldError, UseFormRegister } from 'react-hook-form';
+import { FieldError, UseFormRegister, FieldErrorsImpl, Merge } from 'react-hook-form';
 
 interface InputFormProps {
   label?: string;
@@ -7,9 +7,10 @@ interface InputFormProps {
   type?: string;
   placeholder?: string;
   register: UseFormRegister<any>;
-  error?: FieldError;
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   disabled?: boolean;
 }
+
 
 const InputForm: React.FC<InputFormProps> = ({
   label,
@@ -31,7 +32,10 @@ const InputForm: React.FC<InputFormProps> = ({
           }`}
       />
 
-      {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
+      {typeof error?.message === 'string' && (
+        <p className="text-red-500 text-xs mt-1">{error.message}</p>
+      )}
+
     </div>
   );
 };

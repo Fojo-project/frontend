@@ -7,8 +7,7 @@ import React from 'react';
 import book from '../../../../public/images/home/book.png';
 
 export default function CourseCard() {
-  const { data, isLoading, isError } = useAllCoursesQuery();
-
+  const { data, isLoading, isError, } = useAllCoursesQuery();
   if (isLoading) {
     return (
       <div className="flex flex-wrap gap-6">
@@ -43,10 +42,13 @@ export default function CourseCard() {
         {data?.data?.map((course, index) => (
           <div key={index} className="w-full md:w-[48%]">
             <CoursesList
+              type='my-courses'
               title={course?.title}
               description={course?.description}
+              completed={course?.lesson_progress?.completed_lessons || 0}
               courseImage={course?.course_image}
               lessons={course?.lesson_count || 0}
+              route={`/dashboard/my-courses/${course?.slug || course?.title}`}
             />
           </div>
         ))}

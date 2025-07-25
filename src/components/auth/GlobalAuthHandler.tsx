@@ -1,12 +1,11 @@
-// components/GlobalAuthHandler.tsx
 'use client';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { removeTokenCookie } from '@/utils/helper';
 import useToastify from '@/hooks/useToastify';
 import { useDispatch } from 'react-redux';
-import { logout } from '@/store/auth/auth.slice';
+import { setUser } from '@/store/profile/profile.slice';
+import { clearSessionCookie } from '@/lib/session';
 
 
 export default function GlobalAuthHandler() {
@@ -16,13 +15,13 @@ export default function GlobalAuthHandler() {
 
     useEffect(() => {
         const handleUnauthorized = () => {
-            router.push('/');
-            removeTokenCookie();
-            dispatch(logout());
+            clearSessionCookie()
+            dispatch(setUser({ id: '', full_name: '', email: '', provider: '', role: '' }));
             showToast('Session expired. Please log in again.', 'error');
+            router.push('/');
         };
         window.addEventListener('unauthorized', handleUnauthorized);
         return () => window.removeEventListener('unauthorized', handleUnauthorized);
-    }, []);
+    }, [dispatch, router, showToast]);
     return null;
 }

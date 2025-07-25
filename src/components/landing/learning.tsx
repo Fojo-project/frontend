@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { courseFeatures } from "@/utils/data";
 
 const LearningSection = () => {
   return (
@@ -18,56 +20,26 @@ const LearningSection = () => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:pt-18 sm:gap-10 mb-10 sm:mb-12">
-          <div className="hover:bg-gray-400 p-4 transition-all rounded-md group">
-            <div className="mb-4 flex justify-center">
-              <Image src="/images/home/bible_icon.svg" alt="Bible Icon" width={60} height={60} />
+          {courseFeatures.map((feature, index) => (
+            <div key={index} className="hover:bg-gray-500 p-4 transition-all rounded-md group">
+              <div className="mb-4 flex justify-center">
+                <Image src={feature.icon} alt={feature.alt} width={60} height={60} />
+              </div>
+              <h3 className="text-[22px] font-cormorant">{feature.title}</h3>
+              <p className="text-[14px] font-lora sm:text-sm mb-2 leading-[1.5]">
+                {feature.description}
+              </p>
+              <Link href={feature.href} className="relative inline-block text-white text-sm font-medium group">
+                <span className="relative z-10">{feature.linkText}</span>
+                <span className="absolute left-0 -bottom-0.5 h-[1px] w-0 bg-white transition-all duration-700 group-hover:w-full"></span>
+              </Link>
             </div>
-            <h3 className="text-[22px] font-cormorant">Browse Biblical Courses.</h3>
-            <p className="text-[14px] font-lora mb-2 leading-[1.5]">
-              Explore our free library of Bible-based discipleship
-              <br />
-              courses created to help you grow in Christ.
-            </p>
-            <a href="#" className="relative inline-block text-white text-sm font-medium group">
-              <span className="relative z-10">Explore Courses →</span>
-              <span className="absolute left-0 -bottom-0.5 h-[1px] w-0 bg-white transition-all duration-700 group-hover:w-full"></span>
-            </a>
-          </div>
-          <div className="hover:bg-gray-400 p-4 transition-all rounded-md group">
-            <div className="mb-4 mt-12 md:mt-0 flex justify-center">
-              <Image src="/images/home/video_icon.svg" alt="Video Icon" width={60} height={60} />
-            </div>
-            <h3 className="text-[22px] font-cormorant">Learn At Your Pace.</h3>
-            <p className="text-[14px] sm:text-sm mb-2">
-              Watch videos, listen to audio teachings, or read  <br /> notes
-             
-              all at your convenience.
-            </p>
-            <a href="#" className="relative inline-block text-white text-sm font-medium group">
-              <span className="relative z-10">Browse Library →</span>
-              <span className="absolute left-0 -bottom-0.5 h-[1px] w-0 bg-white transition-all duration-700 group-hover:w-full"></span>
-            </a>
-          </div>
-          <div className="hover:bg-gray-400 p-4 transition-all rounded-md group">
-            <div className="mb-4 mt-12 md:mt-0 flex justify-center">
-              <Image src="/images/home/cross_icon.svg" alt="Cross Icon" width={60} height={60} />
-            </div>
-            <h3 className="text-[22px] font-cormorant">Grow In Christ.</h3>
-            <p className="text-[14px] sm:text-sm mb-2">
-              Apply what you learn as we help you become a
-              <br />
-              disciple who reflects Jesus in everyday life.
-            </p>
-            <a href="#" className="relative inline-block text-white text-sm font-medium group">
-              <span className="relative z-10">Start Growing →</span>
-              <span className="absolute left-0 -bottom-0.5 h-[1px] w-0 bg-white transition-all duration-700 group-hover:w-full"></span>
-            </a>
-          </div>
+          ))}
         </div>
 
-        <button className="bg-white mt-10 sm:mb-8 text-black font-semibold text-sm sm:text-base px-6 sm:px-6 py-4 sm:py-3 rounded-lg hover:bg-gray-200 transition-all">
+        <Link href='/signin' className="bg-white mt-10 sm:mb-8 text-black font-semibold text-sm sm:text-base px-6 sm:px-6 py-4 sm:py-3 rounded-lg hover:bg-gray-200 transition-all">
           Start Learning Now →
-        </button>
+        </Link>
       </div>
     </section>
   );

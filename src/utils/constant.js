@@ -1,18 +1,15 @@
-// import config from '@/config';
-
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Courses', href: '/courses' },
+  { label: 'Courses', href: '/dashboard/explore-courses' },
   { label: 'About', href: '/about' },
-{
+  {
     label: 'Resources',
     children: [
-      { label: 'Watch Live', href: '/resources/blog' },
-      { label: 'Listen Live', href: '/resources/docs' },
+      { label: 'Watch Live', href: '#' },
+      { label: 'Listen Live', href: '#' },
     ],
   },
 ];
-
 export const loadingIndicatorProperties = {
   color: '#FE6D00',
   height: 3.5,
@@ -20,11 +17,10 @@ export const loadingIndicatorProperties = {
   zIndex: 999999999,
 };
 export const cookieConfig = {
-  expires: 365,
-  path: '/',
-  // secure: config.NODE_ENV === 'production',
-  // sameSite: 'Lax',
-  // domain: config.baseUrl,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'lax',
+  maxAge: 60 * 60 * 24 * 7,
 };
 export const googleUserInfoUrl =
   'https://www.googleapis.com/oauth2/v3/userinfo';

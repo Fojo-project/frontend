@@ -1,22 +1,29 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getSessionCookie } from '@/lib/session';
 
-export function middleware(request: NextRequest) {
-  const token = request.cookies.get('FOJO_TOKEN')?.value;
-  const pathname = request.nextUrl.pathname;
-  console.log('Middleware running for:', request.nextUrl.pathname);
+export async function middleware(request: NextRequest) {
+  const token = await getSessionCookie();
+  const { pathname } = request.nextUrl;
+  const authPages = ['/signin', '/signup'];
+  const protectedRoutes = ['/dashboard'];
 
-  if ((pathname === '/signin' || pathname === '/signup') && token) {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+  if (token && authPages.includes(pathname)) {
+    const redirectPath =
+      request.nextUrl.searchParams.get('redirect') || '/dashboard';
+    const redirectUrl = new URL(redirectPath, request.url);
+    return NextResponse.redirect(redirectUrl);
   }
 
-  if (pathname.startsWith('/dashboard') && !token) {
-    return NextResponse.redirect(new URL('/signin', request.url));
+  if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/signin';
+    url.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(url);
   }
-
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/signin'],
+  matcher: ['/dashboard/:path*', '/signin', '/signup'],
 };

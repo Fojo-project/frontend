@@ -8,8 +8,7 @@ export const courseCategories = [
   },
   {
     title: ' Disciple',
-    description:
-      'Learn to follow Jesus daily with obedience and intimacy.',
+    description: 'Learn to follow Jesus daily with obedience and intimacy.',
     image: '/images/home/Disciple.png',
     lessons: 15,
   },
@@ -28,3 +27,93 @@ export const courseCategories = [
     lessons: 15,
   },
 ];
+
+export const courseFeatures = [
+  {
+    icon: '/images/home/bible_icon.svg',
+    alt: 'Bible Icon',
+    title: 'Browse Biblical Courses.',
+    description: (
+      <>
+        Explore our free library of Bible-based discipleship
+        <br />
+        courses created to help you grow in Christ.
+      </>
+    ),
+    linkText: 'Explore Courses →',
+    href: '/dashboard/explore-courses',
+  },
+  {
+    icon: '/images/home/video_icon.svg',
+    alt: 'Video Icon',
+    title: 'Learn At Your Pace.',
+    description: (
+      <>
+        Watch videos, listen to audio teachings, or read
+        <br />
+        notes all at your convenience.
+      </>
+    ),
+    linkText: 'Browse Library →',
+    href: '/dashboard/explore-courses',
+  },
+  {
+    icon: '/images/home/cross_icon.svg',
+    alt: 'Cross Icon',
+    title: 'Grow In Christ.',
+    description: (
+      <>
+        Apply what you learn as we help you become a
+        <br />
+        disciple who reflects Jesus in everyday life.
+      </>
+    ),
+    linkText: 'Start Growing →',
+    href: '/dashboard/explore-courses',
+  },
+];
+
+export const switchConfigs = {
+  account: [
+    {
+      key: "personal",
+      label: "Personal Information",
+      description: "Edit your personal information.",
+    },
+  ],
+  notification: [
+    {
+      key: "push",
+      label: "Push Notifications",
+      description: "Control alerts for new activities and updates.",
+    },
+    {
+      key: "lesson",
+      label: "Lesson Notifications",
+      description: "Receive notifications about your lesson progress.",
+    },
+    {
+      key: "live",
+      label: "Live & Special Events",
+      description: "Get notified about special events, fasts, or prayer meetings.",
+    },
+    {
+      key: "general",
+      label: "General Notifications",
+      description: "Manage announcements and feedback requests.",
+    },
+  ],
+  security: [
+    {
+      key: "password",
+      label: "Password Settings",
+      description: "Change to a new password.",
+    },
+    {
+      key: "delete",
+      label: "Delete Account",
+      description: "Request permanent deletion of my account",
+    },
+  ],
+};
+

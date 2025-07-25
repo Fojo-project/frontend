@@ -7,11 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInFormSchema } from '@/validation/schema';
 import { useLoginMutation } from '@/store/auth/auth.api';
 import useToastify from '@/hooks/useToastify';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Label from '../form/Label';
-import { setTokenCookie } from '@/utils/helper';
+import { setSessionCookie } from '@/lib/session';
 import GoogleAuth from '../auth/socialauth/GoogleAuth';
 import PasswordInputForm from '../form/PasswordInputForm';
+import { Suspense } from 'react';
+import Loading from '../common/Loading';
 
 type SigninFormInputs = {
   email: string;
@@ -21,6 +23,8 @@ type SigninFormInputs = {
 export default function SignInForm() {
   const { showToast } = useToastify();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get('redirect') || '/dashboard';
   const [UserSignIn, { isLoading }] = useLoginMutation();
   const {
     register,
@@ -39,9 +43,9 @@ export default function SignInForm() {
       };
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
-      setTokenCookie(token);
-      router.push('/dashboard');
+      await setSessionCookie(token);
       showToast(response.message, 'success');
+      router.replace(redirectPath);
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
@@ -68,7 +72,9 @@ export default function SignInForm() {
           </div>
           <div>
             <div className="">
-              <GoogleAuth authType="signin" onSuccessRedirect="/dashboard" />
+              <Suspense fallback={<Loading />}>
+                <GoogleAuth authType="signin" />
+              </Suspense>
             </div>
             <div className="relative py-3 sm:py-2">
               <div className="absolute inset-0 flex items-center">
@@ -120,18 +126,18 @@ export default function SignInForm() {
                     className="flex mt-4 items-center justify-center w-full px-4 py-3 text-sm font-lora font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <LoadingIcon /> : 'Sign In'}
+                    {isLoading ? <LoadingIcon width='20' height='20' /> : 'Sign In'}
                   </button>
                 </div>
               </div>
             </form>
 
             <div className="mt-4 font-lora flex items-center justify-center">
-              <p className="text-sm font-normal text-center text-gray-500 dark:text-gray-400 ">
+              <p className="text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                 Don`t have an account?
                 <Link
                   href="/signup"
-                  className="text-black hover:underline font-bold"
+                  className="text-black hover:underline font-bold mx-1"
                 >
                   Sign Up
                 </Link>
