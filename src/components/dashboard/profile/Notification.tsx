@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import SwitchToggle from '@/components/dashboard/profile/SwitchToggle';
-import NotificationRow from '@/components/dashboard/profile/NotificationRow';
 import { switchConfigs } from "@/utils/data";
 import SwitchRow from "../../../components/dashboard/profile/SwitchRow";
 type SectionKey  = 'push' | 'lesson' | 'live' | 'general';

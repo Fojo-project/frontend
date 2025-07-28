@@ -32,10 +32,10 @@ export default function Button({
     variant === 'primary'
       ? 'bg-black-100 flex items-center font-semibold text-white hover:bg-[#1c1b1b]'
       : variant === 'secondary'
-        ? 'bg-gray-100 flex items-center text-gray-800 hover:bg-gray-200'
-        : variant === 'outline'
-          ? 'text-black-100 flex items-center font-semibold dark:text-white '
-          : 'border text-gray-100 bg-gray-200 flex items-center ';
+      ? 'bg-gray-100 flex items-center text-gray-800 hover:bg-gray-200'
+      : variant === 'outline'
+      ? 'text-black-100 flex items-center font-semibold dark:text-white '
+      : 'border text-gray-100 bg-gray-200 flex items-center ';
 
   const disabledClass =
     isLoading || disabled ? ' cursor-not-allowed text-gray-100' : '';
@@ -43,7 +43,7 @@ export default function Button({
   const paddingClass =
     className.includes('px-') || className.includes('py-') ? '' : 'px-4 py-2';
   const allClasses =
-    `${base} ${variantClass} ${paddingClass} ${widthClass} ${disabledClass} ${className}`.trim();
+    `${className} ${base} ${variantClass} ${paddingClass} ${widthClass} ${disabledClass} `.trim();
 
   return (
     <button className={allClasses} disabled={isLoading || disabled} {...rest}>
@@ -52,7 +52,7 @@ export default function Button({
       {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
       {isLoading && (
         <span className="me-2">
-          <LoadingIcon height='18' width='18' />
+          <LoadingIcon height="18" width="18" />
         </span>
       )}
     </button>

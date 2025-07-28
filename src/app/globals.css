@@ -37,7 +37,7 @@
 
 @media (max-width: 768px) {
   .followersbg {
-   background-image: url('/images/home/jesus-image-mobile.png');
+    background-image: url('/images/home/jesus-image-mobile.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -49,19 +49,18 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color:#ffffff; 
+  background-color: #ffffff;
   border-radius: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #ffffff; 
+  background-color: #ffffff;
 }
 
 .custom-scrollbar {
-  scrollbar-width: thin; 
-  scrollbar-color: #5c5c5c #ffffff; 
+  scrollbar-width: thin;
+  scrollbar-color: #5c5c5c #ffffff;
 }
-
 
 @theme {
   --font-outfit: 'Outfit', sans-serif;
@@ -127,6 +126,7 @@
   --color-blue-light-800: #065986;
   --color-blue-light-900: #0b4a6f;
   --color-blue-light-950: #062c41;
+  --color-blue-light-1000: #4285f44d;
 
   --color-gray-25: #f9f9f9;
   --color-gray-50: #f9fafb;
@@ -141,6 +141,11 @@
   --color-gray-900: #101828;
   --color-gray-950: #667085;
   --color-gray-dark: #1a2231;
+  --color-green-100: #b9d8c3;
+  --color-purple-100: #8a38f54d;
+  --color-yellow-100: #fbbc044d;
+  --color-brown-100: #bd775a4d;
+  --color-brown-200: #b16241;
 
   --color-orange-25: #fffaf5;
   --color-orange-50: #fff6ed;

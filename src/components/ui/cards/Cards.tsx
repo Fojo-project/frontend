@@ -2,12 +2,12 @@ import React, { ReactNode } from 'react';
 
 interface CardsProps {
   children: ReactNode;
-  className?: string; // ✅ Allow custom className
+  className?: string;
 }
 
 export default function Cards({ children, className = '' }: CardsProps) {
   return (
-    <div className={`border-2 border-gray-200 rounded-2xl p-4 ${className}`}>
+    <div className={` ${className} border-[1.5px] rounded-2xl p-4 `}>
       {children}
     </div>
   );
