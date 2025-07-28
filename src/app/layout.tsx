@@ -1,4 +1,4 @@
-import { Outfit, Cormorant_Garamond, Open_Sans } from 'next/font/google';
+import { Outfit, Cormorant_Garamond, Open_Sans, Parisienne  } from 'next/font/google';
 import { SidebarProvider } from '@/context/SidebarContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import Providers from '@/lib/Providers';
@@ -27,6 +27,14 @@ const openSans = Open_Sans({
   variable: '--font-open-sans',
 });
 
+
+const parisienne = Parisienne({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-parisienne',
+});
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${cormorant.variable} ${openSans.variable}`}
+      className={`${outfit.variable} ${cormorant.variable} ${openSans.variable} ${parisienne.variable}`}
     >
       <head>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

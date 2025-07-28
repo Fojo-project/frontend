@@ -13,6 +13,7 @@ const config: Config = {
         cormorant: ['Cormorant Garamond', 'serif'],
         openSans: ['Open Sans', 'sans-serif'],
          lora: ['var(--font-lora)'],
+          parisienne: ['var(--font-parisienne)'],
       }
 
     },

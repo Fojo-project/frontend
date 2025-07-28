@@ -117,3 +117,39 @@ export const switchConfigs = {
   ],
 };
 
+
+
+export const notifications = [
+  {
+    title: "Start A New Course.",
+    description: "Continue your journey in Christ by starting the next course.",
+    time: "Just Now",
+    read: false,
+    iconBg: "bg-gray-100",
+    iconColor: "text-black",
+  },
+  {
+    title: "Course Completed! 🎉",
+    description: "Congratulations on completing all lessons in the Foundations Course!",
+    time: "1 min",
+    read: true,
+    iconBg: "bg-gray-100",
+    iconColor: "text-black",
+  },
+  {
+    title: "New Milestone! 🔥",
+    description: "You’ve completed 5 lessons in a row! Keep the streak alive",
+    time: "1 day",
+    read: true,
+    iconBg: "bg-gray-100",
+    iconColor: "text-black",
+  },
+  {
+    title: "Lesson Reminder",
+    description: "Don’t forget to complete your lesson for this week.",
+    time: "1 day",
+    read: false,
+    iconBg: "bg-gray-100",
+    iconColor: "text-gray-400",
+  },
+];
