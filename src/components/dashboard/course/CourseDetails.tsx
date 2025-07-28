@@ -74,7 +74,7 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {response && (
         <CourseTabs
@@ -92,8 +92,7 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
             })),
           }}
         />
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }

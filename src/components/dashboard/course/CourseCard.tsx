@@ -28,8 +28,8 @@ export default function CourseCard() {
     return (
       <div className="text-center text-gray-500 py-10">
         <NoResource
-          title="No course started yet"
-          subtitle="Go to the 'explore courses' to start a course"
+          title="No Lessons Yet"
+          subtitle="No Lessons Yet Start creating shipments"
           icon={book}
         />
       </div>

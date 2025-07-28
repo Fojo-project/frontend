@@ -121,6 +121,7 @@ export const DashboardApi = createApi({
         { type: 'Course', id: arg.course },
       ],
     }),
+
     ShowALesson: builder.query<ShowLessonResponse, LessonQueryArg>({
       query: ({ lesson }) => ({
         url: `/api/lessons/${lesson}`,
