@@ -4,6 +4,7 @@ import React from 'react';
 import Button from '@/components/ui/button/Button';
 import Image from 'next/image';
 import dashboardImage from '../../../../public/images/home/homeimage.png';
+import { getGreeting } from '@/utils/getGreeting';
 import {
   Arrow,
   CertificateIcon,
@@ -20,7 +21,9 @@ export default function DashboardInfo() {
           <div className="flex w-full gap-2">
             <div className="w-full flex flex-col gap-10 md:gap-[87px]">
               <div>
-                <h3 className="text-[46px] mb-2  font-normal">Good Morning,</h3>
+                <h3 className="text-[46px] mb-2  font-normal">
+                  {getGreeting()},
+                </h3>
                 <p className="font-semibold w-[327px] leading-10 text-[40px] -mt-5">
                   Taiwo Akinfenwa
                 </p>
