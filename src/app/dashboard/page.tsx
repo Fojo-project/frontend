@@ -1,3 +1,4 @@
+import UploadButton from '@/components/common/Upaloder';
 import { generateMetadata } from '@/utils/metadata';
 import { Metadata } from 'next';
 
@@ -7,6 +8,7 @@ export default function DashboardHome() {
   return (
     <div>
       <p>Dashboard</p>
+      <UploadButton />
     </div>
   );
 }

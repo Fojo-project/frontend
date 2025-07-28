@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react';
 import SwitchToggle from '@/components/dashboard/profile/SwitchToggle';
-import NotificationRow from '@/components/dashboard/profile/NotificationRow';
 import { switchConfigs } from "@/utils/data";
 import SwitchRow from "../../../components/dashboard/profile/SwitchRow";
-type SectionKey  = 'push' | 'lesson' | 'live' | 'general';
+type SectionKey = 'push' | 'lesson' | 'live' | 'general';
 
 type NotificationSettings = {
     push: {
@@ -27,10 +26,10 @@ type NotificationSettings = {
     };
 };
 
-type NotificationKey<T extends SectionKey > = keyof NotificationSettings[T];
+type NotificationKey<T extends SectionKey> = keyof NotificationSettings[T];
 
 const ProfileNotification = () => {
-    const [activeSection, setActiveSection] = useState<SectionKey >('push');
+    const [activeSection, setActiveSection] = useState<SectionKey>('push');
 
     const [notifications, setNotifications] = useState<NotificationSettings>({
         push: {
@@ -52,7 +51,7 @@ const ProfileNotification = () => {
         },
     });
 
-    const toggle = <T extends SectionKey >(section: T, key: NotificationKey<T>) => {
+    const toggle = <T extends SectionKey>(section: T, key: NotificationKey<T>) => {
         setNotifications((prev) => ({
             ...prev,
             [section]: {
@@ -156,7 +155,7 @@ const ProfileNotification = () => {
                         label={section.label}
                         description={section.description}
                         active={activeSection === section.key}
-                            onClick={() => setActiveSection(section.key as SectionKey)}
+                        onClick={() => setActiveSection(section.key as SectionKey)}
                     />
                 ))}
             </div>
