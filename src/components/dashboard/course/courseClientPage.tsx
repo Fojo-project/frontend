@@ -18,7 +18,7 @@ export default function CourseClientPage({ courseParam }: Props) {
     <div className="flex flex-col gap-6">
 
       <div className="px-4 md:px-0 flex justify-between">
-      <Header Heading={'My Courses'} link='/dashboard/my-courses' />
+        <Header Heading={'My Courses'} link='/dashboard/my-courses' />
 
         <button
           onClick={() => setIsModalOpen(true)}
@@ -36,12 +36,12 @@ export default function CourseClientPage({ courseParam }: Props) {
         className="max-w-4xl mx-auto"
       >
         <Certificate
-  name="Anthony Johnson"
-  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed neque sed lorem hendrerit aliquet. Pellentesque vehicula placerat finibus.
+          name="Anthony Johnson"
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed neque sed lorem hendrerit aliquet. Pellentesque vehicula placerat finibus.
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed neque sed lorem hendrerit aliquet. Pellentesque vehicula placerat finibus."
-  presidentName="CHARLES BLAKE"
-  generalName="JULIE S. SMITH"
-/>
+          presidentName="CHARLES BLAKE"
+          generalName="JULIE S. SMITH"
+        />
       </Modal>
     </div>
   );
