@@ -68,6 +68,7 @@
   --font-open-sans: 'Open Sans', sans-serif;
   --font-cormorant: 'Cormorant Garamond', serif;
   --font-lora: 'Lora', serif;
+  --font-parisienne: 'Parisienne', cursive;
 
   --breakpoint-*: initial;
   --breakpoint-2xsm: 375px;
