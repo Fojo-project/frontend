@@ -91,7 +91,7 @@ export default function DashboardInfo() {
           <h3 className="text-brown-200 mt-2 text-sm text-center">
             John 15:4 (NIV)
           </h3>
-        </Cards>{' '}
+        </Cards>
       </div>
     </div>
   );
