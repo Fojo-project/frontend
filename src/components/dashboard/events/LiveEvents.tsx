@@ -1,48 +1,20 @@
-'use client';
-
-import React, { useState } from 'react';
+import { LiveIcon, WatchIcon, YoutubeIcon } from '@/assets/icons';
+import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
 import Image from 'next/image';
 import Link from 'next/link';
-import { YoutubeIcon, WatchIcon, LiveIcon } from '../../../assets/icons';
-import { useEventsQuery } from '@/store/dashboard/dashboard.api';
-import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
-import NoEvent from '../events/NoEvent';
-import truncateText from '@/utils/truncateText';
-import Pagination from '@/components/ui/Pagination/Pagination';
-import { usePathname } from 'next/navigation';
+import React from 'react';
+import NoEvent from './NoEvent';
+import { useLiveEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
 
-type EventCardProps = {
-  limit?: number;
-  textLimit?: number;
-  setPagination?: boolean;
-};
-
-export default function EventCard({
-  limit,
-  textLimit,
-  setPagination,
-}: EventCardProps) {
-  const [page, setCurrentPage] = useState(1);
-  const { data, isLoading } = useEventsQuery(page);
-  const pathname = usePathname();
-
-  const sortedEvents = [...(data?.data ?? [])].sort((a, b) => {
-    if (a.is_live && !b.is_live) return -1;
-    if (!a.is_live && b.is_live) return 1;
-    return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
-  });
-  const showPagination =
-    typeof setPagination === 'boolean'
-      ? setPagination
-      : pathname === '/dashboard/events';
-
-  const displayedEvents = limit ? sortedEvents.slice(0, limit) : sortedEvents;
+export default function LiveEvents() {
+  const { data, isLoading } = useLiveEventsQuery();
+  console.log(data, isLoading);
 
   if (isLoading)
     return (
       <div className="flex flex-col gap-4">
-        {[...Array(2)].map((_, idx) => (
+        {[...Array(4)].map((_, idx) => (
           <div key={idx} className="w-full ">
             <EventSkeleton />
           </div>
@@ -57,10 +29,15 @@ export default function EventCard({
       </div>
     );
   }
+  const sortedEvents = [...(data?.data ?? [])].sort((a, b) => {
+    if (a.is_live && !b.is_live) return -1;
+    if (!a.is_live && b.is_live) return 1;
+    return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
+  });
 
   return (
     <div className="flex flex-col gap-4">
-      {displayedEvents.map((event) => (
+      {sortedEvents.map((event) => (
         <Link
           href="#"
           key={event.id}
@@ -75,15 +52,15 @@ export default function EventCard({
             />
           </div>
 
-          <div className="flex-1">
+          <div className="flex-1  ">
             <h3 className="text-[22px] font-bold text-gray-900 font-cormorant">
-              {truncateText(event?.title, textLimit)}
+              {event?.title}
             </h3>
             <div className="flex justify-between gap-10 text-xs w-full space-y-1">
-              <p className="text-sm text-[#555555] line-clamp-2 font-lora">
+              <p className="text-sm text-[#555555] line-clamp-2 font-lora text-[16px]">
                 {event?.description}
               </p>
-              <div>
+              <div className="">
                 {event?.is_live ? (
                   <div className="text-red-600 font-semibold flex items-center gap-1 font-lora">
                     Live
@@ -101,28 +78,16 @@ export default function EventCard({
             </div>
 
             <div className="flex items-center gap-4 mt-2">
-              <span className="flex items-center text-[12px] font-bold text-[#0000000] gap-1">
-                <WatchIcon width={14} height={14} />
-                Watch {event?.is_live && 'Live'}
+              <span className="flex items-center text-[14px] font-bold text-[#0000000] gap-1">
+                <WatchIcon width={14} height={14} /> Watch Live
               </span>
-              <span className="flex items-center text-[12px] font-bold text-xs text-gray-700 gap-1">
-                <LiveIcon width={14} height={14} />
-                Listen {event?.is_live && 'Live'}
+              <span className="flex items-center text-[14px] font-bold  text-xs text-gray-700 gap-1">
+                <LiveIcon width={14} height={14} /> Listen Live
               </span>
             </div>
           </div>
         </Link>
       ))}
-
-      {showPagination && (
-        <Pagination
-          currentPage={data.meta.current_page}
-          lastPage={data.meta.last_page}
-          onPageChange={(page) => setCurrentPage(page)}
-          hasNextPage={!!data.meta.next_page_url}
-          hasPrevPage={!!data.meta.prev_page_url}
-        />
-      )}
     </div>
   );
 }
