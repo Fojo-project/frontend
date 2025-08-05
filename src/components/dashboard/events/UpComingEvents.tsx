@@ -2,10 +2,9 @@ import { LiveIcon, WatchIcon } from '@/assets/icons';
 import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import NoEvent from './NoEvent';
 import { useLiveEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
+import NoResource from '@/components/common/NoResource';
 
 export default function UpComingEvents() {
   const { data, isLoading } = useLiveEventsQuery();
@@ -25,7 +24,10 @@ export default function UpComingEvents() {
   if (!data?.data || data.data.length === 0) {
     return (
       <div className="text-center text-gray-500 py-10">
-        <NoEvent />
+        <NoResource title="No upcoming events"
+          subtitle="There are no upcoming events available at the moment."
+          icon='/empty-states/event.svg'
+        />
       </div>
     );
   }

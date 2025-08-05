@@ -2,8 +2,7 @@ import { LiveIcon, WatchIcon, YoutubeIcon } from '@/assets/icons';
 import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import NoEvent from './NoEvent';
+import NoResource from '@/components/common/NoResource';
 import { useLiveEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
 
@@ -25,7 +24,10 @@ export default function LiveEvents() {
   if (!data?.data || data.data.length === 0) {
     return (
       <div className="text-center text-gray-500 py-10">
-        <NoEvent />
+        <NoResource title="No live events"
+          subtitle="There are no live events available at the moment."
+          icon='/empty-states/event.svg'
+        />
       </div>
     );
   }
