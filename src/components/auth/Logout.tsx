@@ -17,8 +17,25 @@ export default function Logout() {
     try {
       await logoutApi().unwrap();
       await clearSessionCookie();
-      dispatch(setUser({ id: '', full_name: '', email: '', provider: '', role: '' }));
-      showToast('Logout successful', 'success');
+      dispatch(
+        setUser({
+          id: 0,
+          full_name: '',
+          email: '',
+          provider: '',
+          role: '',
+          dashboard: {
+            ongoing_course: 0,
+            completed_course: 0,
+            hours_spent: 0,
+            certificate: 0,
+          },
+          deleted_at: null,
+          created_at: '',
+          updated_at: '',
+        })
+      );
+      showToast('Session expired. Please log in again.', 'error');
       router.push('/');
     } catch {
       showToast('Logout failed. Please try again.', 'error');
@@ -33,11 +50,11 @@ export default function Logout() {
       aria-label="Logout"
     >
       <div className="flex items-center justify-between w-full">
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           <SignOut width={24} height={24} />
           Sign Out
         </div>
-        {isLoading ? <LoadingIcon width='17' height='17' /> : null}
+        {isLoading ? <LoadingIcon width="17" height="17" /> : null}
       </div>
     </button>
   );
