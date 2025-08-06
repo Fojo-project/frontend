@@ -59,7 +59,7 @@ export function formatText(text, options) {
   return `${prefix}${formatted}${suffix}`;
 }
 export function formatDuration(minutes) {
-  if (!minutes || minutes < 0) return '0 minutes';
+  if (!minutes || minutes < 0) return '0 minute';
 
   const hrs = Math.floor(minutes / 60);
   const mins = minutes % 60;
@@ -69,4 +69,42 @@ export function formatDuration(minutes) {
   if (mins > 0 || hrs === 0) parts.push(`${mins} minute${mins > 1 ? 's' : ''}`);
 
   return parts.join(' and ');
+}
+export function Duration(minutes = 0) {
+  if (!minutes || minutes < 0) return '0';
+
+  const totalHours = minutes / 60;
+  return `${totalHours.toFixed(2)} hrs`;
+}
+export function timeStringToMinutes(timeStr) {
+  if (!timeStr || typeof timeStr !== 'string') return 0;
+  const [hours, minutes] = timeStr.split(':').map(Number);
+  return hours * 60 + minutes;
+}
+
+export function getTimeFromDate(dateStr) {
+  if (!dateStr) return '';
+
+  const date = new Date(dateStr);
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12 || 12;
+  return `${hours}:${minutes}${ampm}`;
+}
+
+export function getDayName(dateString) {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { weekday: 'long' });
+}
+export function formatTo12HourWithMinutes(timeString) {
+  if (!timeString) return '';
+
+  const [hour, minute] = timeString.split(':').map(Number);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+
+  return `${hour12}:${String(minute).padStart(2, '0')}${period}`;
 }

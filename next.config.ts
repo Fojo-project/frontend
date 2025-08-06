@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: ['i.pravatar.cc', 'www.gstatic.com', 'lh3.googleusercontent.com'],
+    domains: [
+      'i.pravatar.cc',
+      'www.gstatic.com',
+      'lh3.googleusercontent.com',
+      'via.placeholder.com',
+    ],
   },
 };
 

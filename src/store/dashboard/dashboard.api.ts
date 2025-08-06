@@ -5,6 +5,7 @@ interface DashboardResponse {
   message: string;
 }
 interface AllCourse {
+  isStarted: any;
   completed_lesson: number;
   slug: string;
   id: number;
@@ -16,6 +17,7 @@ interface AllCourse {
   lesson_progress?: {
     completed_lessons: number;
     total_lessons: number;
+    percentage_completed?: number;
   };
 }
 interface AllCourseResponse {
@@ -48,6 +50,41 @@ interface Course {
   total_lesson: number;
   total_lessons_duration: number;
 }
+interface EventsResponse {
+  status: boolean;
+  message: string;
+  data: EventItem[];
+  meta: PaginationMeta;
+}
+interface PaginationMeta {
+  current_page: number;
+  per_page: number;
+  total: number;
+  last_page: number;
+  from: number;
+  to: number;
+  next_page_url: string | null;
+  prev_page_url: string | null;
+}
+interface EventItem {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  avatar: string;
+  video_url: string;
+  audio_url: string;
+  start_date: string;
+  start_time: string;
+  end_date: string;
+  end_time: string;
+  status: string;
+  is_live: boolean;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 interface CourseResponse {
   success: boolean;
   message?: string;
@@ -144,6 +181,24 @@ export const DashboardApi = createApi({
         { type: 'Course', id: arg.course },
       ],
     }),
+    Events: builder.query<EventsResponse, number | void>({
+      query: (page = 1) => ({
+        url: `/api/events?page=${page}`,
+        method: 'GET',
+      }),
+    }),
+    LiveEvents: builder.query<EventsResponse, void>({
+      query: () => ({
+        url: `/api/events/live`,
+        method: 'GET',
+      }),
+    }),
+    UpComingEvents: builder.query<EventsResponse, void>({
+      query: () => ({
+        url: `/api/events/scheduled`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -155,4 +210,7 @@ export const {
   useMarkLessonMutation,
   useExploreCoursesQuery,
   useStartCourseMutation,
+  useEventsQuery,
+  useLiveEventsQuery,
+  useUpComingEventsQuery,
 } = DashboardApi;

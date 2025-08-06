@@ -1,12 +1,12 @@
-import { LiveIcon, WatchIcon, YoutubeIcon } from '@/assets/icons';
+import { LiveIcon, WatchIcon } from '@/assets/icons';
 import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
 import Image from 'next/image';
 import Link from 'next/link';
-import NoResource from '@/components/common/NoResource';
 import { useLiveEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
+import NoResource from '@/components/common/NoResource';
 
-export default function LiveEvents() {
+export default function UpComingEvents() {
   const { data, isLoading } = useLiveEventsQuery();
   console.log(data, isLoading);
 
@@ -24,8 +24,8 @@ export default function LiveEvents() {
   if (!data?.data || data.data.length === 0) {
     return (
       <div className="text-center text-gray-500 py-10">
-        <NoResource title="No live events"
-          subtitle="There are no live events available at the moment."
+        <NoResource title="No upcoming events"
+          subtitle="There are no upcoming events available at the moment."
           icon='/empty-states/event.svg'
         />
       </div>
@@ -63,16 +63,9 @@ export default function LiveEvents() {
                 {event?.description}
               </p>
               <div className="">
-                {event?.is_live ? (
-                  <div className="text-red-600 font-semibold flex items-center gap-1 font-lora">
-                    Live
-                    <YoutubeIcon width={14} height={14} />
-                  </div>
-                ) : (
-                  <div className="text-gray-500 font-medium font-lora text-sm">
-                    <div>{getDayName(event?.start_date)}</div>
-                  </div>
-                )}
+                <div className="text-gray-500 font-medium font-lora text-sm">
+                  <div>{getDayName(event?.start_date)}</div>
+                </div>
                 <div className="text-black font-bold font-lora text-[14px]">
                   {formatTo12HourWithMinutes(event?.start_time)}
                 </div>
@@ -80,10 +73,10 @@ export default function LiveEvents() {
             </div>
 
             <div className="flex items-center gap-4 mt-2">
-              <span className="flex items-center text-[14px] font-bold text-[#0000000] gap-1">
+              <span className="flex cursor-not-allowed items-center text-[14px] font-bold text-[#0000000] gap-1">
                 <WatchIcon width={14} height={14} /> Watch Live
               </span>
-              <span className="flex items-center text-[14px] font-bold  text-xs text-gray-700 gap-1">
+              <span className="flex cursor-not-allowed items-center text-[14px] font-bold  text-xs text-gray-700 gap-1">
                 <LiveIcon width={14} height={14} /> Listen Live
               </span>
             </div>

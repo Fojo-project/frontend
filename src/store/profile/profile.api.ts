@@ -9,6 +9,16 @@ interface AuthResponse {
   };
 }
 
+interface Dashboard {
+  ongoing_course: number;
+  completed_course: number;
+  hours_spent: number;
+  current_ongoing_course: {
+    title: string;
+  };
+  certificate: number;
+}
+
 interface MeResponse {
   status: boolean;
   message: string;
@@ -19,6 +29,10 @@ interface MeResponse {
     role: string;
     provider?: string;
     avatar?: string;
+    dashboard: Dashboard;
+    deleted_at: string | null;
+    created_at: string;
+    updated_at: string;
   };
 }
 interface UpdateProfileRequest {
