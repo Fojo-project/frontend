@@ -64,16 +64,14 @@ const AppSidebar: React.FC = () => {
               >
                 {item.icon}
               </span>
-              {(isExpanded || isHovered || isMobileOpen) && (
+              {(isExpanded || isMobileOpen) && (
                 <span
-                  className={`menu-item-text transition-colors ${active
-                    ? 'text-black'
-                    : 'group-hover:text-black text-inherit'
-                    }`}
+                  className={`menu-item-text transition-colors ${active ? 'text-black' : 'group-hover:text-black text-inherit'}`}
                 >
                   {item.name}
                 </span>
               )}
+
             </Link>
           </li>
         );
@@ -84,60 +82,38 @@ const AppSidebar: React.FC = () => {
   return (
     <aside
       className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-        ${isExpanded || isMobileOpen
-          ? 'w-[290px]'
-          : isHovered
-            ? 'w-[290px]'
-            : 'w-[90px]'
-        }
-        ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0`}
-      onMouseEnter={() => !isExpanded && setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    ${isExpanded || isMobileOpen ? 'w-[290px]' : 'w-[90px]'}
+    ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
     >
+
       <div
         className={`py-8 flex ${!isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
           }`}
       >
         <Link href="/">
-          {isExpanded || isHovered || isMobileOpen ? (
+          {isExpanded || isMobileOpen ? (
             <>
-              <Image
-                src={FojoLogo}
-                alt="Fojo Logo"
-                className="dark:hidden object-cover"
-              />
-              <Image
-                src={FojoDarkLogo}
-                alt="Fojo Logo Dark"
-                className="hidden dark:block object-cover py-2"
-              />
+              <Image src={FojoLogo} alt="Fojo Logo" className="dark:hidden object-cover" />
+              <Image src={FojoDarkLogo} alt="Fojo Logo Dark" className="hidden dark:block object-cover py-2" />
             </>
           ) : (
             <>
-              <Image
-                src={Fojo}
-                alt="Fojo icon"
-                className="dark:hidden object-cover"
-              />
-              <Image
-                src={FojoDark}
-                alt="Fojo Logo Dark"
-                className="hidden dark:block object-cover py-2"
-              />
+              <Image src={Fojo} alt="Fojo icon" className="dark:hidden object-cover" />
+              <Image src={FojoDark} alt="Fojo Logo Dark" className="hidden dark:block object-cover py-2" />
             </>
           )}
+
         </Link>
       </div>
 
       <div className="flex flex-col overflow-y-auto  no-scrollbar">
         <nav className="mb-6">
           <h2
-            className={`mb-4 text-xs uppercase text-gray-400 ${!isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
-              } flex leading-[20px]`}
+            className={`mb-4 text-xs uppercase text-gray-400 ${!isExpanded ? 'lg:justify-center' : 'justify-start'} flex leading-[20px]`}
           >
             {''}
           </h2>
+
           {renderMenuItems(navItems)}
         </nav>
       </div>

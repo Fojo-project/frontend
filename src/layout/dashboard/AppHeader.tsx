@@ -15,6 +15,7 @@ import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import FojoLogo from '../../../public/images/home/FojoLogo.png';
 import FojoDarkLogo from '../../../public/images/home/logo.png';
+import SearchForm from '../dashboard/Search';
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
@@ -84,25 +85,16 @@ const AppHeader: React.FC = () => {
           </button>
 
           <div className="hidden lg:block">
-            <form>
-              <div className="relative">
-                <span className="absolute -translate-y-1/2 left-4 top-1/2 pointer-events-none">
-                  <SearchIcon />
-                </span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Search courses..."
-                  className="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-200  py-2.5 pl-12 pr-14 text-sm bg-gray-25 text-gray-950 shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden dark:border-gray-800 dark:bg-gray-900  dark:text-white/90 dark:placeholder:text-white/30 xl:w-[430px]"
-                />
-              </div>
-            </form>
+            <SearchForm />
           </div>
         </div>
         <div
-          className={`${isApplicationMenuOpen ? 'flex' : 'hidden'
-            } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
+          className={`${isApplicationMenuOpen ? 'flex' : 'hidden'}
+    items-center justify-between w-full gap-4 px-5 py-4 
+    lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none
+    bg-white dark:bg-gray-900`} 
         >
+
           <div className="flex items-center gap-2 2xsm:gap-3">
             {/* <!-- Dark Mode Toggler --> */}
             <ThemeToggleButton />

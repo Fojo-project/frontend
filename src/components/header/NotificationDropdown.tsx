@@ -177,11 +177,15 @@ export default function NotificationDropdown() {
         </svg>
       </button>
 
-      <Dropdown
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="absolute right-0 mt-4 w-[380px] max-h-[396px] overflow-y-auto rounded-3xl border border-gray-200 bg-white p-4 shadow-lg"
-      >
+<Dropdown
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  className="absolute mt-4 w-[380px] max-h-[396px] overflow-y-auto rounded-3xl border border-gray-200 bg-white p-4 shadow-lg
+    left-1/2 -translate-x-1/2
+    sm:left-1/2 sm:-translate-x-1/2
+    lg:left-auto lg:right-0 lg:translate-x-0"
+>
+
         <div className="mb-2 flex items-center justify-between">
           <h2 className="text-md font-open-sans font-semibold text-black uppercase">Notifications</h2>
           <button className="flex items-center text-sm text-gray-500 hover:text-black">

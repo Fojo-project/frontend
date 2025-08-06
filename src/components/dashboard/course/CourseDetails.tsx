@@ -9,38 +9,53 @@ import { formatDuration } from '@/utils/helper';
 interface CourseDetailProps {
   id?: string;
   courseTitle: string;
+  onCompletionChange?: (completed: boolean) => void; // ✅ NEW
 }
 
-export default function CourseDetail({ courseTitle }: CourseDetailProps) {
+export default function CourseDetail({ courseTitle, onCompletionChange }: CourseDetailProps) {
   const { data, isLoading, isError, refetch } = useCourseQuery({
     course: courseTitle,
   });
+
   const response = data?.data;
+
   useEffect(() => {
     refetch();
   }, [courseTitle, refetch]);
-  const lowerTitle = courseTitle.toLowerCase();
+
+  useEffect(() => {
+    if (response && onCompletionChange) {
+      const { completed_lessons, total_lessons } = response.lesson_progress ?? {};
+      if (typeof total_lessons === 'number' && typeof completed_lessons === 'number') {
+        const isComplete = completed_lessons === total_lessons && total_lessons > 0;
+        onCompletionChange(isComplete);
+      }
+    }
+  }, [response, onCompletionChange]);
+
 
   if (isLoading) {
     return (
       <div className="flex flex-col w-full gap-6">
         {[...Array(2)].map((_, idx) => (
-          <div key={idx} className="w-full ">
+          <div key={idx} className="w-full">
             <CardSkeleton />
           </div>
         ))}
       </div>
     );
   }
+
   if (isError) {
     return <div>Error loading courses</div>;
   }
+
+  const lowerTitle = courseTitle.toLowerCase();
+
   return (
     <div className="flex flex-col gap-4">
       <section
-        className={`rounded-xl p-6 text-white relative overflow-hidden ${
-          lowerTitle || 'foundations'
-        }`}
+        className={`rounded-xl p-6 text-white relative overflow-hidden ${lowerTitle || 'foundations'}`}
       >
         <div className="relative z-10 flex justify-between items-center">
           <div>
@@ -60,13 +75,13 @@ export default function CourseDetail({ courseTitle }: CourseDetailProps) {
                 >
                   {response?.lesson_progress?.completed_lessons} /{' '}
                   {response?.lesson_progress?.total_lessons} Lesson
-                  {response?.total_lesson !== 1 ? 's' : ''}
+                  {response?.lesson_progress?.total_lessons !== 1 ? 's' : ''}
                 </span>
               </p>
               <p>
                 Total Lesson Length:
                 <span
-                  className="ml-3 px-2 py-1 rounded "
+                  className="ml-3 px-2 py-1 rounded"
                   style={{ backgroundColor: response?.color_code || '#cccccc' }}
                 >
                   {formatDuration(response?.total_lessons_duration ?? 0)}
