@@ -8,8 +8,6 @@ import NoResource from '@/components/common/NoResource';
 
 export default function UpComingEvents() {
   const { data, isLoading } = useLiveEventsQuery();
-  console.log(data, isLoading);
-
   if (isLoading)
     return (
       <div className="flex flex-col gap-4">

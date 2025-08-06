@@ -3,9 +3,7 @@ import Cards from '@/components/ui/cards/Cards';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import dashboardImage from '../../../../public/images/home/homeimage.png';
-import { getGreeting } from '@/utils/getGreeting';
-import truncateText from '@/utils/truncateText';
-import { Duration } from '@/utils/helper';
+import { Duration, getGreeting, truncateText } from '@/utils/helper';
 
 import {
   Arrow,
