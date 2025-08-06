@@ -5,8 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { YoutubeIcon, WatchIcon, LiveIcon } from '../../../assets/icons';
 import { useEventsQuery } from '@/store/dashboard/dashboard.api';
-import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
-import truncateText from '@/utils/truncateText';
+import {
+  formatTo12HourWithMinutes,
+  getDayName,
+  truncateText,
+} from '@/utils/helper';
 import Pagination from '@/components/ui/Pagination/Pagination';
 import { usePathname } from 'next/navigation';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
@@ -53,9 +56,10 @@ export default function EventCard({
   if (!data?.data || data.data.length === 0) {
     return (
       <div className="text-center text-gray-500 py-10">
-        <NoResource title="No Events Found"
+        <NoResource
+          title="No Events Found"
           subtitle="There are no events available at the moment."
-          icon='/empty-states/event.svg'
+          icon="/empty-states/event.svg"
         />
       </div>
     );

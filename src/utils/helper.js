@@ -108,3 +108,18 @@ export function formatTo12HourWithMinutes(timeString) {
 
   return `${hour12}:${String(minute).padStart(2, '0')}${period}`;
 }
+export function getGreeting() {
+  const hour = new Date().getHours();
+
+  if (hour >= 0 && hour < 12) {
+    return 'Good Morning';
+  } else if (hour >= 12 && hour < 17) {
+    return 'Good Afternoon';
+  } else {
+    return 'Good Evening';
+  }
+}
+export function truncateText(text, maxLength) {
+  if (!text) return '';
+  return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+}
