@@ -1,10 +1,11 @@
+
 {
   "name": "fojo-frontend",
   "version": "2.0.2",
   "private": true,
   "scripts": {
-    "dev": "rm -rf .next && rm -rf node_modules/.cache && next dev",
-    "build": "rm -rf .next && rm -rf node_modules/.cache && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
