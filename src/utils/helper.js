@@ -37,6 +37,10 @@ export function downloadTextFile(content, filename) {
   link.click();
   document.body.removeChild(link);
 }
+export function truncateText(text, maxLength) {
+  if (!text) return '';
+  return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+}
 export function formatText(text, options) {
   if (!text) return '';
 
@@ -74,7 +78,7 @@ export function Duration(minutes = 0) {
   if (!minutes || minutes < 0) return '0';
 
   const totalHours = minutes / 60;
-  return `${totalHours.toFixed(2)} hrs`;
+  return `${totalHours.toFixed(2)}`;
 }
 export function timeStringToMinutes(timeStr) {
   if (!timeStr || typeof timeStr !== 'string') return 0;
@@ -107,4 +111,15 @@ export function formatTo12HourWithMinutes(timeString) {
   const hour12 = hour % 12 || 12;
 
   return `${hour12}:${String(minute).padStart(2, '0')}${period}`;
+}
+export function getGreeting() {
+  const hour = new Date().getHours();
+
+  if (hour >= 0 && hour < 12) {
+    return 'Good Morning';
+  } else if (hour >= 12 && hour < 17) {
+    return 'Good Afternoon';
+  } else {
+    return 'Good Evening';
+  }
 }

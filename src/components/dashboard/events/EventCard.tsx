@@ -5,9 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { YoutubeIcon, WatchIcon, LiveIcon } from '../../../assets/icons';
 import { useEventsQuery } from '@/store/dashboard/dashboard.api';
-import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
+import {
+  formatTo12HourWithMinutes,
+  getDayName,
+  truncateText,
+} from '@/utils/helper';
 import NoEvent from '../events/NoEvent';
-import truncateText from '@/utils/truncateText';
 import Pagination from '@/components/ui/Pagination/Pagination';
 import { usePathname } from 'next/navigation';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
