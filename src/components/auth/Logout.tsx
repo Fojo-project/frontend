@@ -35,7 +35,7 @@ export default function Logout() {
           updated_at: '',
         })
       );
-      showToast('Session expired. Please log in again.', 'error');
+      showToast('Successfully logged out.', 'success');
       router.push('/');
     } catch {
       showToast('Logout failed. Please try again.', 'error');

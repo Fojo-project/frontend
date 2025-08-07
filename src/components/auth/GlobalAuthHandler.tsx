@@ -12,8 +12,8 @@ export default function GlobalAuthHandler() {
   const { showToast } = useToastify();
 
   useEffect(() => {
-    const handleUnauthorized = () => {
-      clearSessionCookie();
+    const handleUnauthorized = async () => {
+      await clearSessionCookie();
       dispatch(
         setUser({
           id: 0,

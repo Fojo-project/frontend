@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
       'www.gstatic.com',
       'lh3.googleusercontent.com',
       'via.placeholder.com',
+      'res.cloudinary.com',
     ],
   },
 };
