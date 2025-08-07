@@ -3,7 +3,6 @@ import {
   MenuBarCLose,
   MenuBarIcon,
   MenuIcon,
-  SearchIcon,
 } from '@/assets/icons';
 import { ThemeToggleButton } from '@/components/common/ThemeToggleButton';
 import NotificationDropdown from '@/components/header/NotificationDropdown';
@@ -92,7 +91,7 @@ const AppHeader: React.FC = () => {
           className={`${isApplicationMenuOpen ? 'flex' : 'hidden'}
     items-center justify-between w-full gap-4 px-5 py-4 
     lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none
-    bg-white dark:bg-gray-900`} 
+    bg-white dark:bg-gray-900`}
         >
 
           <div className="flex items-center gap-2 2xsm:gap-3">

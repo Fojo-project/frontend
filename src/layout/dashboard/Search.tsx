@@ -25,7 +25,7 @@ export default function SearchForm() {
     ...(data?.data?.lessons || []).map((item: any) => ({
       ...item,
       type: 'lesson',
-      courseSlug: item.course_slug, 
+      courseSlug: item.course_slug,
     })),
   ];
 
