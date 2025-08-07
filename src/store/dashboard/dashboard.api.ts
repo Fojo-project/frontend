@@ -124,7 +124,37 @@ interface MarkLessonPayload {
 interface StartCoursePayload {
   course: string;
 }
+interface SearchResult {
+  id: number;
+  title: string;
+  slug: string;
+  subtitle?: string;
+  description?: string;
+  about_course?: string;
+  course_video?: string;
+  course_image?: string;
+  lesson_note?: string;
+  lesson_content?: string;
+  lesson_video?: string;
+  lesson_image?: string;
+  lesson_duration?: number;
+  isCompleted?: boolean | string;
+  lesson_order?: number;
+  created_at?: string;
+}
 
+interface SearchResponse {
+  status: boolean;
+  message: string;
+  data: {
+    courses: SearchResult[];
+    lessons: SearchResult[];
+  };
+}
+
+interface SearchQueryArg {
+  query: string;
+}
 export const DashboardApi = createApi({
   reducerPath: 'dashboardApi',
   baseQuery: axiosBaseQuery(),
@@ -199,6 +229,12 @@ export const DashboardApi = createApi({
         method: 'GET',
       }),
     }),
+    searchCoursesAndLessons: builder.query<SearchResponse, SearchQueryArg>({
+      query: ({ query }) => ({
+        url: `/api/search?query=${query}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -213,4 +249,8 @@ export const {
   useEventsQuery,
   useLiveEventsQuery,
   useUpComingEventsQuery,
+     useSearchCoursesAndLessonsQuery,
 } = DashboardApi;
+
+
+
