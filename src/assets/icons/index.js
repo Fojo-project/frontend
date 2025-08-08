@@ -779,3 +779,34 @@ export const ShareIcon = ({ width = 20, height = 20 }) => {
     </svg>
   );
 };
+
+export const AddIcon = ({ width = 20, height = 20 }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <g id="style=linear">
+        <g id="add">
+          <path
+            id="vector"
+            d="M11.998 5.84424L11.998 18.1604"
+            stroke="#000000"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            id="vector_2"
+            d="M18.1561 12.002L5.83998 12.0019"
+            stroke="#000000"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </g>
+      </g>
+    </svg>
+  );
+};

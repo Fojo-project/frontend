@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import dashboardImage from '../../../../public/images/home/homeimage.png';
 import { Duration, getGreeting, truncateText } from '@/utils/helper';
-
 import {
   Arrow,
   CertificateIcon,
@@ -12,15 +11,19 @@ import {
   HourseSpentIcon,
   OngoingIcon,
 } from '@/assets/icons';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { BibleVerse } from '@/store/bible/bibleApi';
 import { loadVerse } from '@/utils/loadVerse';
+import { useDashboardQuery } from '@/store/dashboard/dashboard.api';
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
+import DashboardSkeleton from '@/components/ui/skeleton/DashboardSkeleton';
 
 export default function DashboardInfo() {
-  const user = useSelector((state: RootState) => state.profile.user);
-  const hasOngoingCourses = (user?.dashboard?.ongoing_course ?? 0) > 0;
+  const { data, refetch, isLoading } = useDashboardQuery();
+  const userDetails = useSelector((state: RootState) => state.profile.user);
+  const user = data?.data;
+  const hasOngoingCourses = (user?.ongoing_course ?? 0) > 0;
   const [verse, setVerse] = useState<BibleVerse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,12 +35,23 @@ export default function DashboardInfo() {
   };
 
   useEffect(() => {
+    refetch();
+  }, []);
+
+  useEffect(() => {
     fetchAndSetVerse();
     const interval = setInterval(fetchAndSetVerse, 2 * 60 * 1000);
     return () => {
       clearInterval(interval);
     };
   }, []);
+
+  if (isLoading)
+    return (
+      <div className="w-full ">
+        <DashboardSkeleton />
+      </div>
+    );
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full">
@@ -50,7 +64,7 @@ export default function DashboardInfo() {
                   {getGreeting()},
                 </h3>
                 <p className="font-semibold w-[327px] leading-10 text-[40px] -mt-5">
-                  {user?.full_name}
+                  {userDetails?.full_name}
                 </p>
                 <p className="font-normal mt-3 font-lora tracking-normal text-sm">
                   Disciples make progress daily.
@@ -60,7 +74,7 @@ export default function DashboardInfo() {
               <Link
                 href={
                   hasOngoingCourses
-                    ? `/dashboard/my-courses/${user?.dashboard?.current_ongoing_course?.title}`
+                    ? `/dashboard/my-courses/${user?.current_ongoing_course?.title}`
                     : '/dashboard/explore-courses'
                 }
                 className="bg-white text-black flex items-center gap-1 px-3 text-start py-4 rounded-xl w-[190px] font-semibold dark:text-black-100 tracking-wider font-open-sans text-sm"
@@ -86,37 +100,25 @@ export default function DashboardInfo() {
                             className="h-full bg-brown-300 w-[44%]"
                             style={{
                               width: `${
-                                user?.dashboard?.current_ongoing_course
+                                user?.current_ongoing_course
                                   ?.percentage_completed ?? 0
                               }%`,
                             }}
                           ></div>
                         </div>
                         <span className="text-brown-300 font-semibold text-[10px] font-open-sans">
-                          {
-                            user?.dashboard?.current_ongoing_course
-                              ?.percentage_completed
-                          }
-                          %
+                          {user?.current_ongoing_course?.percentage_completed}%
                         </span>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 px-3 py-2">
                       <div className="flex justify-between items-center">
                         <h3 className=" text-black-100 capitalize font-cormorant font-bold text-[15px] ">
-                          {user?.dashboard?.current_ongoing_course?.title}
+                          {user?.current_ongoing_course?.title}
                         </h3>
                         <p className="text-center bg-[#F6F6F6]  p-2 rounded-[6px] text-gray-100 text-[12px] font-open-sans">
-                          {
-                            user?.dashboard?.current_ongoing_course
-                              ?.completed_lessons
-                          }
-                          /
-                          {
-                            user?.dashboard?.current_ongoing_course
-                              ?.total_lessons
-                          }{' '}
-                          Lessons
+                          {user?.current_ongoing_course?.completed_lessons}/
+                          {user?.current_ongoing_course?.total_lessons} Lessons
                         </p>
                       </div>
                       <p className="text-gray-500 font-lora text-[12px] ">
@@ -148,7 +150,7 @@ export default function DashboardInfo() {
               <h3 className=" text-sm">Ongoing</h3>
             </div>
             <h3 className="mt-3 font-semibold text-2xl font-open-sans">
-              {user?.dashboard?.ongoing_course}
+              {user?.ongoing_course}
             </h3>
           </Cards>
           <Cards className="border-green-100 h-[84px]  py-2   bg-[#F3FFF7] font-lora text-black-100 border[1px]">
@@ -157,7 +159,7 @@ export default function DashboardInfo() {
               <h3 className=" text-sm">Completed</h3>
             </div>
             <h3 className="mt-3 font-semibold text-2xl font-open-sans">
-              {user?.dashboard?.completed_course}
+              {user?.completed_course}
             </h3>
           </Cards>
           <Cards className="border-purple-100 h-[84px]  py-2   bg-[#F5F0FF] font-lora text-black-100 border[1px]">
@@ -166,7 +168,7 @@ export default function DashboardInfo() {
               <h3 className=" text-sm">Hours Spent</h3>
             </div>
             <h3 className="mt-3 font-semibold text-2xl font-open-sans">
-              {Duration(user?.dashboard?.hours_spent)}
+              {Duration(user?.hours_spent)}
             </h3>
           </Cards>{' '}
           <Cards className="border-yellow-100 h-[84px] py-2 bg-[#FFF9E9] font-lora text-black-100 border[1px]">
@@ -175,7 +177,7 @@ export default function DashboardInfo() {
               <h3 className=" text-sm">Certificates</h3>
             </div>
             <h3 className="mt-3 font-semibold text-2xl font-open-sans">
-              {user?.dashboard?.certificate}
+              {user?.certificate}
             </h3>
           </Cards>{' '}
         </div>

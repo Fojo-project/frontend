@@ -61,12 +61,22 @@ interface ResetAccountPasswordPayload {
 export const ProfileApi = createApi({
   reducerPath: 'profileApi',
   baseQuery: axiosBaseQuery(),
+  tagTypes: ['profile'],
   endpoints: (builder) => ({
     getMe: builder.query<MeResponse, void>({
       query: () => ({
         url: '/api/me',
         method: 'GET',
       }),
+      providesTags: ['profile'],
+    }),
+    updateUserProfileImage: builder.mutation<MeResponse, FormData>({
+      query: (formData) => ({
+        url: '/api/upload',
+        method: 'POST',
+        data: formData,
+      }),
+      invalidatesTags: ['profile'],
     }),
     updateUserProfile: builder.mutation<
       UpdateProfileResponse,
@@ -77,6 +87,7 @@ export const ProfileApi = createApi({
         method: 'PUT',
         data,
       }),
+      invalidatesTags: ['profile'],
     }),
     deleteAccount: builder.mutation<
       any,
@@ -103,6 +114,7 @@ export const ProfileApi = createApi({
 
 export const {
   useGetMeQuery,
+  useUpdateUserProfileImageMutation,
   useUpdateUserProfileMutation,
   useDeleteAccountMutation,
   useResetAccountPasswordMutation,

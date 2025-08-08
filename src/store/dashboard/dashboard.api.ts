@@ -3,6 +3,21 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 interface DashboardResponse {
   message: string;
+  data: {
+    completed_lessons: number;
+    certificate: number;
+    hours_spent: number;
+    total_lessons: number;
+    ongoing_course: number;
+    completed_course: number;
+    current_ongoing_course: {
+      title: string;
+      slug: string;
+      completed_lessons: number;
+      total_lessons: number;
+      percentage_completed: number;
+    };
+  };
 }
 interface AllCourse {
   isStarted: any;
@@ -130,6 +145,12 @@ export const DashboardApi = createApi({
   baseQuery: axiosBaseQuery(),
   tagTypes: ['Course', 'AllCourses'],
   endpoints: (builder) => ({
+    dashboard: builder.query<DashboardResponse, void>({
+      query: () => ({
+        url: '/api/dashboard',
+        method: 'GET',
+      }),
+    }),
     allCourses: builder.query<AllCourseResponse, void>({
       query: () => ({
         url: '/api/courses/user/course',
@@ -203,6 +224,7 @@ export const DashboardApi = createApi({
 });
 
 export const {
+  useDashboardQuery,
   useAllCoursesQuery,
   useCourseQuery,
   useHomepageCoursesQuery,

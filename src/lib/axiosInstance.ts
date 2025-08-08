@@ -7,10 +7,10 @@ const API_BASE_URL =
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
+  /*  headers: {
+    //'Content-Type': 'application/json',
+    //Accept: 'application/json',
+  }, */
 });
 
 axiosInstance.interceptors.request.use(async (config) => {

@@ -68,8 +68,7 @@ export default function EventCard({
   return (
     <div className="flex flex-col gap-4">
       {displayedEvents.map((event) => (
-        <Link
-          href="#"
+        <div
           key={event.id}
           className="relative flex flex-col md:flex-row items-start gap-4 w-full rounded-xl border border-gray-200 p-5 bg-white hover:shadow-md transition duration-200 group"
         >
@@ -108,17 +107,23 @@ export default function EventCard({
             </div>
 
             <div className="flex items-center gap-4 mt-2">
-              <span className="flex items-center text-[12px] font-bold text-[#0000000] gap-1">
+              <Link
+                href="#"
+                className="flex items-center text-[12px] font-bold text-[#0000000] gap-1"
+              >
                 <WatchIcon width={14} height={14} />
                 Watch {event?.is_live && 'Live'}
-              </span>
-              <span className="flex items-center text-[12px] font-bold text-xs text-gray-700 gap-1">
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center text-[12px] font-bold text-xs text-gray-700 gap-1"
+              >
                 <LiveIcon width={14} height={14} />
                 Listen {event?.is_live && 'Live'}
-              </span>
+              </Link>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
 
       {showPagination && (

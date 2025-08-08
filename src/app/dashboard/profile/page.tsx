@@ -6,7 +6,7 @@ export default function ProfilePage() {
   return (
     <div>
       <Header Heading={'Profile'} link='/dashboard/profile' />
-      <div className="py-10 px-4">
+      <div className="py-10 px-1">
         <ProfileHeader />
         <ProfileTabContent />
       </div>

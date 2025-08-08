@@ -9,24 +9,28 @@ interface AxiosBaseQueryArgs {
   params?: AxiosRequestConfig['params'];
 }
 
-
-export const axiosBaseQuery = (): BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> =>
-    async ({ url, method, data, params }) => {
-      try {
-        const response = await axiosInstance({
-          url,
-          method,
-          data,
-          params,
-        });
-        return { data: response.data };
-      } catch (error) {
-        const err = error as AxiosError;
-        return {
-          error: {
-            status: err.response?.status,
-            data: err.response?.data || err.message,
-          },
-        };
-      }
-    };
+export const axiosBaseQuery =
+  (): BaseQueryFn<AxiosBaseQueryArgs, unknown, unknown> =>
+  async ({ url, method, data, params }) => {
+    try {
+      const response = await axiosInstance({
+        url,
+        method,
+        data,
+        params,
+        headers:
+          data instanceof FormData
+            ? {}
+            : { 'Content-Type': 'application/json' },
+      });
+      return { data: response.data };
+    } catch (error) {
+      const err = error as AxiosError;
+      return {
+        error: {
+          status: err.response?.status,
+          data: err.response?.data || err.message,
+        },
+      };
+    }
+  };
