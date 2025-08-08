@@ -149,13 +149,14 @@ const Account = () => {
               </div>
             )}
 
-            <button
-              type="submit"
-              className="bg-black w-100 text-white py-3 px-6 rounded-md text-sm font-medium hover:bg-gray-800 transition"
-              disabled={isLoading}
-            >
-              {isLoading ? <LoadingIcon /> : "Update Changes"}
-            </button>
+         <button
+  type="submit"
+  className="bg-black md: w-full w-auto text-white py-3 px-6 rounded-md text-sm font-medium hover:bg-gray-800 transition"
+  disabled={isLoading}
+>
+  {isLoading ? <LoadingIcon /> : "Update Changes"}
+</button>
+
           </>
         )}
       </div>

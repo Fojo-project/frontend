@@ -44,7 +44,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       absolute z-40 mt-4 max-h-[396px] w-[500px] max-w-[380px] overflow-y-auto
       rounded-3xl border border-gray-200 bg-white p-4 shadow-lg
       dark:border-gray-800 dark:bg-gray-dark
-      left-5/2 -translate-x-5 /2
+       left-5/2 -translate-x-1/2
       md:left-1/2 sm:-translate-x-1/2
       lg:left-auto lg:right-0 lg:translate-x-0
       ${className}
