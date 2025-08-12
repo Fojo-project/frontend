@@ -1,8 +1,7 @@
 // CourseClientPage.tsx
-
 'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import Header from '@/layout/dashboard/Header';
 import CourseDetails from '@/components/dashboard/course/CourseDetails';
 import { Modal } from '@/components/ui/modal';
@@ -26,16 +25,15 @@ export default function CourseClientPage({ courseParam }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <div className="px-4 md:px-0 flex justify-between">
-        <Header Heading={'My Courses'} link='/dashboard/my-courses' />
+        <Header Heading={'My Courses'} link="/dashboard/my-courses" />
 
         <button
           onClick={() => setIsModalOpen(true)}
           disabled={!isCourseCompleted}
-          className={`font-semibold px-6 py-2 rounded-md mt-2 ${
-            isCourseCompleted
+          className={`font-semibold px-6 py-2 rounded-md mt-2 ${isCourseCompleted
               ? 'bg-black text-white hover:bg-gray-900'
               : 'bg-gray-400 text-white cursor-not-allowed'
-          }`}
+            }`}
         >
           View Certificate
         </button>
@@ -43,7 +41,7 @@ export default function CourseClientPage({ courseParam }: Props) {
 
       <CourseDetails
         courseTitle={courseTitle}
-        onCompletionChange={(completed) => setIsCourseCompleted(completed)} 
+        onCompletionChange={(completed) => setIsCourseCompleted(completed)}
       />
 
       <Modal

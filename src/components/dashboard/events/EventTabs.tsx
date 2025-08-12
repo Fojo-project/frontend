@@ -36,10 +36,11 @@ export default function EventTabs() {
           <button
             key={key}
             onClick={() => setActiveTab(key as TabKey)}
-            className={`pb-3 transition-all ${activeTab === key
+            className={`pb-3 transition-all ${
+              activeTab === key
                 ? 'text-black border-b-3 border-black font-bold'
-                : 'border-b-3 border-transparent hover:text-gray-700'
-              }`}
+                : 'border-b-3 border-transparent font-bold text-gray-700'
+            }`}
           >
             {label}
           </button>

@@ -10,7 +10,6 @@ import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
 
 export default function RecommededCourse() {
   const { data, isLoading, isError, refetch } = useExploreCoursesQuery();
-  console.log('data', data);
   useEffect(() => {
     refetch();
   }, [refetch]);

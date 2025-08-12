@@ -2,12 +2,12 @@ import { LiveIcon, WatchIcon } from '@/assets/icons';
 import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLiveEventsQuery } from '@/store/dashboard/dashboard.api';
+import { useUpComingEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
 import NoResource from '@/components/common/NoResource';
 
 export default function UpComingEvents() {
-  const { data, isLoading } = useLiveEventsQuery();
+  const { data, isLoading } = useUpComingEventsQuery();
   if (isLoading)
     return (
       <div className="flex flex-col gap-4">
@@ -22,9 +22,10 @@ export default function UpComingEvents() {
   if (!data?.data || data.data.length === 0) {
     return (
       <div className="text-center text-gray-500 py-10">
-        <NoResource title="No upcoming events"
+        <NoResource
+          title="No upcoming events"
           subtitle="There are no upcoming events available at the moment."
-          icon='/empty-states/event.svg'
+          icon="/empty-states/event.svg"
         />
       </div>
     );
@@ -38,8 +39,7 @@ export default function UpComingEvents() {
   return (
     <div className="flex flex-col gap-4">
       {sortedEvents.map((event) => (
-        <Link
-          href="#"
+        <div
           key={event.id}
           className="relative flex flex-col md:flex-row items-start gap-4 w-full rounded-xl border border-gray-200 p-5 bg-white hover:shadow-md transition duration-200 group"
         >
@@ -71,15 +71,21 @@ export default function UpComingEvents() {
             </div>
 
             <div className="flex items-center gap-4 mt-2">
-              <span className="flex cursor-not-allowed items-center text-[14px] font-bold text-[#0000000] gap-1">
+              <Link
+                href={''}
+                className="flex cursor-not-allowed items-center text-[14px] font-bold text-[#0000000] gap-1"
+              >
                 <WatchIcon width={14} height={14} /> Watch Live
-              </span>
-              <span className="flex cursor-not-allowed items-center text-[14px] font-bold  text-xs text-gray-700 gap-1">
+              </Link>
+              <Link
+                href={''}
+                className="flex cursor-not-allowed items-center text-[14px] font-bold  text-xs text-gray-700 gap-1"
+              >
                 <LiveIcon width={14} height={14} /> Listen Live
-              </span>
+              </Link>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

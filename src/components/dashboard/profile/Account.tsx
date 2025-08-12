@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import InputForm from "../../../components/form/InputForm";
-import { AccountInfoSchema } from "@/validation/schema";
-import { useUpdateUserProfileMutation } from "@/store/profile/profile.api";
-import useToastify from "@/hooks/useToastify";
-import { LoadingIcon } from "@/assets/icons";
-import Image from "next/image";
-import SwitchRow from "../../../components/dashboard/profile/SwitchRow";
-import { switchConfigs } from "@/utils/data";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import InputForm from '../../../components/form/InputForm';
+import { AccountInfoSchema } from '@/validation/schema';
+import { useUpdateUserProfileMutation } from '@/store/profile/profile.api';
+import useToastify from '@/hooks/useToastify';
+import { LoadingIcon } from '@/assets/icons';
+import Image from 'next/image';
+import SwitchRow from '../../../components/dashboard/profile/SwitchRow';
+import { switchConfigs } from '@/utils/data';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 interface AccountFormData {
   full_name: string;
@@ -23,9 +23,8 @@ interface AccountFormData {
 const Account = () => {
   const { showToast } = useToastify();
   const user = useSelector((state: RootState) => state.profile.user);
-
   const [updateProfile, { isLoading }] = useUpdateUserProfileMutation();
-  const [activeSection, setActiveSection] = useState("personal");
+  const [activeSection, setActiveSection] = useState('personal');
 
   const {
     register,
@@ -39,14 +38,14 @@ const Account = () => {
     resolver: yupResolver(AccountInfoSchema),
   });
 
-  const watchProvider = watch("provider");
+  const watchProvider = watch('provider');
 
   useEffect(() => {
     if (user) {
       reset({
-        full_name: user.full_name || "",
-        email: user.email || "",
-        provider: user.provider || "",
+        full_name: user.full_name || '',
+        email: user.email || '',
+        provider: user.provider || '',
       });
     }
   }, [user, reset]);
@@ -54,27 +53,26 @@ const Account = () => {
   const onSubmit = async (formData: AccountFormData) => {
     try {
       const response = await updateProfile(formData).unwrap();
-      showToast(response.message, "success");
-
+      showToast(response.message, 'success');
     } catch (error: any) {
       if (error?.data?.errors) {
         Object.entries(error.data.errors).forEach(([field, messages]) =>
           setError(field as keyof AccountFormData, {
-            type: "server",
+            type: 'server',
             message: Array.isArray(messages) ? messages[0] : messages,
           })
         );
       } else {
-        showToast("Something went wrong", "error");
+        showToast('Something went wrong', 'error');
       }
     }
   };
 
   const handleUnlinkGoogle = () => {
-    setValue("provider", "");
+    setValue('provider', '');
     showToast(
       "Google account unlinked locally. Click 'Update Changes' to save.",
-      "info"
+      'info'
     );
   };
 
@@ -96,7 +94,7 @@ const Account = () => {
       </div>
 
       <div className="max-w-100 md:w-3/4 space-y-6 font-open-sans">
-        {activeSection === "personal" && (
+        {activeSection === 'personal' && (
           <>
             <InputForm
               label="Full Name"
@@ -113,9 +111,9 @@ const Account = () => {
               error={errors.email}
             />
 
-            <input type="hidden" {...register("provider")} />
+            <input type="hidden" {...register('provider')} />
 
-            {(watchProvider || user?.provider)?.toLowerCase() === "google" && (
+            {(watchProvider || user?.provider)?.toLowerCase() === 'google' && (
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Linked Account
@@ -149,13 +147,13 @@ const Account = () => {
               </div>
             )}
 
-         <button
-  type="submit"
-  className="bg-black md: w-full w-auto text-white py-3 px-6 rounded-md text-sm font-medium hover:bg-gray-800 transition"
-  disabled={isLoading}
->
-  {isLoading ? <LoadingIcon /> : "Update Changes"}
-</button>
+            <button
+              type="submit"
+              className="bg-black md: w-full w-auto text-white py-3 px-6 rounded-md text-sm font-medium hover:bg-gray-800 transition"
+              disabled={isLoading}
+            >
+              {isLoading ? <LoadingIcon /> : "Update Changes"}
+            </button>
 
           </>
         )}

@@ -63,7 +63,9 @@ const Certificate = ({ name, text, presidentName, generalName }: CertificateProp
                 className="mx-auto mb-8"
               />
               <div className="border-t-2 border-black w-35 md:w-40 mx-auto">
-                <p className="font-semibold text-[14px] -mt-5 font-open-sans tracking-widest">{presidentName}</p>
+                <p className="font-semibold text-[14px] -mt-5 font-open-sans tracking-widest">
+                  {presidentName}
+                </p>
               </div>
               <p className="tracking-widest">President Director</p>
             </div>
@@ -89,12 +91,12 @@ const Certificate = ({ name, text, presidentName, generalName }: CertificateProp
               />
               <div className="border-t-2 border-black mb-1 w-30 md:w-40 mx-auto">
                 <p className="font-semibold pb-2 text-[14px] font-[16px] -mt-5 tracking-widest">{generalName}</p>
-              </div>
+              </div >
               <p className="tracking-widest">General Manager</p>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div >
+          </div >
+        </div >
+      </div >
 
       <div className="flex justify-center gap-4 mt-6">
         <button
@@ -109,7 +111,7 @@ const Certificate = ({ name, text, presidentName, generalName }: CertificateProp
           <ShareIcon width={20} height={20} />
         </button>
       </div>
-    </div>
+    </div >
   );
 };
 
