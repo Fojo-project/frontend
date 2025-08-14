@@ -61,7 +61,7 @@ export default function DashboardInfo() {
             <div className="w-full flex flex-col gap-10 md:gap-[87px]">
               <div>
                 <h3 className="text-[32px] md:text-[46px] mb-2  font-normal">
-                  {getGreeting()},
+                  {getGreeting()} 
                 </h3>
                 <p className="font-semibold w-full md:w-[327px] leading-10 text-[32px] md:text-[40px] -mt-5">
                   {userDetails?.full_name}
