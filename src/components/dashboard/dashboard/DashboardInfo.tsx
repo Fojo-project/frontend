@@ -56,14 +56,14 @@ export default function DashboardInfo() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full">
       <div className="flex-2/3 w-full h-full">
-        <Cards className="border-0 w-full md:h-[332px] dark:border-black-100 rounded-3xl  lora bg-black-100 pr-0 pl-6 pb-3 pt-6 text-white">
+        <Cards className="border-0 w-full md:h-[332px] dark:border-black-100 rounded-3xl  lora bg-black-100 pr-0 md:pl-6 pb-3 pt-6 text-white">
           <div className="flex w-full gap-2">
             <div className="w-full flex flex-col gap-10 md:gap-[87px]">
               <div>
-                <h3 className="text-[46px] mb-2  font-normal">
+                <h3 className="text-[32px] md:text-[46px] mb-2  font-normal">
                   {getGreeting()},
                 </h3>
-                <p className="font-semibold w-[327px] leading-10 text-[40px] -mt-5">
+                <p className="font-semibold w-full md:w-[327px] leading-10 text-[32px] md:text-[40px] -mt-5">
                   {userDetails?.full_name}
                 </p>
                 <p className="font-normal mt-3 font-lora tracking-normal text-sm">
