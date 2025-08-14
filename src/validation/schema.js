@@ -75,5 +75,5 @@ export const PasswordSettingsSchema = yup.object({
 });
 export const DeleteAccountSchema = yup.object().shape({
   reason: yup.string().required('Reason is required'),
-  delete_password: yup.string().required('Password is required'),
+  password: yup.string().required('Password is required'),
 });

@@ -1,5 +1,5 @@
 import ExploreCoursesDetails from '@/components/dashboard/explore/ExploreCoursesDetails';
-import Header from '@/layout/dashboard/Header';
+
 import { generateMetadata as generateCourseMetadata } from '@/utils/metadata';
 import { Metadata } from 'next';
 
@@ -24,7 +24,6 @@ export default async function CoursePage({ params }: PageProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <Header Heading={'Explore Courses'} link='/dashboard/explore-courses' />
       <ExploreCoursesDetails courseTitle={courseTitle as string} />
     </div>
   );

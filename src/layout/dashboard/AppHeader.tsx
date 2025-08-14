@@ -82,8 +82,7 @@ const AppHeader: React.FC = () => {
           >
             <MenuIcon />
           </button>
-
-          <div className="hidden lg:block">
+          <div className="block w-full max-w-full sm:max-w-sm md:max-w-sm">
             <SearchForm />
           </div>
         </div>

@@ -60,10 +60,10 @@ export default function DashboardInfo() {
           <div className="flex w-full gap-2">
             <div className="w-full flex flex-col gap-10 md:gap-[87px]">
               <div>
-                <h3 className="text-[46px] mb-2  font-normal">
+                <h3 className="lg:text-[46px] text-[42px]  mb-2  font-normal">
                   {getGreeting()},
                 </h3>
-                <p className="font-semibold w-[327px] leading-10 text-[40px] -mt-5">
+                <p className="font-semibold w-[327px] leading-10 text-[38px] lg:text-[40px] -mt-5">
                   {userDetails?.full_name}
                 </p>
                 <p className="font-normal mt-3 font-lora tracking-normal text-sm">
@@ -84,9 +84,8 @@ export default function DashboardInfo() {
               </Link>
             </div>
             <div
-              className={`md:flex hidden w-full ${
-                hasOngoingCourses ? 'justify-center' : 'justify-end'
-              } mt-8`}
+              className={`md:flex hidden w-full ${hasOngoingCourses ? 'justify-center' : 'justify-end'
+                } mt-8`}
             >
               {hasOngoingCourses ? (
                 <div className="flex justify-center w-full">
@@ -99,10 +98,9 @@ export default function DashboardInfo() {
                           <div
                             className="h-full bg-brown-300 w-[44%]"
                             style={{
-                              width: `${
-                                user?.current_ongoing_course
+                              width: `${user?.current_ongoing_course
                                   ?.percentage_completed ?? 0
-                              }%`,
+                                }%`,
                             }}
                           ></div>
                         </div>
@@ -163,10 +161,11 @@ export default function DashboardInfo() {
             </h3>
           </Cards>
           <Cards className="border-purple-100 h-[84px]  py-2   bg-[#F5F0FF] font-lora text-black-100 border[1px]">
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center whitespace-nowrap">
               <HourseSpentIcon />
-              <h3 className=" text-sm">Hours Spent</h3>
+              <h3 className="text-sm">Hours Spent</h3>
             </div>
+
             <h3 className="mt-3 font-semibold text-2xl font-open-sans">
               {Duration(user?.hours_spent)}
             </h3>
@@ -182,7 +181,7 @@ export default function DashboardInfo() {
           </Cards>{' '}
         </div>
         <Cards className="border-brown-100  bg-[#FFF9E9] py-2  font-lora text-black-100 border[1px]">
-          <h3 className="text-center text-brown-200 text-[29px] font-semibold font-open-sans">
+          <h3 className="text-center text-brown-200 md:text-[26px] font-semibold font-open-sans">
             “
             {loading
               ? truncateText('Remain in me, as I also remain in you.', 27)

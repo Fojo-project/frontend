@@ -20,8 +20,13 @@ export default function NoResource({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-20">
-      <Image src={icon} alt="Empty state icon" className="mb-4" width={80}
-        height={80} />
+      <img
+        src={icon}
+        alt="Empty state icon"
+        className="mb-4"
+        width={80}
+        height={80}
+      />
       <h2 className="text-sm text-gray-400 font-semibold mb-1">{title}</h2>
       <p className="text-xs text-gray-400 mb-4">{subtitle}</p>
 

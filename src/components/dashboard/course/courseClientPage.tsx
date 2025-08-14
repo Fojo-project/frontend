@@ -21,6 +21,10 @@ export default function CourseClientPage({ courseParam }: Props) {
 
   const user = useSelector((state: RootState) => state.profile.user);
   const userName = user?.full_name || "Student";
+  const formattedCourseTitle = courseTitle.toLowerCase().includes("training")
+    ? courseTitle
+    : `${courseTitle} training`;
+
 
   return (
     <div className="flex flex-col gap-6">
@@ -30,9 +34,9 @@ export default function CourseClientPage({ courseParam }: Props) {
         <button
           onClick={() => setIsModalOpen(true)}
           disabled={!isCourseCompleted}
-          className={`font-semibold px-6 py-2 rounded-md mt-2 ${isCourseCompleted
-              ? 'bg-black text-white hover:bg-gray-900'
-              : 'bg-gray-400 text-white cursor-not-allowed'
+          className={`font-semibold text-8px md:text-24px px-2 lg:px-6 py-2 rounded-md md:mt-2 ${isCourseCompleted
+            ? 'bg-black text-white hover:bg-gray-900'
+            : 'bg-gray-400 text-white cursor-not-allowed'
             }`}
         >
           View Certificate
@@ -50,8 +54,8 @@ export default function CourseClientPage({ courseParam }: Props) {
         className="max-w-4xl mx-auto"
       >
         <Certificate
-          name={userName}
-          text="For successful completion of the course and dedication to learning."
+          name={userName || "Student Name"}
+          text={`This is to certify that the named student has successfully completed the ${formattedCourseTitle} on FOJO.`}
           presidentName="CHARLES BLAKE"
           generalName="JULIE S. SMITH"
         />
