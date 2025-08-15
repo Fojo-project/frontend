@@ -9,6 +9,7 @@ import Button from '@/components/ui/button/Button';
 import { useRouter } from 'next/navigation';
 import { formatDuration } from '@/utils/helper';
 import ExploreCourseTabs from './ExploreCourseTabs';
+import Header from '@/layout/dashboard/Header';
 
 interface CourseDetailProps {
   courseTitle: string;
@@ -47,6 +48,8 @@ export default function ExploreCoursesDetails({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-between items-center">
+              <Header Heading={'Explore Courses'} link='/dashboard/explore-courses' />
+        
         <Button
           variant={'primary'}
           onClick={handleStartCourse}

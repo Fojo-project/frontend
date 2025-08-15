@@ -168,9 +168,9 @@ const ProfileSecurity = () => {
 
             <PasswordInputForm
               label="Password"
-              name="delete_password"
+              name="password"
               register={registerDelete}
-              error={deleteErrors.delete_password}
+              error={deleteErrors.password}
               placeholder="Confirm with password"
             />
 
