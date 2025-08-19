@@ -92,7 +92,6 @@ export default function SignInForm() {
               className="w-full max-w-md space-y-6"
             >
               <div className="grid grid-cols-1 gap-3 ">
-                {/* <!-- Email --> */}
                 <div className="sm:col-span-1">
                   <Label className="font-medium  text-gray-500">
                     Email Address
@@ -105,7 +104,6 @@ export default function SignInForm() {
                     type="text"
                   />
                 </div>
-                {/* <!-- Password --> */}
                 <div>
                   <PasswordInputForm
                     name="password"
