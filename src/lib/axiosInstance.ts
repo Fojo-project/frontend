@@ -15,8 +15,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(async (config) => {
   const token = await getSessionCookie();
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
+  const bearerToken = typeof token === 'string' ? token : token?.token;
+  if (bearerToken && config.headers) {
+    config.headers.Authorization = `Bearer ${bearerToken}`;
   }
   if (config.data instanceof FormData) {
     config.headers['Content-Type'] = 'multipart/form-data';

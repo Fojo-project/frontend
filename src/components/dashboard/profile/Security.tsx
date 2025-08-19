@@ -55,7 +55,7 @@ const ProfileSecurity = () => {
   useEffect(() => {
     resetPassword();
     resetDelete();
-  }, [activeSection]);
+  }, [activeSection, resetPassword, resetDelete]);
 
   const onSubmitPassword = async (data: PasswordFormData) => {
     try {

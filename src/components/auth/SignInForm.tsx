@@ -43,7 +43,8 @@ export default function SignInForm() {
       };
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
-      await setSessionCookie(token);
+      const userRole = (response?.data as { role?: string })?.role;
+      await setSessionCookie({ token, role: userRole });
       showToast(response.message, 'success');
       router.replace(redirectPath);
     } catch (error: any) {
@@ -126,7 +127,11 @@ export default function SignInForm() {
                     className="flex mt-4 items-center justify-center w-full px-4 py-3 text-sm font-lora font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <LoadingIcon width='20' height='20' /> : 'Sign In'}
+                    {isLoading ? (
+                      <LoadingIcon width="20" height="20" />
+                    ) : (
+                      'Sign In'
+                    )}
                   </button>
                 </div>
               </div>
