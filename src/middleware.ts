@@ -3,9 +3,9 @@ import type { NextRequest } from 'next/server';
 import { getSessionCookie } from '@/lib/session';
 
 export async function middleware(request: NextRequest) {
-  const { token, role } = await getSessionCookie();
-  // const token = typeof session === 'string' ? session : session?.token;
-  // const role = typeof session === 'string' ? undefined : session?.role;
+  const session = await getSessionCookie();
+  const token = typeof session === 'string' ? session : session?.token;
+  const role = typeof session === 'string' ? undefined : session?.role;
   const { pathname } = request.nextUrl;
   const authPages = ['/signin', '/signup'];
   const protectedRoutes = ['/dashboard'];
