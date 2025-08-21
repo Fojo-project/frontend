@@ -2,14 +2,15 @@
 import CoursesList from '@/components/common/CoursesList';
 import NoResource from '@/components/common/NoResource';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 import { useExploreCoursesQuery } from '@/store/dashboard/dashboard.api';
 import React from 'react';
 import book from '../../../../public/images/home/book.png';
 
 export default function ExploreCourseCard() {
   const { data, isLoading, isError } = useExploreCoursesQuery();
-  if (isLoading) {
-    return (
+  if (isLoading || isError) {
+    return isLoading ? (
       <div className="flex flex-wrap gap-6">
         {[...Array(4)].map((_, idx) => (
           <div key={idx} className="w-full md:w-[48%]">
@@ -17,21 +18,19 @@ export default function ExploreCourseCard() {
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
-  }
-
-  if (isError) {
-    return <div>Error loading courses</div>;
   }
 
   if (!data?.data || data.data.length === 0) {
     return (
       <div className="text-center text-gray-500 py-10">
-        <NoResource
-          title="No courses"
-          subtitle=""
-          icon={book}
-        />
+        <NoResource title="No courses" subtitle="" icon={book} />
       </div>
     );
   }

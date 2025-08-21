@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { formatDuration } from '@/utils/helper';
 import ExploreCourseTabs from './ExploreCourseTabs';
 import Header from '@/layout/dashboard/Header';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 interface CourseDetailProps {
   courseTitle: string;
@@ -30,26 +31,28 @@ export default function ExploreCoursesDetails({
   };
 
   const lowerTitle = courseTitle.toLowerCase();
-  if (isLoading) {
-    return (
-      <div className="flex flex-col w-full gap-6">
+  if (isLoading || isError) {
+    return isLoading ? (
+      <div className="flex flex-wrap gap-6">
         {[...Array(2)].map((_, idx) => (
-          <div key={idx} className="w-full ">
+          <div key={idx} className="w-full md:w-[48%]">
             <CardSkeleton />
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
   }
-  if (isError) {
-    return <div>Error loading courses</div>;
-  }
-
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-between items-center">
-              <Header Heading={'Explore Courses'} link='/dashboard/explore-courses' />
-        
+        <Header Heading={'Explore Courses'} link="/dashboard/explore-courses" />
+
         <Button
           variant={'primary'}
           onClick={handleStartCourse}

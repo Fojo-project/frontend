@@ -2,14 +2,15 @@
 import CoursesList from '@/components/common/CoursesList';
 import NoResource from '@/components/common/NoResource';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 import { useAllCoursesQuery } from '@/store/dashboard/dashboard.api';
 import React from 'react';
 import book from '../../../../public/images/home/book.png';
 
 export default function CourseCard() {
-  const { data, isLoading, isError, } = useAllCoursesQuery();
-  if (isLoading) {
-    return (
+  const { data, isLoading, isError } = useAllCoursesQuery();
+  if (isLoading || isError) {
+    return isLoading ? (
       <div className="flex flex-wrap gap-6">
         {[...Array(4)].map((_, idx) => (
           <div key={idx} className="w-full md:w-[48%]">
@@ -17,11 +18,13 @@ export default function CourseCard() {
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
-  }
-
-  if (isError) {
-    return <div>Error loading courses</div>;
   }
 
   if (!data?.data || data.data.length === 0) {
@@ -42,7 +45,7 @@ export default function CourseCard() {
         {data?.data?.map((course, index) => (
           <div key={index} className="w-full md:w-[48%]">
             <CoursesList
-              type='my-courses'
+              type="my-courses"
               title={course?.title}
               description={course?.description}
               completed={course?.lesson_progress?.completed_lessons || 0}

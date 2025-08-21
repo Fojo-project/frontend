@@ -9,14 +9,13 @@ export async function getSessionCookie() {
   if (!sessionCookie) return null;
   try {
     return JSON.parse(sessionCookie.value);
-  } catch (error) {
-    if (error) return null;
+  } catch{
+    return sessionCookie.value || null;
   }
 }
 export async function setSessionCookie(session) {
   const cookieStore = await cookies();
   const sessionValue = JSON.stringify(session);
-
   cookieStore.set('SESSION_COOKIE', sessionValue, cookieConfig);
 }
 export async function clearSessionCookie() {

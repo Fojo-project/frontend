@@ -43,7 +43,8 @@ export default function SignInForm() {
       };
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
-      await setSessionCookie(token);
+      const userRole = (response?.data as { role?: string })?.role;
+      await setSessionCookie({ token, role: userRole });
       showToast(response.message, 'success');
       router.replace(redirectPath);
     } catch (error: any) {
@@ -91,7 +92,6 @@ export default function SignInForm() {
               className="w-full max-w-md space-y-6"
             >
               <div className="grid grid-cols-1 gap-3 ">
-                {/* <!-- Email --> */}
                 <div className="sm:col-span-1">
                   <Label className="font-medium  text-gray-500">
                     Email Address
@@ -104,7 +104,6 @@ export default function SignInForm() {
                     type="text"
                   />
                 </div>
-                {/* <!-- Password --> */}
                 <div>
                   <PasswordInputForm
                     name="password"
@@ -126,7 +125,11 @@ export default function SignInForm() {
                     className="flex mt-4 items-center justify-center w-full px-4 py-3 text-sm font-lora font-medium text-white transition rounded-lg bg-black shadow-theme-xs  disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                   >
-                    {isLoading ? <LoadingIcon width='20' height='20' /> : 'Sign In'}
+                    {isLoading ? (
+                      <LoadingIcon width="20" height="20" />
+                    ) : (
+                      'Sign In'
+                    )}
                   </button>
                 </div>
               </div>

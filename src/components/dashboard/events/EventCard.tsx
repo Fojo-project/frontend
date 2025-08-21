@@ -200,7 +200,6 @@
 // }
 'use client';
 
-
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -215,6 +214,7 @@ import Pagination from '@/components/ui/Pagination/Pagination';
 import { usePathname } from 'next/navigation';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
 import NoResource from '@/components/common/NoResource';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 type EventCardProps = {
   limit?: number;
@@ -228,7 +228,7 @@ export default function EventCard({
   setPagination,
 }: EventCardProps) {
   const [page, setCurrentPage] = useState(1);
-  const { data, isLoading } = useEventsQuery(page);
+  const { data, isLoading, isError } = useEventsQuery(page);
   const pathname = usePathname();
 
   const sortedEvents = [...(data?.data ?? [])].sort((a, b) => {
@@ -244,8 +244,8 @@ export default function EventCard({
 
   const displayedEvents = limit ? sortedEvents.slice(0, limit) : sortedEvents;
 
-  if (isLoading)
-    return (
+  if (isLoading || isError)
+    return isLoading ? (
       <div className="flex flex-col gap-4">
         {[...Array(2)].map((_, idx) => (
           <div key={idx} className="w-full">
@@ -253,6 +253,12 @@ export default function EventCard({
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
 
   if (!data?.data || data.data.length === 0) {
