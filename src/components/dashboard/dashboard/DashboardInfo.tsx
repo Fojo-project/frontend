@@ -18,9 +18,10 @@ import { useDashboardQuery } from '@/store/dashboard/dashboard.api';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import DashboardSkeleton from '@/components/ui/skeleton/DashboardSkeleton';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 export default function DashboardInfo() {
-  const { data, refetch, isLoading } = useDashboardQuery();
+  const { data, refetch, isLoading, isError } = useDashboardQuery();
   const userDetails = useSelector((state: RootState) => state.profile.user);
   const user = data?.data;
   const hasOngoingCourses = (user?.ongoing_course ?? 0) > 0;
@@ -46,12 +47,21 @@ export default function DashboardInfo() {
     };
   }, []);
 
-  if (isLoading)
+  if (isLoading || isError) {
     return (
-      <div className="w-full ">
-        <DashboardSkeleton />
+      <div className="w-full">
+        {isLoading ? (
+          <DashboardSkeleton />
+        ) : (
+          <NetworkErrorAlert
+            error={isError}
+            showRetryButton={true}
+            onRetry={() => window.location.reload()}
+          />
+        )}
       </div>
     );
+  }
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full">

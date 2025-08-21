@@ -7,19 +7,26 @@ import Link from 'next/link';
 import { useUpComingEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
 import NoResource from '@/components/common/NoResource';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 export default function UpComingEvents() {
-  const { data, isLoading } = useUpComingEventsQuery();
+  const { data, isLoading, isError } = useUpComingEventsQuery();
 
-  if (isLoading)
-    return (
+  if (isLoading || isError)
+    return isLoading ? (
       <div className="flex flex-col gap-4">
-        {[...Array(4)].map((_, idx) => (
+        {[...Array(2)].map((_, idx) => (
           <div key={idx} className="w-full">
             <EventSkeleton />
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
 
   if (!data?.data || data.data.length === 0) {
@@ -75,24 +82,23 @@ export default function UpComingEvents() {
             </div>
 
             <div className="flex items-center gap-4 mt-2">
-             {event?.video_url && (
-  <Link
-    href={`/dashboard/events/${event.id}?type=video`}
-    className="flex items-center text-[14px] font-bold text-black gap-1"
-  >
-    <WatchIcon width={14} height={14} /> Watch Live
-  </Link>
-)}
+              {event?.video_url && (
+                <Link
+                  href={`/dashboard/events/${event.id}?type=video`}
+                  className="flex items-center text-[14px] font-bold text-black gap-1"
+                >
+                  <WatchIcon width={14} height={14} /> Watch Live
+                </Link>
+              )}
 
-{event?.audio_url && (
-  <Link
-    href={`/dashboard/events/${event.id}?type=audio`}
-    className="flex items-center text-[14px] font-bold text-xs text-gray-700 gap-1"
-  >
-    <LiveIcon width={14} height={14} /> Listen Live
-  </Link>
-)}
-
+              {event?.audio_url && (
+                <Link
+                  href={`/dashboard/events/${event.id}?type=audio`}
+                  className="flex items-center text-[14px] font-bold text-xs text-gray-700 gap-1"
+                >
+                  <LiveIcon width={14} height={14} /> Listen Live
+                </Link>
+              )}
             </div>
           </div>
         </div>

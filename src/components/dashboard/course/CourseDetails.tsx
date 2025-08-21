@@ -5,14 +5,18 @@ import { useCourseQuery } from '@/store/dashboard/dashboard.api';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
 import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import { formatDuration } from '@/utils/helper';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 interface CourseDetailProps {
   id?: string;
   courseTitle: string;
-  onCompletionChange?: (completed: boolean) => void; // ✅ NEW
+  onCompletionChange?: (completed: boolean) => void; 
 }
 
-export default function CourseDetail({ courseTitle, onCompletionChange }: CourseDetailProps) {
+export default function CourseDetail({
+  courseTitle,
+  onCompletionChange,
+}: CourseDetailProps) {
   const { data, isLoading, isError, refetch } = useCourseQuery({
     course: courseTitle,
   });
@@ -25,17 +29,21 @@ export default function CourseDetail({ courseTitle, onCompletionChange }: Course
 
   useEffect(() => {
     if (response && onCompletionChange) {
-      const { completed_lessons, total_lessons } = response.lesson_progress ?? {};
-      if (typeof total_lessons === 'number' && typeof completed_lessons === 'number') {
-        const isComplete = completed_lessons === total_lessons && total_lessons > 0;
+      const { completed_lessons, total_lessons } =
+        response.lesson_progress ?? {};
+      if (
+        typeof total_lessons === 'number' &&
+        typeof completed_lessons === 'number'
+      ) {
+        const isComplete =
+          completed_lessons === total_lessons && total_lessons > 0;
         onCompletionChange(isComplete);
       }
     }
   }, [response, onCompletionChange]);
 
-
-  if (isLoading) {
-    return (
+  if (isLoading || isError) {
+    return isLoading ? (
       <div className="flex flex-col w-full gap-6">
         {[...Array(2)].map((_, idx) => (
           <div key={idx} className="w-full">
@@ -43,11 +51,13 @@ export default function CourseDetail({ courseTitle, onCompletionChange }: Course
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
-  }
-
-  if (isError) {
-    return <div>Error loading courses</div>;
   }
 
   const lowerTitle = courseTitle.toLowerCase();
@@ -55,7 +65,9 @@ export default function CourseDetail({ courseTitle, onCompletionChange }: Course
   return (
     <div className="flex flex-col gap-4">
       <section
-        className={`rounded-xl p-6 text-white relative overflow-hidden ${lowerTitle || 'foundations'}`}
+        className={`rounded-xl p-6 text-white relative overflow-hidden ${
+          lowerTitle || 'foundations'
+        }`}
       >
         <div className="relative z-10 flex justify-between items-center">
           <div>

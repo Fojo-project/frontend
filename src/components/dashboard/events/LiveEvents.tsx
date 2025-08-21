@@ -169,21 +169,27 @@ import Link from 'next/link';
 import NoResource from '@/components/common/NoResource';
 import { useLiveEventsQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 export default function LiveEvents() {
-  const { data, isLoading } = useLiveEventsQuery();
+  const { data, isLoading, isError } = useLiveEventsQuery();
 
-  if (isLoading) {
-    return (
+  if (isLoading || isError)
+    return isLoading ? (
       <div className="flex flex-col gap-4">
-        {[...Array(4)].map((_, idx) => (
+        {[...Array(2)].map((_, idx) => (
           <div key={idx} className="w-full">
             <EventSkeleton />
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
-  }
 
   if (!data?.data || data.data.length === 0) {
     return (

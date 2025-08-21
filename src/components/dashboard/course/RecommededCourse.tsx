@@ -7,15 +7,16 @@ import { Arrow } from '@/assets/icons';
 import Image from 'next/image';
 import { useExploreCoursesQuery } from '@/store/dashboard/dashboard.api';
 import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
+import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 export default function RecommededCourse() {
-  const { data, isLoading, isError, refetch } = useExploreCoursesQuery();
+  const { data, isLoading, refetch, isError } = useExploreCoursesQuery();
   useEffect(() => {
     refetch();
   }, [refetch]);
 
-  if (isLoading) {
-    return (
+  if (isLoading || isError) {
+    return isLoading ? (
       <div className="flex flex-wrap gap-4">
         {[...Array(2)].map((_, idx) => (
           <div key={idx} className="w-full ">
@@ -23,11 +24,13 @@ export default function RecommededCourse() {
           </div>
         ))}
       </div>
+    ) : (
+      <NetworkErrorAlert
+        error={isError}
+        showRetryButton={true}
+        onRetry={() => window.location.reload()}
+      />
     );
-  }
-
-  if (isError) {
-    return <div>Error loading courses</div>;
   }
 
   if (!data?.data || data.data.length === 0) {
