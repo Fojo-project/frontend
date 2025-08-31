@@ -3,14 +3,14 @@ import React, { useEffect } from 'react';
 import CourseTabs from './CourseTabs';
 import { useCourseQuery } from '@/store/dashboard/dashboard.api';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
-import MediaPlayer from '@/components/ui/video/MediaPlayer';
+// import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import { formatDuration } from '@/utils/helper';
 import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 interface CourseDetailProps {
   id?: string;
   courseTitle: string;
-  onCompletionChange?: (completed: boolean) => void; 
+  onCompletionChange?: (completed: boolean) => void;
 }
 
 export default function CourseDetail({
@@ -46,7 +46,7 @@ export default function CourseDetail({
     return isLoading ? (
       <div className="flex flex-col w-full gap-6">
         {[...Array(2)].map((_, idx) => (
-          <div key={idx} className="w-full">
+          <div key={idx} className="w-full gap-y-5">
             <CardSkeleton />
           </div>
         ))}
@@ -65,9 +65,8 @@ export default function CourseDetail({
   return (
     <div className="flex flex-col gap-4">
       <section
-        className={`rounded-xl p-6 text-white relative overflow-hidden ${
-          lowerTitle || 'foundations'
-        }`}
+        className={`rounded-xl p-6 text-white relative overflow-hidden ${lowerTitle || 'foundations'
+          }`}
       >
         <div className="relative z-10 flex justify-between items-center">
           <div>
@@ -102,11 +101,11 @@ export default function CourseDetail({
             </div>
           </div>
 
-          <div className="hidden md:flex">
+          {/* <div className="hidden md:flex">
             <div className="w-[200px] h-[120px] rounded-lg overflow-hidden bg-black">
               <MediaPlayer url={response?.course_video ?? ''} />
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

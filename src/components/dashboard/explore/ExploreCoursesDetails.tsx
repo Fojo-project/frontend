@@ -4,7 +4,7 @@ import {
   useStartCourseMutation,
 } from '@/store/dashboard/dashboard.api';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
-import MediaPlayer from '@/components/ui/video/MediaPlayer';
+// import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import Button from '@/components/ui/button/Button';
 import { useRouter } from 'next/navigation';
 import { formatDuration } from '@/utils/helper';
@@ -35,7 +35,7 @@ export default function ExploreCoursesDetails({
     return isLoading ? (
       <div className="flex flex-wrap gap-6">
         {[...Array(2)].map((_, idx) => (
-          <div key={idx} className="w-full md:w-[48%]">
+          <div key={idx} className="w-full gap-y-5">
             <CardSkeleton />
           </div>
         ))}
@@ -64,9 +64,8 @@ export default function ExploreCoursesDetails({
         </Button>
       </div>
       <section
-        className={`rounded-xl p-6 text-white relative overflow-hidden ${
-          lowerTitle || 'foundations'
-        }`}
+        className={`rounded-xl p-6 text-white relative overflow-hidden ${lowerTitle || 'foundations'
+          }`}
       >
         <div className="relative z-10 flex justify-between items-center">
           <div>
@@ -102,11 +101,11 @@ export default function ExploreCoursesDetails({
             </div>
           </div>
 
-          <div className="hidden md:flex">
+          {/* <div className="hidden md:flex">
             <div className="w-[200px] h-[120px] rounded-lg overflow-hidden bg-black">
               <MediaPlayer url={response?.course_video ?? ''} />
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
