@@ -144,32 +144,40 @@ export default function ExploreLessonDetails({ lesson }: CourseDetailsProps) {
                             {response?.lesson?.title}
                         </h1>
                     </div>
-                    <h3 className="dark:text-white Lora">
-                        {response?.lesson?.lesson_content}
-                    </h3>
-                </Cards>
-                <Cards className="flex-1/3 font-open-sans h-[400px]  no-scrollbar overflow-y-auto">
-                    <div className="gap-6 mb-4 flex justify-between border-b-2  border-gray-200 py-2  top-0  dark:bg-black z-10 ">
-                        <h1 className="lg:text-[18px] md:text-[14px] font-bold dark:text-white mt-1">Lesson Note</h1>
-                        <Button
-                            variant="outline"
-                            onClick={() =>
-                                downloadTextFile(
-                                    response?.lesson?.lesson_note ?? '',
-                                    `${response?.lesson?.title
-                                        .toLowerCase()
-                                        .replace(/\s+/g, '_')}_note.txt`
-                                )
-                            }
-                            rightIcon={<DownloadIcon width={14} height={14} />}
-                        >
-                            <h3 className="font-semibold text-xs">Download Note</h3>
-                        </Button>
-                    </div>
-                    <h3 className="p-2 font-lora text-sm">
+                    <h3 className="p-2 font-lora text-md">
                         {response?.lesson?.lesson_note}
                     </h3>
+                   
                 </Cards>
+               <Cards className="flex-1/3 font-open-sans h-[400px] no-scrollbar overflow-y-auto">
+  <div className="gap-6 mb-4 flex justify-between border-b-2 border-gray-200 py-2 top-0 dark:bg-black z-10">
+    <h1 className="lg:text-[18px] md:text-[14px] font-bold dark:text-white mt-1">
+      Lesson Note
+    </h1>
+
+    <Button
+      variant="outline"
+      onClick={() => {
+        const pdfUrl = response?.lesson?.lesson_content;
+
+        if (pdfUrl) {
+          // ✅ Open the PDF link in a new browser tab
+          window.open(pdfUrl, "_blank");
+        } else {
+          alert("No lesson note available.");
+        }
+      }}
+      rightIcon={<DownloadIcon width={14} height={14} />}
+    >
+      <h3 className="font-semibold text-xs">Download Note</h3>
+    </Button>
+  </div>
+
+  <h3 className="dark:text-white Lora">
+    {response?.lesson?.lesson_content}
+  </h3>
+</Cards>
+
             </div>
         </div>
     );
