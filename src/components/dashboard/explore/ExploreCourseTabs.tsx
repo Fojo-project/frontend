@@ -1,12 +1,9 @@
 'use client';
-
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
 import Cards from '@/components/ui/cards/Cards';
 import Button from '@/components/ui/button/Button';
 import { DownloadIcon } from '@/assets/icons';
 import { downloadTextFile } from '@/utils/helper';
-import Link from 'next/link';
 
 type Lesson = {
   isCompleted?: boolean;
@@ -37,8 +34,6 @@ type TabKey = keyof typeof TABS;
 
 export default function ExploreCourseTabs({ courseData }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>('ABOUT');
-  const params = useParams();
-  const courseTitle = params?.course;
 
   const renderLesson = (lesson: Lesson, isLast: boolean) => {
     const noteFileName = `${lesson.title
@@ -50,29 +45,28 @@ export default function ExploreCourseTabs({ courseData }: Props) {
         key={lesson.slug}
         className={`pb-4 ${!isLast ? 'border-b-2 border-b-gray-200' : ''}`}
       >
-        <div className="flex flex-col md:flex-row items-center gap-3 text-sm text-gray-800">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-3 text-sm text-gray-800">
           {/* Lesson Info */}
-          <div className="w-full flex items-center gap-3">
+          <div className="w-full flex flex-col md:flex-row md:items-center gap-3">
             <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
               Lesson {lesson.lesson_order}.
             </span>
-            <Link
+            <div
               className={`w-full font-medium text-lg ${
                 courseData.status
                   ? 'cursor-pointer hover:underline text-black-100 dark:text-white'
                   : 'cursor-not-allowed text-gray-400'
               }`}
-              href={`/dashboard/explore-courses/${courseTitle}/lesson/${lesson.slug}`}
               role="button"
               tabIndex={courseData.status ? 0 : -1}
-              aria-disabled={!courseData.status}
+              aria-disabled={courseData.status}
             >
               {lesson.title}
-            </Link>
+            </div>
           </div>
 
           {/* Actions */}
-          <div className="w-full flex items-center justify-end gap-2 font-open-sans">
+          <div className="w-full  flex md:items-center justify-end gap-2 font-open-sans">
             <Button
               variant="outline"
               disabled={!courseData.status}

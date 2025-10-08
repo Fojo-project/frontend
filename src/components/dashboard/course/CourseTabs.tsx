@@ -93,7 +93,7 @@ export default function CourseTabs({ courseData }: Props) {
             <Button
               variant={lesson.isCompleted ? 'primary' : 'outline'}
               disabled={!courseData.status}
-              className="px-10 py-4 text-xs  text-gray-400 border border-gray-300 cursor-default"
+              className="px-10 py-4 text-xs  text-black-100 border border-gray-300 cursor-default"
             >
               {lesson.isCompleted ? 'Watched' : 'Watch'}
             </Button>
