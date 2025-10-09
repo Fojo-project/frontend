@@ -18,7 +18,7 @@ export default function DashboardHome() {
       <Header Heading={'Dashboard'} link="/dashboard" />
       <div className=" flex flex-col gap-[56px]">
         <DashboardInfo />
-        <div className="flex flex-col lg:flex-row gap-4">
+        <div className="flex flex-col-reverse lg:flex-row-reverse gap-4">
           <div className="w-full flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <h3 className="text-black font-lora text-[22px] font-semibold">

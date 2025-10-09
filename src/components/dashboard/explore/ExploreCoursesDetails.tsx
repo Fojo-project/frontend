@@ -53,7 +53,7 @@ export default function ExploreCoursesDetails({
       <div className="flex justify-between items-center">
         <Header Heading={'Explore Courses'} link="/dashboard/explore-courses" />
 
-        <Button
+        {/*  <Button
           variant={'primary'}
           onClick={handleStartCourse}
           disabled={response?.isStarted || isStarting}
@@ -61,7 +61,7 @@ export default function ExploreCoursesDetails({
           isLoading={isStarting}
         >
           {response?.isStarted ? ' Started Course' : 'Start Course'}
-        </Button>
+        </Button> */}
       </div>
       <section
         className={`rounded-xl p-6 text-white relative overflow-hidden ${lowerTitle || 'foundations'
@@ -126,6 +126,17 @@ export default function ExploreCoursesDetails({
           }}
         />
       )}
+      <div className="flex justify-center items-center">
+        <Button
+          variant={'primary'}
+          onClick={handleStartCourse}
+          disabled={response?.isStarted || isStarting}
+          className="px-[27px] py-[10px]"
+          isLoading={isStarting}
+        >
+          {response?.isStarted ? ' Started Course' : 'Start Course'}
+        </Button>
+      </div>
     </div>
   );
 }
