@@ -39,7 +39,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
     } catch (error) {
       showToast(
         (error as { message?: string })?.message ||
-          'check your network conection',
+        'check your network conection',
         'error'
       );
     }
@@ -51,9 +51,8 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
         {[...Array(4)].map((_, idx) => (
           <div
             key={idx}
-            className={`${
-              idx % 2 === 0 ? 'md:col-span-2' : 'md:col-span-1'
-            } w-full`}
+            className={`${idx % 2 === 0 ? 'md:col-span-2' : 'md:col-span-1'
+              } w-full`}
           >
             <CardSkeleton />
           </div>
@@ -102,16 +101,15 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
           </h3>
           <Cards className="flex mt-2 max-h-[360px] flex-col gap-3 custom-scrollbar overflow-y-auto">
             {response &&
-            response.next_lessons &&
-            response.next_lessons.length > 0 ? (
+              response.next_lessons &&
+              response.next_lessons.length > 0 ? (
               response.next_lessons.map((nextLesson, index) => (
                 <div
                   key={index}
-                  className={`flex items-start gap-3 ${
-                    index !== response.next_lessons.length - 1
+                  className={`flex items-start gap-3 ${index !== response.next_lessons.length - 1
                       ? 'border-b-2 border-b-gray-200 pb-2'
                       : ''
-                  }`}
+                    }`}
                 >
                   <div className="w-[85px] h-[85px]">
                     <Image
@@ -153,7 +151,8 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
             </h1>
           </div>
           <h3 className="dark:text-white Lora">
-            {response?.lesson?.lesson_content}
+          
+                {response?.lesson?.lesson_note}
           </h3>
         </Cards>
         <Cards className="flex-1/3 font-open-sans h-[400px]  no-scrollbar overflow-y-auto">
@@ -163,21 +162,22 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
             </h1>
             <Button
               variant="outline"
-              onClick={() =>
-                downloadTextFile(
-                  response?.lesson?.lesson_note ?? '',
-                  `${response?.lesson?.title
-                    .toLowerCase()
-                    .replace(/\s+/g, '_')}_note.txt`
-                )
-              }
+              onClick={() => {
+                const pdfUrl = response?.lesson?.lesson_content;
+
+                if (pdfUrl) {
+                  window.open(pdfUrl, "_blank");
+                } else {
+                  alert("No lesson note available.");
+                }
+              }}
               rightIcon={<DownloadIcon width={14} height={14} />}
             >
               <h3 className="font-semibold text-xs">Download Note</h3>
             </Button>
           </div>
           <h3 className="p-2 font-lora text-sm">
-            {response?.lesson?.lesson_note}
+             {response?.lesson?.lesson_content}
           </h3>
         </Cards>
       </div>

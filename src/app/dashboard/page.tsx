@@ -32,7 +32,9 @@ export default function DashboardHome() {
               </Link>
             </div>
             <div>
-              <EventCard limit={2} textLimit={25} setPagination={false} />
+              <EventCard limit={2} textLimit={100} setPagination={false} />
+              {/* <EventCard limit={2} textLimit={25} setPagination={false} /> */}
+
             </div>
           </div>
           <div className="w-full flex flex-col gap-4">
