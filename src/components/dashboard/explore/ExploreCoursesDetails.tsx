@@ -124,6 +124,20 @@ export default function ExploreCoursesDetails({
           }}
         />
       )}
+      <Button
+        variant={'primary'}
+        onClick={() =>
+          response?.isStarted
+            ? router.push(`/dashboard/my-courses/${courseTitle}`)
+            : handleStartCourse()
+        }
+        disabled={isStarting}
+        className="px-8 hidden md:flex py-4 text-base shadow-lg"
+        isLoading={isStarting}
+        aria-label="Get started with this course"
+      >
+        {response?.isStarted ? 'Continue Course' : 'Get Started'}
+      </Button>
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden p-4 bg-white/90 dark:bg-black/70 backdrop-blur border-t border-gray-200">
         <Button
           variant={'primary'}

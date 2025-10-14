@@ -37,7 +37,7 @@ export default function CoursesList({
         <div>
           <div className="flex items-center justify-between">
             <h3 className="text-[22px] font-normal capitalize lora">{title}</h3>
-            <span className="text-xs bg-gray-300 text-gray-100 px-2 py-1 rounded-sm font-lora">
+            <span className="text-base bg-gray-300 font-medium  px-2 py-1 rounded-sm font-lora">
               {type === 'my-courses' ? `${completed} / ` : null}
               {lessons} Lesson{lessons > 1 ? 's' : ''}
             </span>
@@ -48,7 +48,7 @@ export default function CoursesList({
         </div>
         <Link
           href={route}
-          className={`mt-3 inline-flex items-center justify-center rounded-md font-semibold transition-colors
+          className={`mt-3 inline-flex justify-end rounded-md font-semibold transition-colors
             ${
               type === 'explore-courses'
                 ? 'bg-black-100 text-white px-4 py-2 text-sm hover:opacity-90'

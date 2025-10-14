@@ -35,7 +35,6 @@ export default function ExploreLessonDetails({ lesson }: CourseDetailsProps) {
     try {
       const res = await markLesson({ lesson: lessonSlug }).unwrap();
       showToast(res?.message || 'Lesson completed successfully', 'success');
-      // Trigger background refetch to update the lesson data
       refetch();
     } catch (error) {
       showToast(

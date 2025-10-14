@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Cards from '@/components/ui/cards/Cards';
-import Button from '@/components/ui/button/Button';
+/* import Button from '@/components/ui/button/Button';
 import { DownloadIcon } from '@/assets/icons';
-import { downloadTextFile } from '@/utils/helper';
+import { downloadTextFile } from '@/utils/helper'; */
 import Link from 'next/link';
 
 type Lesson = {
@@ -41,9 +41,9 @@ export default function CourseTabs({ courseData }: Props) {
   const courseTitle = params?.course;
 
   const renderLesson = (lesson: Lesson, isLast: boolean) => {
-    const noteFileName = `${lesson.title
+    /*  const noteFileName = `${lesson.title
       .toLowerCase()
-      .replace(/\s+/g, '_')}_note.txt`;
+      .replace(/\s+/g, '_')}_note.txt`; */
 
     return (
       <div
@@ -52,27 +52,29 @@ export default function CourseTabs({ courseData }: Props) {
       >
         <div className="flex flex-col md:flex-row items-center gap-3 text-sm text-gray-800">
           {/* Lesson Info */}
-          <div className="w-full flex items-center gap-3">
-            <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
+          <Link
+            href={`/dashboard/my-courses/${courseTitle}/lesson/${lesson.slug}`}
+            role="button"
+            tabIndex={courseData.status ? 0 : -1}
+            aria-disabled={!courseData.status}
+            className="w-full flex items-center gap-3"
+          >
+            <span className="w-[100px]  flex justify-center font-medium text-base  rounded-md p-2 bg-gray-25">
               Lesson {lesson.lesson_order}.
             </span>
-            <Link
+            <div
               className={`w-full font-medium text-lg ${
                 courseData.status
                   ? 'cursor-pointer hover:underline text-black-100 dark:text-white'
                   : 'cursor-not-allowed text-gray-400'
               }`}
-              href={`/dashboard/my-courses/${courseTitle}/lesson/${lesson.slug}`}
-              role="button"
-              tabIndex={courseData.status ? 0 : -1}
-              aria-disabled={!courseData.status}
             >
               {lesson.title}
-            </Link>
-          </div>
+            </div>
+          </Link>
 
           {/* Actions */}
-          <div className="w-full flex items-center justify-end gap-2 font-open-sans">
+          {/*  <div className="w-full flex items-center justify-end gap-2 font-open-sans">
             <Button
               variant="outline"
               disabled={!courseData.status}
@@ -97,7 +99,7 @@ export default function CourseTabs({ courseData }: Props) {
             >
               {lesson.isCompleted ? 'Watched' : 'Watch'}
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     );

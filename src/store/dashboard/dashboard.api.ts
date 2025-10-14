@@ -113,6 +113,7 @@ interface ShowLessonResponse {
   data: {
     lesson: Lesson;
     next_lessons: Lesson[];
+    previous_lessons: Lesson[];
   };
 }
 interface Lesson {
@@ -271,8 +272,5 @@ export const {
   useEventsQuery,
   useLiveEventsQuery,
   useUpComingEventsQuery,
-     useSearchCoursesAndLessonsQuery,
+  useSearchCoursesAndLessonsQuery,
 } = DashboardApi;
-
-
-
