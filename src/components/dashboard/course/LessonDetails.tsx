@@ -26,8 +26,8 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
   const { showToast } = useToastify();
   const [markLesson] = useMarkLessonMutation();
   const response = data?.data;
-  const params = useParams();
-  const courseSlug = params?.course;
+  const params = useParams<{ course: string }>();
+  const courseSlug = params.course;
 
   const handleLessonComplete = async () => {
     const lessonSlug = response?.lesson?.slug;
@@ -85,7 +85,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
         </Link>
         {' / '}
         <span className="capitalize text-black-100 dark:text-white">
-          Lesson {response?.lesson.lesson_order} {''}
+          Lesson {response?.lesson?.lesson_order} {''}
         </span>
       </div>
 
@@ -109,7 +109,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
                   {response?.lesson?.title}
                 </h1>
               </div>
-              <div className="flex justify-end mt-2 w-[400px]">
+              <div className="flex justify-end mt-2 ">
                 <Button
                   variant="outline"
                   className="b"
@@ -186,14 +186,14 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
                 Previous Lesson
               </h3>
               <Cards className="flex  max-h-[200px] flex-col gap-3 custom-scrollbar overflow-y-auto">
-                {response &&
-                response.next_lessons &&
-                response.next_lessons.length > 0 ? (
-                  response.next_lessons.map((nextLesson, index) => (
+                {response?.previous_lessons &&
+                response.previous_lessons &&
+                response.previous_lessons.length > 0 ? (
+                  response.previous_lessons.map((prevLesson, index) => (
                     <div
                       key={index}
                       className={`flex items-start gap-3 ${
-                        index !== response.next_lessons.length - 1
+                        index !== response.previous_lessons.length - 1
                           ? 'border-b-2 border-b-gray-200 pb-2'
                           : ''
                       }`}
@@ -207,14 +207,14 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
                       </div>
                       <div className="w-full">
                         <Link
-                          href={`/dashboard/my-courses/${courseSlug}/lesson/${nextLesson?.slug}`}
+                          href={`/dashboard/my-courses/${courseSlug}/lesson/${prevLesson?.slug}`}
                         >
                           <div className="flex-1/3 cursor-pointer flex-col flex items-start gap-2">
                             <span className="w-[100px] flex justify-start font-medium text-sm rounded-md  bg-gray-25">
-                              Lesson {nextLesson.lesson_order}.
+                              Lesson {prevLesson.lesson_order}.
                             </span>
                             <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
-                              {nextLesson.title}
+                              {prevLesson.title}
                             </h3>
                           </div>
                         </Link>
@@ -224,37 +224,13 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
                 ) : (
                   <AlertMessage
                     type="info"
-                    message="No next lessons available."
+                    message="No Previous lessons available."
                   />
                 )}
               </Cards>
             </div>
           </div>
         </div>
-        {/*   <Cards className="flex-1/3 font-open-sans h-[400px]  no-scrollbar overflow-y-auto">
-          <div className="gap-6 mb-4 flex justify-between border-b-2  border-gray-200 py-2  top-0  dark:bg-black z-10 ">
-            <h1 className="lg:text-[18px] md:text-[14px] font-bold dark:text-white mt-1">
-              Lesson Note
-            </h1>
-            <Button
-              variant="outline"
-              onClick={() =>
-                downloadTextFile(
-                  response?.lesson?.lesson_note ?? '',
-                  `${response?.lesson?.title
-                    .toLowerCase()
-                    .replace(/\s+/g, '_')}_note.txt`
-                )
-              }
-              rightIcon={<DownloadIcon width={14} height={14} />}
-            >
-              <h3 className="font-semibold text-xs">Download Note</h3>
-            </Button>
-          </div>
-          <h3 className="p-2 font-lora text-sm">
-            {response?.lesson?.lesson_note}
-          </h3>
-        </Cards> */}
       </div>
     </div>
   );
