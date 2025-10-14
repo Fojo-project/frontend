@@ -20,7 +20,8 @@ const CoursesSection = () => {
           Grow in Christ, one course at a time.
         </h2>
         <p className="text-gray-600 text-base font-lora leading-relaxed max-w-2xl mx-auto mb-12">
-          Whether  you&#39;re new to the faith or deepening your walk, these courses are a great place to begin.
+          Whether you&#39;re new to the faith or deepening your walk, these
+          courses are a great place to begin.
         </p>
 
         {isLoading ? (
@@ -60,10 +61,12 @@ const CoursesSection = () => {
                 <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-bold text-[20px] mt-1 text-gray-900 font-cormorant leading-snug group-hover:text-gray-900 transition-colors">
-                      {course.title.charAt(0).toUpperCase() + course.title.slice(1)}
+                      {course.title.charAt(0).toUpperCase() +
+                        course.title.slice(1)}
                     </h3>
 
-                    <span className="text-[11px] font-semibold text-[#E5E5E5] bg-white px-3 py-2 rounded-md font-openSans">
+                    <span className="text-[11px] font-semibold text-black-100
+                     bg-white px-3 py-2 rounded-md font-openSans">
                       {course.lesson_count || 0} Lessons
                     </span>
                   </div>
