@@ -39,13 +39,12 @@ export default function ExploreCourseTabs({ courseData }: Props) {
         className={`pb-4 ${!isLast ? 'border-b-2 border-b-gray-200' : ''}`}
       >
         <div className="flex flex-col md:flex-row items-start md:items-center gap-3 text-sm text-gray-800">
-          {/* Lesson Info */}
           <div className="w-full flex flex-col md:flex-row md:items-center gap-3">
-            <span className="w-[80px]  flex justify-center font-medium text-[13px]  rounded-md p-2 bg-gray-25">
+            <span className="w-[100px]  flex justify-center font-medium text-base   rounded-md p-2 bg-gray-25">
               Lesson {lesson.lesson_order}.
             </span>
             <div
-              className="w-full font-medium text-lg cursor-pointer hover:underline text-black-10e0 dark:text-white"
+              className="w-full font-medium text-lg  text-black-10e0 dark:text-white"
               role="button"
               tabIndex={courseData.status ? 0 : -1}
               aria-disabled={courseData.status}
@@ -53,8 +52,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
               {lesson.title}
             </div>
           </div>
-
-          {/* Actions */}
         </div>
       </div>
     );
@@ -62,7 +59,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
 
   return (
     <div className="mt-4">
-      {/* Tab Controls */}
       <div className="flex space-x-6 border-b">
         {Object.entries(TABS).map(([key, label]) => (
           <button
@@ -78,8 +74,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
           </button>
         ))}
       </div>
-
-      {/* Tab Content */}
       <div className="mt-4 font-lora">
         <Cards>
           {activeTab === 'ABOUT' && (

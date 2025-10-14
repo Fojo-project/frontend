@@ -96,67 +96,142 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
             url={response?.lesson?.lesson_video ?? ''}
           />
         </div>
-        <div className="flex-1/3  gap-2 -mt-2 flex-col">
-          <h3 className="font-medium text-black-100 dark:text-white">
-            Next Lesson
-          </h3>
-          <Cards className="flex mt-2 max-h-[360px] flex-col gap-3 custom-scrollbar overflow-y-auto">
-            {response &&
-            response.next_lessons &&
-            response.next_lessons.length > 0 ? (
-              response.next_lessons.map((nextLesson, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start gap-3 ${
-                    index !== response.next_lessons.length - 1
-                      ? 'border-b-2 border-b-gray-200 pb-2'
-                      : ''
-                  }`}
-                >
-                  <div className="w-[85px] h-[85px]">
-                    <Image
-                      src={Foundation}
-                      alt=""
-                      className="w-[65px] h-[65px] rounded-[5px] object-cover"
-                    />
-                  </div>
-                  <div className="w-full">
-                    <Link
-                      href={`/dashboard/my-courses/${courseSlug}/lesson/${nextLesson?.slug}`}
-                    >
-                      <div className="flex-1/3 cursor-pointer flex-col flex items-start gap-2">
-                        <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
-                          Lesson {nextLesson.lesson_order}.
-                        </span>
-                        <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
-                          {nextLesson.title}
-                        </h3>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <AlertMessage type="info" message="No next lessons available." />
-            )}
-          </Cards>
-        </div>
       </div>
-      <div className="flex flex-col h-auto md:flex-row gap-4 ">
+      <div className="flex flex-col-reverse h-auto md:flex-row gap-4 ">
         <Cards className="flex-2/3 flex flex-col gap-4 h-[400px] hide-scrollbar no-scrollbar overflow-y-auto">
           <div className="gap-2 flex flex-col border-b-2 border-gray-200  p-2">
-            <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
-              Lesson {response?.lesson?.lesson_order} {''}
-            </span>
-            <h1 className="text-2xl font-bold dark:text-white">
-              {response?.lesson?.title}
-            </h1>
+            <div className="flex flex-col md:flex-row justify-between md:items-center">
+              <div>
+                <span className="w-[100px] flex justify-start font-medium text-lg rounded-md p-2 bg-gray-25">
+                  Lesson {response?.lesson?.lesson_order} {''}
+                </span>
+                <h1 className="text-2xl font-bold dark:text-white">
+                  {response?.lesson?.title}
+                </h1>
+              </div>
+              <div className="flex justify-end mt-2 w-[400px]">
+                <Button
+                  variant="outline"
+                  className="b"
+                  onClick={() =>
+                    downloadTextFile(
+                      response?.lesson?.lesson_note ?? '',
+                      `${response?.lesson?.title
+                        .toLowerCase()
+                        .replace(/\s+/g, '_')}_note.txt`
+                    )
+                  }
+                  rightIcon={<DownloadIcon width={14} height={14} />}
+                >
+                  <h3 className="font-semibold  font-outfit">Download Note</h3>
+                </Button>
+              </div>
+            </div>
           </div>
           <h3 className="dark:text-white Lora">
             {response?.lesson?.lesson_content}
           </h3>
         </Cards>
-        <Cards className="flex-1/3 font-open-sans h-[400px]  no-scrollbar overflow-y-auto">
+        <div className="flex-1/3  gap-2 -mt-2 flex-col">
+          <div>
+            <div>
+              <h3 className="font-medium font-outfit text-black-100 dark:text-white">
+                Next Lesson
+              </h3>
+              <Cards className="flex mt-2 max-h-[200px] flex-col gap-3 custom-scrollbar overflow-y-auto">
+                {' '}
+                {response &&
+                response.next_lessons &&
+                response.next_lessons.length > 0 ? (
+                  response.next_lessons.map((nextLesson, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-start gap-3 ${
+                        index !== response.next_lessons.length - 1
+                          ? 'border-b-2 border-b-gray-200 pb-2'
+                          : ''
+                      }`}
+                    >
+                      <div className="w-[65px] h-[65px]">
+                        <Image
+                          src={Foundation}
+                          alt=""
+                          className="w-[45px] h-[45px] rounded-[5px] object-cover"
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Link
+                          href={`/dashboard/my-courses/${courseSlug}/lesson/${nextLesson?.slug}`}
+                        >
+                          <div className="flex-1/3 cursor-pointer flex-col flex items-start gap-1">
+                            <span className="w-[100px] flex justify-start font-medium text-sm rounded-md  bg-gray-25">
+                              Lesson {nextLesson.lesson_order}.
+                            </span>
+                            <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
+                              {nextLesson.title}
+                            </h3>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <AlertMessage
+                    type="info"
+                    message="No next lessons available."
+                  />
+                )}
+              </Cards>
+              <h3 className="font-medium font-outfit mt-2 text-black-100 dark:text-white">
+                Previous Lesson
+              </h3>
+              <Cards className="flex  max-h-[200px] flex-col gap-3 custom-scrollbar overflow-y-auto">
+                {response &&
+                response.next_lessons &&
+                response.next_lessons.length > 0 ? (
+                  response.next_lessons.map((nextLesson, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-start gap-3 ${
+                        index !== response.next_lessons.length - 1
+                          ? 'border-b-2 border-b-gray-200 pb-2'
+                          : ''
+                      }`}
+                    >
+                      <div className="w-[65px] h-[65px]">
+                        <Image
+                          src={Foundation}
+                          alt=""
+                          className="w-[45px] h-[45px] rounded-[5px] object-cover"
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Link
+                          href={`/dashboard/my-courses/${courseSlug}/lesson/${nextLesson?.slug}`}
+                        >
+                          <div className="flex-1/3 cursor-pointer flex-col flex items-start gap-2">
+                            <span className="w-[100px] flex justify-start font-medium text-sm rounded-md  bg-gray-25">
+                              Lesson {nextLesson.lesson_order}.
+                            </span>
+                            <h3 className="font-medium font-lora text-sm text-black-100 dark:text-white">
+                              {nextLesson.title}
+                            </h3>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <AlertMessage
+                    type="info"
+                    message="No next lessons available."
+                  />
+                )}
+              </Cards>
+            </div>
+          </div>
+        </div>
+        {/*   <Cards className="flex-1/3 font-open-sans h-[400px]  no-scrollbar overflow-y-auto">
           <div className="gap-6 mb-4 flex justify-between border-b-2  border-gray-200 py-2  top-0  dark:bg-black z-10 ">
             <h1 className="lg:text-[18px] md:text-[14px] font-bold dark:text-white mt-1">
               Lesson Note
@@ -179,7 +254,7 @@ export default function LessonDetails({ lesson }: CourseDetailsProps) {
           <h3 className="p-2 font-lora text-sm">
             {response?.lesson?.lesson_note}
           </h3>
-        </Cards>
+        </Cards> */}
       </div>
     </div>
   );
