@@ -132,7 +132,7 @@ export default function ExploreCoursesDetails({
             : handleStartCourse()
         }
         disabled={isStarting}
-        className="px-8 hidden md:flex py-4 text-base shadow-lg"
+        className="px-8 hidden md:flex max-w-xs py-4 text-base shadow-lg"
         isLoading={isStarting}
         aria-label="Get started with this course"
       >

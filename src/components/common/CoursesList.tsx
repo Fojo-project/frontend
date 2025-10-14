@@ -48,11 +48,10 @@ export default function CoursesList({
         </div>
         <Link
           href={route}
-          className={`mt-3 inline-flex justify-end rounded-md font-semibold transition-colors
-            ${
-              type === 'explore-courses'
-                ? 'bg-black-100 text-white px-4 py-2 text-sm hover:opacity-90'
-                : 'text-[14px] text-black font-medium'
+          className={`mt-3 inline-flex justify-start rounded-md font-semibold transition-colors
+            ${type === 'explore-courses'
+              ? 'bg-black-100 text-white px-4 py-2 text-sm hover:opacity-90'
+              : 'text-[14px] text-black font-medium'
             }
           `}
         >
