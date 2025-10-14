@@ -32,7 +32,7 @@ export default function DashboardHome() {
               </Link>
             </div>
             <div>
-              <EventCard limit={2} textLimit={100} setPagination={false} />
+              <EventCard />
               {/* <EventCard limit={2} textLimit={25} setPagination={false} /> */}
 
             </div>

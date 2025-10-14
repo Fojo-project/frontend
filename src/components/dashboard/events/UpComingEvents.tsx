@@ -1,55 +1,55 @@
 // 'use client';
 
-import { LiveIcon, WatchIcon } from '@/assets/icons';
-import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useUpComingEventsQuery } from '@/store/dashboard/dashboard.api';
-import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
-import NoResource from '@/components/common/NoResource';
-import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
+// import { LiveIcon, WatchIcon } from '@/assets/icons';
+// import { formatTo12HourWithMinutes, getDayName } from '@/utils/helper';
+// import Image from 'next/image';
+// import Link from 'next/link';
+// import { useUpComingEventsQuery } from '@/store/dashboard/dashboard.api';
+// import EventSkeleton from '@/components/ui/skeleton/EventSkeleton';
+// import NoResource from '@/components/common/NoResource';
+// import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
 
 export default function UpComingEvents() {
-  const { data, isLoading, isError } = useUpComingEventsQuery();
+  // const { data, isLoading, isError } = useUpComingEventsQuery();
 
-  if (isLoading || isError)
-    return isLoading ? (
-      <div className="flex flex-col gap-4">
-        {[...Array(2)].map((_, idx) => (
-          <div key={idx} className="w-full">
-            <EventSkeleton />
-          </div>
-        ))}
-      </div>
-    ) : (
-      <NetworkErrorAlert
-        error={isError}
-        showRetryButton={true}
-        onRetry={() => window.location.reload()}
-      />
-    );
+  // if (isLoading || isError)
+  //   return isLoading ? (
+  //     <div className="flex flex-col gap-4">
+  //       {[...Array(2)].map((_, idx) => (
+  //         <div key={idx} className="w-full">
+  //           <EventSkeleton />
+  //         </div>
+  //       ))}
+  //     </div>
+  //   ) : (
+  //     <NetworkErrorAlert
+  //       error={isError}
+  //       showRetryButton={true}
+  //       onRetry={() => window.location.reload()}
+  //     />
+  //   );
 
-  if (!data?.data || data.data.length === 0) {
-    return (
-      <div className="text-center text-gray-500 py-10">
-        <NoResource
-          title="No upcoming events"
-          subtitle="There are no upcoming events available at the moment."
-          icon="/images/event/no-event.png"
-        />
-      </div>
-    );
-  }
+  // if (!data?.data || data.data.length === 0) {
+  //   return (
+  //     <div className="text-center text-gray-500 py-10">
+  //       <NoResource
+  //         title="No upcoming events"
+  //         subtitle="There are no upcoming events available at the moment."
+  //         icon="/images/event/no-event.png"
+  //       />
+  //     </div>
+  //   );
+  // }
 
-  const sortedEvents = [...(data?.data ?? [])].sort((a, b) => {
-    if (a.is_live && !b.is_live) return -1;
-    if (!a.is_live && b.is_live) return 1;
-    return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
-  });
+  // const sortedEvents = [...(data?.data ?? [])].sort((a, b) => {
+  //   if (a.is_live && !b.is_live) return -1;
+  //   if (!a.is_live && b.is_live) return 1;
+  //   return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
+  // });
 
   return (
     <div className="flex flex-col gap-4">
-      {sortedEvents.map((event) => (
+      {/* {sortedEvents.map((event) => (
         <div
           key={event.id}
           className="relative flex flex-col md:flex-row items-start gap-4 w-full rounded-xl border border-gray-200 p-5 bg-white hover:shadow-md transition duration-200 group"
@@ -102,7 +102,7 @@ export default function UpComingEvents() {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

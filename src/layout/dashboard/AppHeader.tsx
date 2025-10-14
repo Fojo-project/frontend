@@ -5,7 +5,7 @@ import {
   MenuIcon,
 } from '@/assets/icons';
 import { ThemeToggleButton } from '@/components/common/ThemeToggleButton';
-import NotificationDropdown from '@/components/header/NotificationDropdown';
+// import NotificationDropdown from '@/components/header/NotificationDropdown';
 import UserDropdown from '@/components/header/UserDropdown';
 import Profile from '@/components/user-profile/profile';
 import { useSidebar } from '@/context/SidebarContext';
@@ -14,7 +14,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import FojoLogo from '../../../public/images/home/FojoLogo.png';
 import FojoDarkLogo from '../../../public/images/home/logo.png';
-import SearchForm from '../dashboard/Search';
+// import SearchForm from '../dashboard/Search';
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
@@ -66,9 +66,9 @@ const AppHeader: React.FC = () => {
           >
             <MenuIcon />
           </button>
-          <div className="block w-full max-w-full sm:max-w-sm md:max-w-sm">
+          {/* <div className="block w-full max-w-full sm:max-w-sm md:max-w-sm">
             <SearchForm />
-          </div>
+          </div> */}
         </div>
         <div
           className={`${isApplicationMenuOpen ? 'flex' : 'hidden'}
@@ -82,8 +82,7 @@ const AppHeader: React.FC = () => {
             <ThemeToggleButton />
             {/* <!-- Dark Mode Toggler --> */}
 
-            <NotificationDropdown />
-            {/* <!-- Notification Menu Area --> */}
+            {/* <NotificationDropdown /> */}
           </div>
           {/* <!-- User Area --> */}
           <UserDropdown />

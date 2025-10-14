@@ -354,8 +354,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { WatchIcon, LiveIcon } from '../../../assets/icons';
 import Pagination from '@/components/ui/Pagination/Pagination';
 import { usePathname } from 'next/navigation';
 
@@ -382,31 +380,21 @@ export default function EventCard({
 School of Ministry (Living in God’s Holy Truth) — Wednesdays 8:30pm (Online)
 In-Person Worship Service — Sundays 11am
 1 Raneleigh Gardens, Bexleyheath DA7 5PD
-Prayers Everyday at 8:30pm and weekends 7am.
-Send a text to 07429 379 777 for Zoom details.`,
-      image: '/images/event/event_image.png',
+Prayers Everyday at 8:30pm and weekends 7am`,
+      image: '/images/event/city_chapel.png',
       video_url: '/dashboard/events/1?type=video',
       audio_url: '/dashboard/events/1?type=audio',
     },
     {
       id: 2,
       title: 'Children Discipleship Program',
-      description: `City Chapel Children Discipleship Program in Partnership with DH Little Arrows.
-"Train up a child in the way he should go; and when he is old, he will not depart from it." 
+      description: `City Chapel Children Discipleship Program in Partnership with DH Little Arrows
+"Train up a child in the way he should go; and when he is old, he will not depart from it."
 — Proverbs 22:6`,
-      image: '/images/event/event_image.png',
+      image: '/images/event/children_program.png',
       location: 'City Chapel London',
       video_url: '/dashboard/events/2?type=video',
       audio_url: '/dashboard/events/2?type=audio',
-    },
-    {
-      id: 3,
-      title: 'Faith and Family Retreat',
-      description: `A weekend to grow your faith and strengthen family bonds. Join us for teaching sessions, fun activities, and worship.`,
-      image: '/images/event/event_image.png',
-      location: 'Bexleyheath Retreat Center',
-      video_url: '/dashboard/events/3?type=video',
-      audio_url: '/dashboard/events/3?type=audio',
     },
   ];
 
@@ -423,13 +411,18 @@ Send a text to 07429 379 777 for Zoom details.`,
     ? events.slice(0, limit)
     : events;
 
-  const truncateText = (text: string, max: number) => {
-    if (!max) return text;
-    return text.length > max ? text.slice(0, max) + '...' : text;
-  };
+  const dashboardTextLimit = textLimit || 300;
 
-  // use longer text on dashboard preview
-  const dashboardTextLimit = textLimit || 300; // increased from 150 → 300
+  const renderDescriptionAsList = (text: string) => {
+    return text
+      .split('\n')
+      .filter((line) => line.trim() !== '')
+      .map((line, index) => (
+        <li key={index} className="text-sm text-[#555] leading-relaxed font-lora">
+          {line.trim()}
+        </li>
+      ));
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -448,20 +441,20 @@ Send a text to 07429 379 777 for Zoom details.`,
           </div>
 
           <div className="flex-1">
-            <h3 className="text-[20px] lg:text-[22px] font-bold text-gray-900 font-cormorant">
+            <h3 className="text-[20px] lg:text-[22px] font-bold text-gray-900 font-cormorant mb-2">
               {event.title}
             </h3>
 
-            <div className="text-sm text-[#555555] whitespace-pre-line font-lora">
-              {truncateText(event.description, dashboardTextLimit)}
-            </div>
+            <ul className="list-disc list-inside space-y-1">
+              {renderDescriptionAsList(event.description)}
+            </ul>
 
             {event.location && (
-              <p className="mt-2 text-[13px] text-gray-600 font-lora">
+              <p className="mt-2 text-[13px] text-gray-600 font-lora italic">
                 {event.location}
               </p>
             )}
-
+{/* 
             <div className="flex items-center gap-4 mt-3 flex-wrap">
               {event.video_url && (
                 <Link
@@ -481,8 +474,7 @@ Send a text to 07429 379 777 for Zoom details.`,
                   Listen
                 </Link>
               )}
-              
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
