@@ -359,13 +359,13 @@ import { usePathname } from 'next/navigation';
 
 type EventCardProps = {
   limit?: number;
-  textLimit?: number;
+  // textLimit?: number;
   setPagination?: boolean;
 };
 
 export default function EventCard({
   limit,
-  textLimit,
+  // textLimit,
   setPagination,
 }: EventCardProps) {
   const pathname = usePathname();
@@ -411,7 +411,6 @@ Prayers Everyday at 8:30pm and weekends 7am`,
     ? events.slice(0, limit)
     : events;
 
-  const dashboardTextLimit = textLimit || 300;
 
   const renderDescriptionAsList = (text: string) => {
     return text

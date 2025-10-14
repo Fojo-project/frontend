@@ -9,7 +9,6 @@ import {
   useMarkLessonMutation,
   useShowALessonQuery,
 } from '@/store/dashboard/dashboard.api';
-import { downloadTextFile } from '@/utils/helper';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
 import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import { useParams } from 'next/navigation';
