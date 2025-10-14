@@ -4,7 +4,6 @@ import {
   useStartCourseMutation,
 } from '@/store/dashboard/dashboard.api';
 import CardSkeleton from '@/components/ui/skeleton/CardSkeleton';
-// import MediaPlayer from '@/components/ui/video/MediaPlayer';
 import Button from '@/components/ui/button/Button';
 import { useRouter } from 'next/navigation';
 import { formatDuration } from '@/utils/helper';
@@ -22,7 +21,6 @@ export default function ExploreCoursesDetails({
   const router = useRouter();
   const { data, isLoading, isError } = useCourseQuery({ course: courseTitle });
   const [startCourse, { isLoading: isStarting }] = useStartCourseMutation();
-  console.log(data);
   const response = data?.data;
 
   const handleStartCourse = async () => {
@@ -49,30 +47,20 @@ export default function ExploreCoursesDetails({
     );
   }
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 pb-20 md:pb-0">
       <div className="flex justify-between items-center">
         <Header Heading={'Explore Courses'} link="/dashboard/explore-courses" />
-
-        {/*  <Button
-          variant={'primary'}
-          onClick={handleStartCourse}
-          disabled={response?.isStarted || isStarting}
-          className="px-[27px] py-[10px]"
-          isLoading={isStarting}
-        >
-          {response?.isStarted ? ' Started Course' : 'Start Course'}
-        </Button> */}
       </div>
       <section
-        className={`rounded-xl p-6 text-white relative overflow-hidden ${lowerTitle || 'foundations'
+        className={`rounded-xl p-6 text-white relative overflow-hidden md:overflow-visible ${lowerTitle || 'foundations'
           }`}
       >
         <div className="relative z-10 flex justify-between items-center">
           <div>
-            <h1 className="text-3xl capitalize font-lora font-medium">
+            <h1 className="text-4xl md:text-5xl capitalize font-lora font-medium">
               {response?.slug}
             </h1>
-            <p className="mt-2 text-sm w-[296px] lora">
+            <p className="mt-2 text-sm w-full max-w-xl lora">
               {response?.description}
             </p>
 
@@ -99,13 +87,23 @@ export default function ExploreCoursesDetails({
                 </span>
               </p>
             </div>
-          </div>
-
-          {/* <div className="hidden md:flex">
-            <div className="w-[200px] h-[120px] rounded-lg overflow-hidden bg-black">
-              <MediaPlayer url={response?.course_video ?? ''} />
+            <div className="mt-6 md:sticky md:flex hidden md:top-4 md:z-30">
+              <Button
+                variant={'primary'}
+                onClick={() =>
+                  response?.isStarted
+                    ? router.push(`/dashboard/my-courses/${courseTitle}`)
+                    : handleStartCourse()
+                }
+                disabled={isStarting}
+                className="px-8 py-4 text-base shadow-lg"
+                isLoading={isStarting}
+                aria-label="Get started with this course"
+              >
+                {response?.isStarted ? 'Continue Course' : 'Get Started'}
+              </Button>
             </div>
-          </div> */}
+          </div>
         </div>
       </section>
 
@@ -126,15 +124,20 @@ export default function ExploreCoursesDetails({
           }}
         />
       )}
-      <div className="flex justify-center items-center">
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden p-4 bg-white/90 dark:bg-black/70 backdrop-blur border-t border-gray-200">
         <Button
           variant={'primary'}
-          onClick={handleStartCourse}
-          disabled={response?.isStarted || isStarting}
-          className="px-[27px] py-[10px]"
+          onClick={() =>
+            response?.isStarted
+              ? router.push(`/dashboard/my-courses/${courseTitle}`)
+              : handleStartCourse()
+          }
+          disabled={isStarting}
+          className="w-full py-3 text-sm"
           isLoading={isStarting}
+          aria-label="Get started with this course"
         >
-          {response?.isStarted ? ' Started Course' : 'Start Course'}
+          {response?.isStarted ? 'Continue Course' : 'Get Started'}
         </Button>
       </div>
     </div>

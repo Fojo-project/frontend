@@ -1,9 +1,6 @@
 'use client';
 import { useState } from 'react';
 import Cards from '@/components/ui/cards/Cards';
-import Button from '@/components/ui/button/Button';
-import { DownloadIcon } from '@/assets/icons';
-import { downloadTextFile } from '@/utils/helper';
 
 type Lesson = {
   isCompleted?: boolean;
@@ -36,10 +33,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>('ABOUT');
 
   const renderLesson = (lesson: Lesson, isLast: boolean) => {
-    const noteFileName = `${lesson.title
-      .toLowerCase()
-      .replace(/\s+/g, '_')}_note.txt`;
-
     return (
       <div
         key={lesson.slug}
@@ -48,15 +41,11 @@ export default function ExploreCourseTabs({ courseData }: Props) {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-3 text-sm text-gray-800">
           {/* Lesson Info */}
           <div className="w-full flex flex-col md:flex-row md:items-center gap-3">
-            <span className="w-[80px] text-gray-100 flex justify-center font-medium text-[10px] border-2 border-gray-200 rounded-md p-2 bg-gray-25">
+            <span className="w-[80px]  flex justify-center font-medium text-[13px]  rounded-md p-2 bg-gray-25">
               Lesson {lesson.lesson_order}.
             </span>
             <div
-              className={`w-full font-medium text-lg ${
-                courseData.status
-                  ? 'cursor-pointer hover:underline text-black-100 dark:text-white'
-                  : 'cursor-not-allowed text-gray-400'
-              }`}
+              className="w-full font-medium text-lg cursor-pointer hover:underline text-black-10e0 dark:text-white"
               role="button"
               tabIndex={courseData.status ? 0 : -1}
               aria-disabled={courseData.status}
@@ -66,34 +55,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
           </div>
 
           {/* Actions */}
-          <div className="w-full  flex md:items-center justify-end gap-2 font-open-sans">
-            <Button
-              variant="outline"
-              disabled={!courseData.status}
-              onClick={() => downloadTextFile(lesson.lesson_note, noteFileName)}
-              rightIcon={
-                <DownloadIcon
-                  width={14}
-                  height={14}
-                  className="dark:text-white text-gray-100"
-                />
-              }
-            >
-              <span className="font-semibold text-sm dark:opacity-60 text-gray-100">
-                Download Note
-              </span>
-            </Button>
-
-            <Button
-              variant={lesson.isCompleted ? 'primary' : 'outline'}
-              disabled={!courseData.status}
-              className={`${
-                lesson.isCompleted ? 'px-8' : 'px-10'
-              }  py-4 text-xs  text-gray-400 border border-gray-300 cursor-default`}
-            >
-              {lesson.isCompleted ? 'Watched' : 'watch'}
-            </Button>
-          </div>
         </div>
       </div>
     );
@@ -133,12 +94,10 @@ export default function ExploreCourseTabs({ courseData }: Props) {
           )}
 
           {activeTab === 'CORE' && (
-            <section className="space-y-3">
-              {courseData.lessons
-                .slice(0, 4)
-                .map((lesson, index) =>
-                  renderLesson(lesson, index === courseData.lessons.length - 1)
-                )}
+            <section className="space-y-3 max-h-[400px] md:max-h-[300px] overflow-y-auto">
+              {courseData.lessons.map((lesson, index) =>
+                renderLesson(lesson, index === courseData.lessons.length - 1)
+              )}
             </section>
           )}
         </Cards>
