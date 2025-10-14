@@ -1,9 +1,6 @@
 'use client';
 import { useState } from 'react';
 import Cards from '@/components/ui/cards/Cards';
-import Button from '@/components/ui/button/Button';
-import { DownloadIcon } from '@/assets/icons';
-import { downloadTextFile } from '@/utils/helper';
 
 type Lesson = {
   isCompleted?: boolean;
@@ -36,10 +33,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>('ABOUT');
 
   const renderLesson = (lesson: Lesson, isLast: boolean) => {
-    const noteFileName = `${lesson.title
-      .toLowerCase()
-      .replace(/\s+/g, '_')}_note.txt`;
-
     return (
       <div
         key={lesson.slug}
@@ -66,34 +59,6 @@ export default function ExploreCourseTabs({ courseData }: Props) {
           </div>
 
           {/* Actions */}
-          <div className="w-full  flex md:items-center justify-end gap-2 font-open-sans">
-            <Button
-              variant="outline"
-              disabled={!courseData.status}
-              onClick={() => downloadTextFile(lesson.lesson_note, noteFileName)}
-              rightIcon={
-                <DownloadIcon
-                  width={14}
-                  height={14}
-                  className="dark:text-white text-gray-100"
-                />
-              }
-            >
-              <span className="font-semibold text-sm dark:opacity-60 text-gray-100">
-                Download Note
-              </span>
-            </Button>
-
-            <Button
-              variant={lesson.isCompleted ? 'primary' : 'outline'}
-              disabled={!courseData.status}
-              className={`${
-                lesson.isCompleted ? 'px-8' : 'px-10'
-              }  py-4 text-xs  text-gray-400 border border-gray-300 cursor-default`}
-            >
-              {lesson.isCompleted ? 'Watched' : 'watch'}
-            </Button>
-          </div>
         </div>
       </div>
     );

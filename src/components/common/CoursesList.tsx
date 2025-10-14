@@ -11,10 +11,19 @@ interface CoursesListProps {
   route: string;
   completed: number;
   type?: 'my-courses' | 'explore-courses';
+  isStarted?: boolean;
 }
 
-export default function CoursesList({ title, description, lessons, route, courseImage, type, completed }: CoursesListProps) {
-
+export default function CoursesList({
+  title,
+  description,
+  lessons,
+  route,
+  courseImage,
+  type,
+  completed,
+  isStarted,
+}: CoursesListProps) {
   return (
     <div className="bg-gray-25 border-1 h-full border-gray-200 rounded-xl  overflow-hidden flex flex-col">
       <Image
@@ -27,9 +36,7 @@ export default function CoursesList({ title, description, lessons, route, course
       <div className="p-4 flex-1 flex flex-col justify-between bg-[#F9F9F9]">
         <div>
           <div className="flex items-center justify-between">
-            <h3 className="text-[22px] font-normal capitalize lora">
-              {title}
-            </h3>
+            <h3 className="text-[22px] font-normal capitalize lora">{title}</h3>
             <span className="text-xs bg-gray-300 text-gray-100 px-2 py-1 rounded-sm font-lora">
               {type === 'my-courses' ? `${completed} / ` : null}
               {lessons} Lesson{lessons > 1 ? 's' : ''}
@@ -41,9 +48,19 @@ export default function CoursesList({ title, description, lessons, route, course
         </div>
         <Link
           href={route}
-          className="mt-3 text-[14px] text-black font-medium"
+          className={`mt-3 inline-flex items-center justify-center rounded-md font-semibold transition-colors
+            ${
+              type === 'explore-courses'
+                ? 'bg-black-100 text-white px-4 py-2 text-sm hover:opacity-90'
+                : 'text-[14px] text-black font-medium'
+            }
+          `}
         >
-          View Course →
+          {type === 'explore-courses'
+            ? isStarted
+              ? 'Continue Course →'
+              : 'Get Started →'
+            : 'View Course →'}
         </Link>
       </div>
     </div>
