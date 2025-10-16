@@ -15,7 +15,6 @@ import { useParams } from 'next/navigation';
 import useToastify from '@/hooks/useToastify';
 import AlertMessage from '@/components/common/AlertMessage';
 import NetworkErrorAlert from '@/components/common/NetworkErrorAlert';
-import { downloadTextFile } from '@/utils/helper';
 
 interface CourseDetailsProps {
   lesson: string;
