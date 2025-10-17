@@ -167,53 +167,57 @@ const AppSidebar: React.FC = () => {
   );
 
   return (
-    <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-    ${isExpanded || isMobileOpen ? 'w-[290px]' : 'w-[90px]'}
-    ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
+<aside
+  className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+  ${isExpanded || isMobileOpen ? 'w-[290px]' : 'w-[90px]'}
+  ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
+>
+  {/* Logo Section */}
+  <div
+    className={`py-8 flex items-center justify-center lg:justify-start ${
+      !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
+    }`}
+  >
+    <Link
+      href="/"
+      className="hidden lg:flex items-center justify-center w-full"
     >
-      {/* Logo */}
-      <div
-        className={`py-8 flex ${
-          !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
-        }`}
-      >
-        <Link href="/">
-          {isExpanded || isMobileOpen ? (
-            <>
-              <Image
-                src={FojoLogo}
-                alt="Fojo Logo"
-                className="dark:hidden object-cover"
-              />
-              <Image
-                src={FojoDarkLogo}
-                alt="Fojo Logo Dark"
-                className="hidden dark:block object-cover py-2"
-              />
-            </>
-          ) : (
-            <>
-              <Image
-                src={Fojo}
-                alt="Fojo icon"
-                className="dark:hidden object-cover"
-              />
-              <Image
-                src={FojoDark}
-                alt="Fojo Logo Dark"
-                className="hidden dark:block object-cover py-2"
-              />
-            </>
-          )}
-        </Link>
-      </div>
+      {isExpanded || isMobileOpen ? (
+        <>
+          <Image
+            src={FojoLogo}
+            alt="Fojo Logo"
+            className="dark:hidden object-cover"
+          />
+          <Image
+            src={FojoDarkLogo}
+            alt="Fojo Logo Dark"
+            className="hidden dark:block object-cover py-2"
+          />
+        </>
+      ) : (
+        <>
+          <Image
+            src={Fojo}
+            alt="Fojo icon"
+            className="dark:hidden object-cover"
+          />
+          <Image
+            src={FojoDark}
+            alt="Fojo Logo Dark"
+            className="hidden dark:block object-cover py-2"
+          />
+        </>
+      )}
+    </Link>
+  </div>
 
-      {/* Menu */}
-      <div className="flex flex-col overflow-y-auto no-scrollbar">
-        <nav className="mb-6">{renderMenuItems(navItems)}</nav>
-      </div>
-    </aside>
+  {/* Menu Section */}
+  <div className="flex flex-col overflow-y-auto no-scrollbar flex-1">
+    <nav className="mb-6">{renderMenuItems(navItems)}</nav>
+  </div>
+</aside>
+
   );
 };
 

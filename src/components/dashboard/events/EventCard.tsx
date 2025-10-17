@@ -408,8 +408,8 @@ Prayers Everyday at 8:30pm and weekends 7am`,
   const paginatedEvents = showPagination
     ? events.slice(indexOfFirst, indexOfLast)
     : limit
-    ? events.slice(0, limit)
-    : events;
+      ? events.slice(0, limit)
+      : events;
 
 
   const renderDescriptionAsList = (text: string) => {
@@ -428,16 +428,17 @@ Prayers Everyday at 8:30pm and weekends 7am`,
       {paginatedEvents.map((event) => (
         <div
           key={event.id}
-          className="relative flex flex-col md:flex-row items-start gap-4 w-full rounded-xl border border-gray-200 p-5 bg-white hover:shadow-md transition duration-200 group"
+          className="relative flex flex-col md:flex-row items-start gap-4 w-full rounded-xl border border-gray-200 md:p-5 p-4 bg-white hover:shadow-md transition duration-200 group"
         >
-          <div className="relative w-full h-30 md:w-28 md:h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+          <div className="relative w-full aspect-[16/9] md:w-40 md:aspect-[4/3] rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
             <Image
               src={event.image}
               alt={event.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="md:object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </div>
+
 
           <div className="flex-1">
             <h3 className="text-[20px] lg:text-[22px] font-bold text-gray-900 font-cormorant mb-2">
@@ -453,7 +454,7 @@ Prayers Everyday at 8:30pm and weekends 7am`,
                 {event.location}
               </p>
             )}
-{/* 
+            {/* 
             <div className="flex items-center gap-4 mt-3 flex-wrap">
               {event.video_url && (
                 <Link
@@ -490,3 +491,4 @@ Prayers Everyday at 8:30pm and weekends 7am`,
     </div>
   );
 }
+

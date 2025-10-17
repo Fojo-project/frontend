@@ -39,7 +39,7 @@ export default function DashboardHome() {
           </div>
           <div className="w-full flex flex-col gap-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-black font-lora text-[22px] font-semibold">
+              <h3 className="text-black font-lora md:text-[22px] text-[20px] font-semibold">
                 Recommended Courses
               </h3>
               <Link
