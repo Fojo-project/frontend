@@ -59,12 +59,10 @@ export default function Page() {
           </div>
         </div>
       </section>
-
       <div className="relative z-0">
         <NewsLetterSection />
         <Footer />
       </div>
-
     </div>
   );
 }
