@@ -46,7 +46,6 @@ export async function fetchBibleVerse(
       verse: first.verse,
     };
   } catch (error) {
-    console.error('Bible API Error:', error);
     return null;
   }
 }

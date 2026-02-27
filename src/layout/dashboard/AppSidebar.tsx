@@ -17,7 +17,7 @@ import FojoLogo from '../../../public/images/home/FojoLogo.png';
 import FojoDarkLogo from '../../../public/images/home/logo.png';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Users2 } from 'lucide-react';
 
 type NavItem = {
   name: string;
@@ -70,15 +70,20 @@ const AppSidebar: React.FC = () => {
       name: 'Admin',
       path: '/dashboard/admin',
       children: [
+        // {
+        //   icon: <EventsIcon width={20} height={20} />,
+        //   name: 'Events',
+        //   path: '/dashboard/admin/events',
+        // },
+        // {
+        //   icon: <CourseIcon width={16} height={17} />,
+        //   name: 'My Courses',
+        //   path: '/dashboard/admin/courses',
+        // },
         {
-          icon: <EventsIcon width={20} height={20} />,
-          name: 'Events',
-          path: '/dashboard/admin/events',
-        },
-        {
-          icon: <CourseIcon width={16} height={17} />,
-          name: 'My Courses',
-          path: '/dashboard/admin/courses',
+          icon: <Users2 />,
+          name: 'Users',
+          path: '/dashboard/admin/users',
         },
       ],
     });
@@ -99,11 +104,10 @@ const AppSidebar: React.FC = () => {
                   onClick={() =>
                     setOpenDropdown(isDropdownOpen ? null : item.name)
                   }
-                  className={`w-full dark:text-white  flex cursor-pointer items-center justify-between gap-3 rounded-md px-4 py-4 transition-colors ${
-                    active || isDropdownOpen
-                      ? ' font-medium text-black dark:text-gray-300 hover:text-black'
-                      : 'hover:bg-gray-50  text-gray-600 dark:text-gray-300 '
-                  }`}
+                  className={`w-full dark:text-white  flex cursor-pointer items-center justify-between gap-3 rounded-md px-4 py-4 transition-colors ${active || isDropdownOpen
+                    ? ' font-medium text-black dark:text-gray-300 hover:text-black'
+                    : 'hover:bg-gray-50  text-gray-600 dark:text-gray-300 '
+                    }`}
                 >
                   <div className="flex items-center dark:text-gray-300 gap-3 text-gray-600 font-bold">
                     <span className="dark:text-gray-300">{item.icon}</span>
@@ -116,9 +120,8 @@ const AppSidebar: React.FC = () => {
                   {(isExpanded || isMobileOpen) && (
                     <ChevronDown
                       size={16}
-                      className={`transition-transform ${
-                        isDropdownOpen ? 'rotate-180' : ''
-                      }`}
+                      className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''
+                        }`}
                     />
                   )}
                 </button>
@@ -132,11 +135,10 @@ const AppSidebar: React.FC = () => {
                         <li key={child.name}>
                           <Link
                             href={child.path}
-                            className={`menu-item  group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${
-                              childActive
-                                ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
-                                : 'hover:bg-gray-25 border-gray-200 text-black-100 dark:text-white hover:text-black'
-                            }`}
+                            className={`menu-item  group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${childActive
+                              ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
+                              : 'hover:bg-gray-25 border-gray-200 text-black-100 dark:text-white hover:text-black'
+                              }`}
                           >
                             {child.icon}
                             {child.name}
@@ -150,11 +152,10 @@ const AppSidebar: React.FC = () => {
             ) : (
               <Link
                 href={item.path}
-                className={`menu-item group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${
-                  active
-                    ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
-                    : 'hover:bg-gray-25 border-gray-200 text-black-100 dark:text-white hover:text-black'
-                }`}
+                className={`menu-item group flex items-center gap-3 rounded-md px-4 py-4 transition-colors ${active
+                  ? 'font-semibold text-sm bg-gray-25 border border-gray-200 text-black'
+                  : 'hover:bg-gray-25 border-gray-200 text-black-100 dark:text-white hover:text-black'
+                  }`}
               >
                 <span>{item.icon}</span>
                 {(isExpanded || isMobileOpen) && <span>{item.name}</span>}
@@ -167,56 +168,55 @@ const AppSidebar: React.FC = () => {
   );
 
   return (
-<aside
-  className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+    <aside
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
   ${isExpanded || isMobileOpen ? 'w-[290px]' : 'w-[90px]'}
   ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
->
-  {/* Logo Section */}
-  <div
-    className={`py-8 flex items-center justify-center lg:justify-start ${
-      !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
-    }`}
-  >
-    <Link
-      href="/"
-      className="hidden lg:flex items-center justify-center w-full"
     >
-      {isExpanded || isMobileOpen ? (
-        <>
-          <Image
-            src={FojoLogo}
-            alt="Fojo Logo"
-            className="dark:hidden object-cover"
-          />
-          <Image
-            src={FojoDarkLogo}
-            alt="Fojo Logo Dark"
-            className="hidden dark:block object-cover py-2"
-          />
-        </>
-      ) : (
-        <>
-          <Image
-            src={Fojo}
-            alt="Fojo icon"
-            className="dark:hidden object-cover"
-          />
-          <Image
-            src={FojoDark}
-            alt="Fojo Logo Dark"
-            className="hidden dark:block object-cover py-2"
-          />
-        </>
-      )}
-    </Link>
-  </div>
+      {/* Logo Section */}
+      <div
+        className={`py-8 flex items-center justify-center lg:justify-start ${!isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start'
+          }`}
+      >
+        <Link
+          href="/"
+          className="hidden lg:flex items-center justify-center w-full"
+        >
+          {isExpanded || isMobileOpen ? (
+            <>
+              <Image
+                src={FojoLogo}
+                alt="Fojo Logo"
+                className="dark:hidden object-cover"
+              />
+              <Image
+                src={FojoDarkLogo}
+                alt="Fojo Logo Dark"
+                className="hidden dark:block object-cover py-2"
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                src={Fojo}
+                alt="Fojo icon"
+                className="dark:hidden object-cover"
+              />
+              <Image
+                src={FojoDark}
+                alt="Fojo Logo Dark"
+                className="hidden dark:block object-cover py-2"
+              />
+            </>
+          )}
+        </Link>
+      </div>
 
-  {/* Menu Section */}
-  <div className="flex flex-col overflow-y-auto no-scrollbar flex-1">
-    <nav className="mb-6">{renderMenuItems(navItems)}</nav>
-  </div>
-</aside>
+      {/* Menu Section */}
+      <div className="flex flex-col overflow-y-auto no-scrollbar flex-1">
+        <nav className="mb-6">{renderMenuItems(navItems)}</nav>
+      </div>
+    </aside>
 
   );
 };

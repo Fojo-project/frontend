@@ -31,7 +31,6 @@ const ProfileHeader = () => {
       showToast(response.message, 'success');
     } catch (error) {
       showToast(error as string, 'error');
-      console.error('Upload failed:', error);
     }
   };
 
