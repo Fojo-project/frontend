@@ -26,7 +26,7 @@ export default function GoogleAuth({ authType = 'signin' }) {
           avatar
         };
         const res = await socialLogin(payload).unwrap();
-        await setSessionCookie({ token: res.data.token, role: res.data.role });
+        await setSessionCookie({ token: res.data.token, roles: res.data.roles });
         const action = authType === 'signin' ? 'Login' : 'Signup';
         showToast(`${action} successful`, 'success');
         router.replace(redirectPath);

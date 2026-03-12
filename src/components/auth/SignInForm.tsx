@@ -43,8 +43,7 @@ export default function SignInForm() {
       };
       const response = await UserSignIn(apiData).unwrap();
       const token = response?.data?.token;
-      const userRole = (response?.data as { role?: string })?.role;
-      await setSessionCookie({ token, role: userRole });
+      await setSessionCookie({ token, roles: response?.data?.roles });
       showToast(response.message, 'success');
       router.replace(redirectPath);
     } catch (error: any) {

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+export type Role = "super_admin" | "admin" | "learner" | "instructor";
 
 export interface Dashboard {
   ongoing_course: number;
@@ -16,7 +17,7 @@ export interface User {
   id: number;
   full_name: string;
   email: string;
-  role: string;
+  roles: Role[];
   provider?: string;
   avatar?: string;
   dashboard: Dashboard;

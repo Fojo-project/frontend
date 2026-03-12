@@ -1,9 +1,9 @@
 import { axiosBaseQuery } from '@/lib/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-interface PaginationMeta {
+export interface PaginationMeta {
     current_page: number;
     per_page: number;
     total: number;
@@ -14,7 +14,7 @@ interface PaginationMeta {
     prev_page_url: string | null;
 }
 
-interface AdminUser {
+export interface AdminUser {
     id: number;
     full_name: string;
     email: string;
@@ -25,14 +25,14 @@ interface AdminUser {
     roles: string[];
 }
 
-interface AdminUsersResponse {
+export interface AdminUsersResponse {
     success: boolean;
     message: string;
     data: AdminUser[];
     meta: PaginationMeta;
 }
 
-interface AdminUserResponse {
+export interface AdminUserResponse {
     success: boolean;
     message: string;
     data: AdminUser;
@@ -50,7 +50,24 @@ export interface AdminUsersQueryParams {
     sort_dir?: 'asc' | 'desc';
 }
 
-// ─── API Slice ────────────────────────────────────────────────────────────────
+// ─── Query String Builder ─────────────────────────────────────────────────────
+
+const buildQueryString = (params?: AdminUsersQueryParams): string => {
+    if (!params) return '';
+    const query = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+        if (value === undefined || value === null || value === '') return;
+        if (Array.isArray(value)) {
+            value.forEach((v) => query.append(key, String(v)));
+        } else {
+            query.append(key, String(value));
+        }
+    });
+    const qs = query.toString();
+    return qs ? `?${qs}` : '';
+};
+
+// ─── API ──────────────────────────────────────────────────────────────────────
 
 export const AdminUserApi = createApi({
     reducerPath: 'adminUserApi',
@@ -58,22 +75,11 @@ export const AdminUserApi = createApi({
     tagTypes: ['AdminUsers', 'AdminUser'],
     endpoints: (builder) => ({
 
-        // GET /api/admin/users
-        getAdminUsers: builder.query<AdminUsersResponse, AdminUsersQueryParams | void>({
-            query: (params = {}) => {
-                const safeParams = params ?? {}
-                const cleanedParams = Object.fromEntries(
-                    Object.entries(safeParams).filter(([, v]) => v !== undefined && v !== '')
-                );
-                const queryString = new URLSearchParams(
-                    cleanedParams as Record<string, string>
-                ).toString();
-
-                return {
-                    url: `/api/admin/users${queryString ? `?${queryString}` : ''}`,
-                    method: 'GET',
-                };
-            },
+        getAdminUsers: builder.query<AdminUsersResponse, AdminUsersQueryParams>({
+            query: (params) => ({
+                url: `/api/admin/users${buildQueryString(params)}`,
+                method: 'GET',
+            }),
             providesTags: (result) =>
                 result
                     ? [
@@ -82,7 +88,35 @@ export const AdminUserApi = createApi({
                     ]
                     : [{ type: 'AdminUsers', id: 'LIST' }],
         }),
+
+        assignRole: builder.mutation<void, { userId: number; role: string }>({
+            query: ({ userId, role }) => ({
+                url: `/api/admin/users/${userId}/roles`,
+                method: 'POST',
+                data: { role },
+            }),
+            invalidatesTags: (_, __, { userId }) => [
+                { type: 'AdminUser', id: userId },
+                { type: 'AdminUsers', id: 'LIST' },
+            ],
+        }),
+
+        unassignRole: builder.mutation<void, { userId: number; role: string }>({
+            query: ({ userId, role }) => ({
+                url: `/api/admin/users/${userId}/roles/${role}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: (_, __, { userId }) => [
+                { type: 'AdminUser', id: userId },
+                { type: 'AdminUsers', id: 'LIST' },
+            ],
+        }),
+
     }),
 });
 
-export const { useGetAdminUsersQuery } = AdminUserApi;
+export const {
+    useGetAdminUsersQuery,
+    useAssignRoleMutation,
+    useUnassignRoleMutation,
+} = AdminUserApi;

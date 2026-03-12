@@ -29,6 +29,7 @@ interface AuthResponse {
   message: string;
   data?: {
     token?: string;
+    roles?: string[]
   };
 }
 interface SocialLoginPayload {

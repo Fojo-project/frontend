@@ -9,7 +9,7 @@ export async function getSessionCookie() {
   if (!sessionCookie) return null;
   try {
     return JSON.parse(sessionCookie.value);
-  } catch{
+  } catch {
     return sessionCookie.value || null;
   }
 }

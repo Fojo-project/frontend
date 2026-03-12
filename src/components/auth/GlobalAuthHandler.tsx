@@ -20,7 +20,7 @@ export default function GlobalAuthHandler() {
           full_name: '',
           email: '',
           provider: '',
-          role: '',
+          roles: [],
           dashboard: {
             ongoing_course: 0,
             completed_course: 0,

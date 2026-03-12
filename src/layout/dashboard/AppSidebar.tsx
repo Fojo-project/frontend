@@ -57,8 +57,7 @@ const AppSidebar: React.FC = () => {
     },
   ];
 
-  // ✅ Add Admin only if role is admin
-  if (user?.role === 'admin') {
+  if (user?.roles.includes("admin")) {
     navItems.push({
       icon: (
         <AdminIcon

@@ -1,5 +1,6 @@
 import { axiosBaseQuery } from '@/lib/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { Role } from './profile.slice';
 
 interface AuthResponse {
   success: boolean;
@@ -26,7 +27,7 @@ interface MeResponse {
     id: number;
     full_name: string;
     email: string;
-    role: string;
+    roles: Role[];
     provider?: string;
     avatar?: string;
     dashboard: Dashboard;
@@ -47,7 +48,7 @@ interface UpdateProfileResponse {
     id: number;
     full_name: string;
     email: string;
-    role: string;
+    roles: Role[];
     provider?: string;
     avatar?: string;
   };
